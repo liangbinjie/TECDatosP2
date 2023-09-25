@@ -10,7 +10,7 @@ class NodoPais {
 		string nombre;
 		NodoPais* izq;
 		NodoPais* der;
-		friend class arbolPais;
+		friend class ArbolPais;
 
 		NodoPais();
 		NodoPais(int id, string nombre);

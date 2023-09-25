@@ -31,9 +31,7 @@ class ArbolPais {
 		
 		void preorden();
 		void inorden();
-		void postorden();
-		
-		
+		void postorden();	
 };
 
 #endif
