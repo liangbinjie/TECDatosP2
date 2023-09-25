@@ -8,8 +8,16 @@ using namespace std;
 
 int main() {
 	ArbolPais paises;
-	paises.insertar(1, "USA");
-	paises.insertar(2, "ES");
-	paises.preorden(paises.getRaiz());
+	paises.insertar(9, "USA");
+	paises.insertar(46, "ES");
+	paises.insertar(100, "ASW");
+	paises.insertar(4, "CVB");
+	paises.insertar(5, "QWE");
+	paises.insertar(76, "WER");
+	paises.insertar(23, "SDF");
+	paises.insertar(63, "CHN");
+	paises.preorden();
+	paises.postorden();
+	paises.inorden();
 	return 0;
 }
