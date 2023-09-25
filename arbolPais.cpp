@@ -57,6 +57,30 @@ void ArbolPais::buscar(int id) {
     }
 }
 
+NodoPais* ArbolPais::modificarAux(NodoPais* r, int id, string nombre) {
+    if (r->id == id) {
+    	r->nombre = nombre;
+        return r;
+    }
+
+    if (id < r->id) {
+        return modificarAux(r->izq, id, nombre);
+    } else {
+        return modificarAux(r->der, id, nombre);
+    }
+}
+
+void ArbolPais::modificar(int id, string nombre) {
+    
+    if (!existe(id)) {
+        cout << "No existe este pais" << endl;
+    } else {
+    	NodoPais* buscado = modificarAux(raiz, id, nombre);
+    	cout << "Nombre modificado" << endl;
+        cout << "ID: " << buscado->id << "\nNombre: " << buscado->nombre << endl;
+    }
+}
+
 NodoPais* ArbolPais::existeAux(NodoPais* r, int id) {
     if (r == NULL || r->id == id) {
         return r;
@@ -123,5 +147,26 @@ void ArbolPais::postorden(NodoPais* r) {
 void ArbolPais::postorden() {
 	postorden(raiz);
 	cout << endl;
+}
+
+
+void ArbolPais::cargarPais() {
+	ifstream archivo("Archivos/Paises.txt");
+    string line;
+    
+    while (getline(archivo, line)) {
+        stringstream ss(line);
+        string temp;
+        int idP;
+        string name;
+
+        getline(ss, temp, ';');
+        idP = stoi(temp);
+
+        getline(ss, name, ';');
+
+        insertar(idP, name);
+    }
+    archivo.close();
 }
 

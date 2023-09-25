@@ -5,6 +5,9 @@
 using namespace std;
 
 #include "nodoPais.h"
+#include <fstream>
+#include <string>
+#include <sstream>
 
 class ArbolPais {
 	private:
@@ -16,6 +19,7 @@ class ArbolPais {
 		void inorden(NodoPais* r);
 		void preorden(NodoPais* r);
 		NodoPais* existeAux(NodoPais* r, int id);
+		NodoPais* modificarAux(NodoPais* r, int id, string nombreNuevo);
 	public:
 		ArbolPais();
 		
@@ -23,6 +27,7 @@ class ArbolPais {
 		void cargarPais();
 		void buscar(int id);
 		bool existe(int id);
+		void modificar(int id, string nombreNuevo);
 		
 		void preorden();
 		void inorden();
