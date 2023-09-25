@@ -24,10 +24,61 @@ void ArbolPais::insertarAux(NodoPais* r, int id, string nombre) {
 void ArbolPais::insertar(int id, string nombre) {
 	if (raiz == NULL) {
 		raiz = new NodoPais(id, nombre);
+		cout << "Nuevo pais insertado" << endl;
 	} else {
-		insertarAux(raiz, id, nombre);
+		if (existe(id)) {
+			cout << "Este pais ya existe" << endl;
+		} else {
+			insertarAux(raiz, id, nombre);
+			cout << "Nuevo pais insertado" << endl;
+		}
 	}
 }
+
+
+NodoPais* ArbolPais::buscarAux(NodoPais* r, int id) {
+    if (r == NULL || r->id == id) {
+        return r;
+    }
+
+    if (id < r->id) {
+        return buscarAux(r->izq, id);
+    } else {
+        return buscarAux(r->der, id);
+    }
+}
+
+void ArbolPais::buscar(int id) {
+    NodoPais* buscado = buscarAux(raiz, id);
+    if (buscado == NULL) {
+        cout << "No existe este pais" << endl;
+    } else {
+        cout << "ID: " << buscado->id << "\nNombre: " << buscado->nombre << endl;
+    }
+}
+
+NodoPais* ArbolPais::existeAux(NodoPais* r, int id) {
+    if (r == NULL || r->id == id) {
+        return r;
+    }
+
+    if (id < r->id) {
+        return existeAux(r->izq, id);
+    } else {
+        return existeAux(r->der, id);
+    }
+}
+
+bool ArbolPais::existe(int id) {
+    NodoPais* buscado = existeAux(raiz, id);
+    if (buscado == NULL) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+
 
 void ArbolPais::preorden(NodoPais* r) {
 	if (r == NULL) {

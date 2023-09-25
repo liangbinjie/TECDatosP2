@@ -9,17 +9,23 @@ using namespace std;
 class ArbolPais {
 	private:
 		NodoPais* raiz;
+		
+		void insertarAux(NodoPais* r, int id, string nombre);
+		NodoPais* buscarAux(NodoPais* r, int id);
+		void postorden(NodoPais* r);
+		void inorden(NodoPais* r);
+		void preorden(NodoPais* r);
+		NodoPais* existeAux(NodoPais* r, int id);
 	public:
 		ArbolPais();
-		void insertarAux(NodoPais* r, int id, string nombre);
+		
 		void insertar(int id, string nombre);
 		void cargarPais();
+		void buscar(int id);
+		bool existe(int id);
 		
-		void preorden(NodoPais* r);
 		void preorden();
-		void inorden(NodoPais* r);
 		void inorden();
-		void postorden(NodoPais* r);
 		void postorden();
 		
 		
