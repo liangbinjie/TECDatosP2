@@ -14,7 +14,7 @@ class NodoRestaurante {
         NodoRestaurante *Hizq;
         NodoRestaurante *Hder;
         int color;
-        
+
         friend class ArbolRestaurante;
 };
 
