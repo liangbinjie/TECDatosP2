@@ -84,6 +84,7 @@ void ArbolCiudad::insertarBalanceado(NodoCiudad* &r, int id, string nombre, bool
                             RotacionDobleDerecha(r, n1);
                         }
                         Hh=false;
+
                         break;
                     }
                 }
@@ -182,7 +183,7 @@ void ArbolCiudad::preorden(NodoCiudad* r) {
 	if (r == NULL) {
 		return;
 	} else {
-		cout << r->nombre << " - ";
+		cout << r->nombre << r->FB << " - ";
 		preorden(r->izq);
 		preorden(r->der);
 	}
