@@ -37,7 +37,7 @@ void ArbolCiudad::insertarBalanceado(NodoCiudad* &r, int id, string nombre, bool
         if(Hh){
             cout <<"hh izquierdo true"<<endl;
             cout<<r->id<<" "<<r->FB<<endl;
-            switch(r->id){
+            switch(r->FB){
                 case 1: r->FB=0;
                 Hh = false;
                 break;
@@ -145,6 +145,7 @@ void ArbolCiudad::RotacionDobleDerecha(NodoCiudad* &n, NodoCiudad* &n1){
     cout<<"n "<<n->id<<" n1 "<<n1->id<<" n2 "<<n2->id<<endl;
     cout<<"n "<<n->FB<<" n1 "<<n1->FB<<" n2 "<<n2->FB<<endl;
     n=n2;
+    
     cout<<"fin"<<endl;
     cout<<"n "<<n->id<<" n1 "<<n1->id<<" n2 "<<n2->id<<endl;
     cout<<"n "<<n->FB<<" n1 "<<n1->FB<<" n2 "<<n2->FB<<endl;
@@ -179,11 +180,15 @@ void ArbolCiudad::RotacionSimpleIzquierda(NodoCiudad* &n, NodoCiudad* &n1){
 }
 
 
+
+
+
+
 void ArbolCiudad::preorden(NodoCiudad* r) {
 	if (r == NULL) {
 		return;
 	} else {
-		cout << r->nombre << r->FB << " - ";
+		cout << r->id << "  " << r->FB << " - ";
 		preorden(r->izq);
 		preorden(r->der);
 	}
@@ -199,7 +204,7 @@ void ArbolCiudad::inorden(NodoCiudad* r) {
 		return;
 	} else {
 		inorden(r->izq);
-		cout << r->nombre << " - ";
+		cout << r->id << " - ";
 		inorden(r->der);
 	}
 }
