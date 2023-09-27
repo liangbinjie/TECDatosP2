@@ -7,6 +7,7 @@ using namespace std;
 class NodoCiudad {
 	public:
 		int id;
+		int idPais;
         int FB;
 		string nombre;
 		NodoCiudad* izq;
@@ -14,7 +15,7 @@ class NodoCiudad {
 		friend class arbolCiudad;
 
 		NodoCiudad();
-		NodoCiudad(int id, string nombre);
+		NodoCiudad(int id, int idPais, string nombre);
 		
 };
 

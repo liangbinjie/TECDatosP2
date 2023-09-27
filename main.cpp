@@ -17,10 +17,22 @@ int main() {
 	ciudades.insertar(28, "Cartago");
 	ciudades.insertar(9, "Heredia");
 	ciudades.insertar(1, "Puntarenas");
+	ciudades.insertar(26, "Puntarenas");
+	ciudades.insertar(77, "Puntarenas");
+	ciudades.insertar(13, "Puntarenas");
+	ciudades.insertar(98, "Puntarenas");
+	ciudades.insertar(14, "Puntarenas");
+	ciudades.insertar(12, "Puntarenas");
+	ciudades.insertar(24, "Puntarenas");
+	ciudades.insertar(17, "Puntarenas");
+	ciudades.insertar(48, "Puntarenas");
+	ciudades.insertar(71, "Puntarenas");
+	ciudades.insertar(132, "Puntarenas");
 	
 	cout<<"hola"<<endl;
 	ciudades.preorden();
 	ciudades.inorden();
+	ciudades.existe(12);
 	ArbolPais paises;
 	//paises.cargarPais();
 	paises.insertar(9, "USA");

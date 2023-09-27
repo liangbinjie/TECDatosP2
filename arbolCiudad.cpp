@@ -1,23 +1,25 @@
 #include "arbolCiudad.h"
+#include "nodoPais.h"
+#include "arbolPais.h"
 
 ArbolCiudad::ArbolCiudad() {
 	raiz = NULL;
 }
 
-void ArbolCiudad::insertar(int id, string nombre) {
+void ArbolCiudad::insertar(int id, int idPais, string nombre) {
 	if (raiz == NULL) {
-		raiz = new NodoCiudad(id, nombre);
+		raiz = new NodoCiudad(id, idPais, nombre);
 		cout << "Nueva ciudad insertada" << nombre<< endl;
 	} else {
-		//if (existe(id)) {
-		//	cout << "Esta ciudad ya existe" << endl;
-		//} else {
+		if (existe(id)) {
+			cout << "Esta ciudad ya existe" << endl;
+		} else {
             bool Hh= false;
             cout << " Insertar   Nueva ciudad insertada" << nombre<< endl;
 			insertarBalanceado(raiz, id, nombre, Hh);
 		}
 	}
-//}
+}
 
 
 
@@ -180,7 +182,27 @@ void ArbolCiudad::RotacionSimpleIzquierda(NodoCiudad* &n, NodoCiudad* &n1){
 }
 
 
+NodoCiudad* ArbolCiudad::existeAux(NodoCiudad* r, int id) {
+    if (r == NULL || r->id == id) {
+        return r;
+    }
 
+    if (id < r->id) {
+        return existeAux(r->izq, id);
+    } else {
+        return existeAux(r->der, id);
+    }
+}
+
+bool ArbolCiudad::existe(int id) {
+    NodoCiudad* buscado = existeAux(raiz, id);
+    if (buscado == NULL) {
+        return false;
+    } else {
+        cout<<"si existe"<<endl;
+        return true;
+    }
+}
 
 
 
@@ -188,7 +210,7 @@ void ArbolCiudad::preorden(NodoCiudad* r) {
 	if (r == NULL) {
 		return;
 	} else {
-		cout << r->id << "  " << r->FB << " - ";
+		cout << r->id << " - ";
 		preorden(r->izq);
 		preorden(r->der);
 	}
