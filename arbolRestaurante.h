@@ -8,6 +8,8 @@ using namespace std;
 #include <sstream>
 
 #include "nodoRestaurante.h"
+#include "arbolCiudad.h"
+#include "arbolPais.h"
 
 class ArbolRestaurante {
     private:
@@ -38,10 +40,10 @@ class ArbolRestaurante {
         pnodoRest predecessor(pnodoRest nodo);
         void RotacionIzquierda(pnodoRest nodo);
         void RotacionDerecha(pnodoRest nodo);
-        void insertar(int idPais, int idCiudad, int valornuevo, string nombre);
+        void insertar(int idPais, int idCiudad, int valornuevo, string nombre, ArbolPais &paises, ArbolCiudad &ciudades);
         pnodoRest getRaiz();
         void MostrarRN();
-        void cargarRests();
+        void cargarRests(ArbolPais &paises, ArbolCiudad &ciudades);
         void modificar(int id, int idPais, int idCiudad, string nuevoNombre);
 };
 

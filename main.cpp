@@ -6,8 +6,9 @@ using namespace std;
 #include "arbolPais.h"
 #include "arbolRestaurante.h"
 #include "nodoRestaurante.h"
+#include "arbolCiudad.h"
 
-void menu(ArbolPais paises, ArbolRestaurante restaurantes) {
+void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes) {
 	cout << endl;
 	cout << "Bienvenido, que desea realizar?" << endl;
 	cout << endl;
@@ -58,7 +59,7 @@ void menu(ArbolPais paises, ArbolRestaurante restaurantes) {
                     cout << "Ingrese el nombre de la ciudad: " << endl;
                     cin.ignore();
                     getline(cin,nombre);
-                    // lCiudad.insertar(codPais, codCiudad, nombre, lPais);
+                    ciudades.insertar(codCiudad, codPais, nombre, paises);
                     break;
 
                 case 3:
@@ -72,7 +73,7 @@ void menu(ArbolPais paises, ArbolRestaurante restaurantes) {
                     cout << "Ingrese el nombre del restaurante: " << endl;
                     cin.ignore();
                     getline(cin,nombre);
-                    restaurantes.insertar(codPais, codCiudad, codRest, nombre);
+                    restaurantes.insertar(codPais, codCiudad, codRest, nombre, paises, ciudades);
                     break;
 				
 				case 7:
@@ -219,7 +220,7 @@ void menu(ArbolPais paises, ArbolRestaurante restaurantes) {
                     cout << "Ingrese el nuevo nombre que quiere MODIFICAR: ";
                     cin.ignore();
                     getline(cin,nombre);
-                	// lCiudad.modificarCiudad(codPais, codCiudad, nombre, lPais);
+                	ciudades.modificar(codCiudad, nombre, codPais, paises);
                     break;
                 case 3:
                 	cout << endl;
@@ -316,7 +317,7 @@ void menu(ArbolPais paises, ArbolRestaurante restaurantes) {
                     cin >> numPais;
                     cout << "Ingrese el codigo de ciudad que deseas buscar: " << endl;
                     cin >> codCiudad;
-                    // lCiudad.buscarCiudad(numPais, codCiudad);
+                    ciudades.buscarCiudad(codCiudad, codPais, paises);
                     break;
                 case 3:
                 	cout << endl;
@@ -526,14 +527,16 @@ void menu(ArbolPais paises, ArbolRestaurante restaurantes) {
     	case 7:
             return;
     }
-    menu(paises, restaurantes);
+    menu(paises, ciudades, restaurantes);
 }
 
 int main() {
 	ArbolPais paises;
 	paises.cargarPais();
+    ArbolCiudad ciudades;
+    ciudades.cargarCiudades(paises);
 	ArbolRestaurante restaurantes;
-    restaurantes.cargarRests();
-	menu(paises, restaurantes);
+    restaurantes.cargarRests(paises, ciudades);
+	menu(paises, ciudades, restaurantes);
 	return 0;
 }

@@ -243,16 +243,16 @@ void ArbolRestaurante::RotacionDerecha(pnodoRest nodo) {
   nodo->padre = y;
 }
 
-void ArbolRestaurante::insertar(int idPais, int idCiudad, int valornuevo, string nombre) {
+void ArbolRestaurante::insertar(int idPais, int idCiudad, int valornuevo, string nombre, ArbolPais &paises, ArbolCiudad &ciudades) {
+  // revisa si existe este restaurante
   if (existe(valornuevo, idPais, idCiudad)) {
     cout << "Este restaurante ya existe" << endl;
     return;
   }
-  // ahora revisa si el pais y ciudad existen
-  // if (!arbolCiudad.existe()) {
-  //   cut << "Ubicacion no existe" << endl;
-  //   return;
-  // }
+  if (!ciudades.existeCiudad(idCiudad, idPais, paises)) {
+    cout << "Ubicacion no existe" << endl;
+    return;
+  }
   pnodoRest nodo = new NodoRestaurante;
   nodo->padre = nullptr;
   nodo->valor = valornuevo;
@@ -306,7 +306,7 @@ void ArbolRestaurante::MostrarRN() {
   }
 }
 
-void ArbolRestaurante::cargarRests() {
+void ArbolRestaurante::cargarRests(ArbolPais &paises, ArbolCiudad &ciudades) {
     ifstream archivo("Archivos/Restaurantes.txt");
     string line;
     
@@ -327,7 +327,7 @@ void ArbolRestaurante::cargarRests() {
 
         getline(ss, name, ';');
 
-       insertar(idP, idC, idR, name);
+       insertar(idP, idC, idR, name, paises, ciudades);
     }
 
     archivo.close();
