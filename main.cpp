@@ -158,7 +158,13 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes)
                     break;
                 case 2:
                 	cout << endl;
-                    // lCiudad.mostrar();
+					cout << "Preorden: " << endl;
+                    ciudades.preorden();
+					cout << "Inorden: " << endl;
+                    ciudades.inorden();
+					cout << "Postorden: " << endl;
+                    ciudades.postorden();
+					cout << endl;
                     break;
                 case 3:
                 	cout << endl;
