@@ -4,8 +4,8 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = main.o nodoPais.o arbolPais.o nodoCiudad.o arbolCiudad.o arbolRestaurante.o nodoRestaurante.o
-LINKOBJ  = main.o nodoPais.o arbolPais.o nodoCiudad.o arbolCiudad.o arbolRestaurante.o nodoRestaurante.o
+OBJ      = main.o nodoPais.o arbolPais.o arbolRestaurante.o nodoRestaurante.o
+LINKOBJ  = main.o nodoPais.o arbolPais.o arbolRestaurante.o nodoRestaurante.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib32" -static-libgcc -m32
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
@@ -32,12 +32,6 @@ nodoPais.o: nodoPais.cpp
 
 arbolPais.o: arbolPais.cpp
 	$(CPP) -c arbolPais.cpp -o arbolPais.o $(CXXFLAGS)
-
-nodoCiudad.o: nodoCiudad.cpp
-	$(CPP) -c nodoCiudad.cpp -o nodoCiudad.o $(CXXFLAGS)
-
-arbolCiudad.o: arbolCiudad.cpp
-	$(CPP) -c arbolCiudad.cpp -o arbolCiudad.o $(CXXFLAGS)
 
 arbolRestaurante.o: arbolRestaurante.cpp
 	$(CPP) -c arbolRestaurante.cpp -o arbolRestaurante.o $(CXXFLAGS)

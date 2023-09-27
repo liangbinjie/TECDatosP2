@@ -1,4 +1,5 @@
 123;345;34;MacPanama
+123;345;34;macCR3
 345;987;456;Disney Springs
 4567;234;876;Mac
 12;34;234;MacBocas

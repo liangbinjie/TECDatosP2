@@ -4,6 +4,9 @@
 #include <iostream>
 using namespace std;
 
+#include <fstream>
+#include <sstream>
+
 #include "nodoRestaurante.h"
 
 class ArbolRestaurante {
@@ -19,6 +22,8 @@ class ArbolRestaurante {
         void rbModificar(pnodoRest uRaiz, pnodoRest vValor);
         void insertarBalanceado(pnodoRest NodoEva);
         void MostrarRN(pnodoRest raiz, string indent, bool ultimo);
+        pnodoRest existeAux(pnodoRest nodo, int id, int idPais, int idCiudad);
+        void modificarAux(pnodoRest nodo, int id, int idPais, int idCiudad, string nuevoNombre);
 
     public:
         ArbolRestaurante();
@@ -26,6 +31,7 @@ class ArbolRestaurante {
         void inordenM();
         void postorderM();
         void BusquedaM(int id, int idPais, int idCiudad);
+        bool existe(int id, int idPais, int idCiudad);
         pnodoRest minimo(pnodoRest nodo);
         pnodoRest maximo(pnodoRest nodo);
         pnodoRest successor(pnodoRest nodo);
@@ -35,6 +41,8 @@ class ArbolRestaurante {
         void insertar(int idPais, int idCiudad, int valornuevo, string nombre);
         pnodoRest getRaiz();
         void MostrarRN();
+        void cargarRests();
+        void modificar(int id, int idPais, int idCiudad, string nuevoNombre);
 };
 
 #endif 

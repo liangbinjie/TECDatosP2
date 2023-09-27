@@ -44,6 +44,17 @@ pnodoRest ArbolRestaurante::Busqueda(pnodoRest nodo, int id, int idPais, int idC
     return Busqueda(nodo->Hder, id, idPais, idCiudad);
 }
 
+pnodoRest ArbolRestaurante::existeAux(pnodoRest nodo, int id, int idPais, int idCiudad) {
+    if (nodo == TNULL || (id == nodo->valor && idPais == nodo->idPais && idCiudad == nodo->idCiudad)) {
+      return nodo;
+    }
+
+    if (id < nodo->valor) {
+      return Busqueda(nodo->Hizq, id, idPais, idCiudad);
+    }
+    return Busqueda(nodo->Hder, id, idPais, idCiudad);
+}
+
 void ArbolRestaurante::rbModificar(pnodoRest uRaiz, pnodoRest vValor) {
     if (raiz->padre == nullptr) {
       raiz = vValor;
@@ -139,10 +150,19 @@ void ArbolRestaurante::postorderM() {
 
 void ArbolRestaurante::BusquedaM(int id, int idPais, int idCiudad) {
   NodoRestaurante* buscado = Busqueda(this->raiz, id, idPais, idCiudad);
-  if (buscado == NULL) {
+  if (!existe(id, idPais, idCiudad)) {
     cout << "No se encontro este restaurante" << endl;
   } else {
     cout << "ID Restaurante: " << buscado->valor << "\nNombre: " << buscado->nombre << "\nID pais: " << buscado->idPais << "\nID ciudad: " << buscado->idCiudad << endl;
+  }
+}
+
+bool ArbolRestaurante::existe(int id, int idPais, int idCiudad) {
+  NodoRestaurante* buscado = Busqueda(this->raiz, id, idPais, idCiudad);
+  if (buscado->valor == -1) {
+    return false;
+  } else {
+    return true;
   }
 }
 
@@ -224,6 +244,15 @@ void ArbolRestaurante::RotacionDerecha(pnodoRest nodo) {
 }
 
 void ArbolRestaurante::insertar(int idPais, int idCiudad, int valornuevo, string nombre) {
+  if (existe(valornuevo, idPais, idCiudad)) {
+    cout << "Este restaurante ya existe" << endl;
+    return;
+  }
+  // ahora revisa si el pais y ciudad existen
+  // if (!arbolCiudad.existe()) {
+  //   cut << "Ubicacion no existe" << endl;
+  //   return;
+  // }
   pnodoRest nodo = new NodoRestaurante;
   nodo->padre = nullptr;
   nodo->valor = valornuevo;
@@ -275,4 +304,56 @@ void ArbolRestaurante::MostrarRN() {
   if (raiz) {
     MostrarRN(this->raiz, "", true);
   }
+}
+
+void ArbolRestaurante::cargarRests() {
+    ifstream archivo("Archivos/Restaurantes.txt");
+    string line;
+    
+    while (getline(archivo, line)) {
+        stringstream ss(line);
+        string temp;
+        int idP, idC, idR;
+        string name;
+
+        getline(ss, temp, ';');
+        idP = stoi(temp);
+
+        getline(ss, temp, ';');
+        idC = stoi(temp);
+
+        getline(ss, temp, ';');
+        idR = stoi(temp);
+
+        getline(ss, name, ';');
+
+       insertar(idP, idC, idR, name);
+    }
+
+    archivo.close();
+}
+
+
+void ArbolRestaurante::modificar(int id, int idPais, int idCiudad, string nuevoNombre) {
+  if (existe(id, idPais, idCiudad)) {
+    modificarAux(this->raiz, id, idPais, idCiudad, nuevoNombre);
+    return;
+  } else {
+    cout << "No existe este restaurante" << endl;
+    return;
+  }
+}
+
+
+void ArbolRestaurante::modificarAux(pnodoRest nodo, int id, int idP, int idC, string nuevo) {
+    if (nodo == TNULL || (id == nodo->valor && idP == nodo->idPais && idC == nodo->idCiudad)) {
+      nodo->nombre = nuevo;
+      cout << "Nombre modificado a: " << nuevo << endl;
+      return;
+    }
+
+    if (id < nodo->valor) {
+      return modificarAux(nodo->Hizq, id, idP, idC, nuevo);
+    }
+    return modificarAux(nodo->Hder, id, idP, idC, nuevo);
 }

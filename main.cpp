@@ -18,7 +18,6 @@ void menu(ArbolPais paises, ArbolRestaurante restaurantes) {
     cout << "5. Comprar" << endl;
     cout << "6. Reportes" << endl;
     cout << "7. Salir" << endl;
-	cout << restaurantes.getRaiz()->valor << endl;
     int numPais;
     int opcion;
     cout << "> ";
@@ -233,12 +232,7 @@ void menu(ArbolPais paises, ArbolRestaurante restaurantes) {
                     cout << "Ingrese el nuevo nombre del restaurante: ";
                     cin.ignore();
                     getline(cin,nombre);
-                    // if (lRest.existeRest(codPais, codCiudad, codRest, lPais, lCiudad)) {
-                    //     lRest.modificarRest(codPais, codCiudad, codRest, lPais, lCiudad, nombre);
-                    //     cout << "Nombre del restaurante modificado a: " << nombre << endl;
-                    // } else {
-                    //     cout << "No se encontro el restaurante en la base d datos" << endl;
-                    // }
+                    restaurantes.modificar(codRest, codPais, codCiudad, nombre);
                     break;
 
 				/*
@@ -306,6 +300,7 @@ void menu(ArbolPais paises, ArbolRestaurante restaurantes) {
             cout << "4. Menu" << endl;
             cout << "5. Producto" << endl;
             cout << "6. Clientes" << endl;
+            cout << "7. Salir" << endl;
             cout << "> ";
             cin >> opcion;
             switch(opcion) {
@@ -537,23 +532,8 @@ void menu(ArbolPais paises, ArbolRestaurante restaurantes) {
 int main() {
 	ArbolPais paises;
 	paises.cargarPais();
-//	paises.insertar(9, "USA");
-//	paises.insertar(46, "ES");
-//	paises.insertar(100, "ASW");
-//	paises.insertar(4, "CVB");
-//	paises.insertar(5, "QWE");
-//	paises.insertar(76, "WER");
-//	paises.insertar(23, "SDF");
-//	paises.insertar(63, "CHN");
-//	paises.insertar(23, "SQW");
-	// paises.modificar(345, "KOREA");
-	// paises.modificar(234, "no se");
-	// paises.preorden();
-	// paises.postorden();
-	// paises.inorden();
-	// paises.buscar(4567);
-	// paises.buscar(200);
 	ArbolRestaurante restaurantes;
+    restaurantes.cargarRests();
 	menu(paises, restaurantes);
 	return 0;
 }

@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=3
 CompilerSettings=00000001c0000000000000000
-UnitCount=19
+UnitCount=15
 
 [VersionInfo]
 Major=1
@@ -155,9 +155,9 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit12]
-FileName=nodoCiudad.h
+FileName=arbolRestaurante.cpp
 CompileCpp=1
-Folder=Ciudad
+Folder=Restaurante
 Compile=1
 Link=1
 Priority=1000
@@ -165,9 +165,9 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit13]
-FileName=nodoCiudad.cpp
+FileName=arbolRestaurante.h
 CompileCpp=1
-Folder=Ciudad
+Folder=Restaurante
 Compile=1
 Link=1
 Priority=1000
@@ -175,9 +175,9 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit14]
-FileName=arbolCiudad.cpp
+FileName=nodoRestaurante.cpp
 CompileCpp=1
-Folder=Ciudad
+Folder=Restaurante
 Compile=1
 Link=1
 Priority=1000
@@ -185,9 +185,9 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit15]
-FileName=arbolCiudad.h
+FileName=nodoRestaurante.h
 CompileCpp=1
-Folder=Ciudad
+Folder=Restaurante
 Compile=1
 Link=1
 Priority=1000
