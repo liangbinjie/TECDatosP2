@@ -6,39 +6,39 @@ ArbolCiudad::ArbolCiudad() {
 	raiz = NULL;
 }
 
-void ArbolCiudad::insertar(int id, int idPais, string nombre) {
+void ArbolCiudad::insertar(int id, int idPais, string nombre, ArbolPais& aPaises) {
 	if (raiz == NULL) {
 		raiz = new NodoCiudad(id, idPais, nombre);
 		cout << "Nueva ciudad insertada" << nombre<< endl;
 	} else {
-		if (existe(id)) {
-			cout << "Esta ciudad ya existe" << endl;
+		if (existeCiudad(id, idPais, aPaises)) {
+			cout << "Esta ciudad ya existe" << id << endl;
 		} else {
             bool Hh= false;
-            cout << " Insertar   Nueva ciudad insertada" << nombre<< endl;
-			insertarBalanceado(raiz, id, nombre, Hh);
+            cout << " Insertar   Nueva ciudad insertada" << id<< endl;
+			insertarBalanceado(raiz, id, idPais, nombre, Hh);
 		}
 	}
 }
 
 
 
-void ArbolCiudad::insertarBalanceado(NodoCiudad* &r, int id, string nombre, bool& Hh){
+void ArbolCiudad::insertarBalanceado(NodoCiudad* &r, int id, int idPais, string nombre, bool& Hh){
     
     
     if(r==NULL){
-        r=new NodoCiudad(id, nombre);
-        cout<<r->id<<" igual a Null"<<endl;
+        r=new NodoCiudad(id, idPais, nombre);
+        //cout<<r->id<<" igual a Null"<<endl;
         Hh = true;
     }else{
-        cout<<"no Null "<<r->id<<endl;
-        if(id<r->id){
-            cout<< id <<" es menor a "<<r->id<<endl;
-            insertarBalanceado(r->izq, id, nombre, Hh);
+        //cout<<"no Null "<<r->id<<endl;
+        if(id<=r->id){
+            //cout<< id <<" es menor a "<<r->id<<endl;
+            insertarBalanceado(r->izq, id, idPais, nombre, Hh);
 
         if(Hh){
-            cout <<"hh izquierdo true"<<endl;
-            cout<<r->id<<" "<<r->FB<<endl;
+            //cout <<"hh izquierdo true"<<endl;
+            //cout<<r->id<<" "<<r->FB<<endl;
             switch(r->FB){
                 case 1: r->FB=0;
                 Hh = false;
@@ -60,12 +60,12 @@ void ArbolCiudad::insertarBalanceado(NodoCiudad* &r, int id, string nombre, bool
             }
         }
         }else{
-            if(id>r->id){
-                cout<< id <<" es mayor a "<<r->id<<endl;
-                insertarBalanceado(r->der, id, nombre, Hh);
+            if(id>=r->id){
+                //cout<< id <<" es mayor a "<<r->id<<endl;
+                insertarBalanceado(r->der, id, idPais, nombre, Hh);
 
                 if(Hh){
-                    cout <<"hh derecho true"<< r->id <<" "<< r->FB<< endl;
+                    //cout <<"hh derecho true"<< r->id <<" "<< r->FB<< endl;
                     switch(r->FB){
                         case -1: 
                         r->FB=0;
@@ -120,22 +120,22 @@ void ArbolCiudad::RotacionDobleIzquierda(NodoCiudad* &n, NodoCiudad* &n1){
 
 void ArbolCiudad::RotacionDobleDerecha(NodoCiudad* &n, NodoCiudad* &n1){
     NodoCiudad *n2;
-    cout<<"entro"<<endl;
+    //cout<<"entro"<<endl;
     n2=n1->izq;
-    cout<<"n "<<n->id<<" n1 "<<n1->id<<" n2 "<<n2->id<<endl;
+    //cout<<"n "<<n->id<<" n1 "<<n1->id<<" n2 "<<n2->id<<endl;
     n->der = n2->izq;
     n2->izq=n;
     n1->izq=n2->der;
     n2->der=n1;
 
-    cout<<"n "<<n->id<<" n1 "<<n1->id<<" n2 "<<n2->id<<endl;
-    cout<<"n "<<n->FB<<" n1 "<<n1->FB<<" n2 "<<n2->FB<<endl;
+    //cout<<"n "<<n->id<<" n1 "<<n1->id<<" n2 "<<n2->id<<endl;
+    //cout<<"n "<<n->FB<<" n1 "<<n1->FB<<" n2 "<<n2->FB<<endl;
 
     if(n2->FB==1){
-        cout<<"ii"<<endl;
+        //cout<<"ii"<<endl;
         n->FB=-1;
     }else{
-        cout<<"tt"<<endl;
+        //cout<<"tt"<<endl;
         n->FB=0;
     }
     if(n2->FB==-1){
@@ -144,13 +144,13 @@ void ArbolCiudad::RotacionDobleDerecha(NodoCiudad* &n, NodoCiudad* &n1){
         n1->FB=0;
     }
     n2->FB=0;
-    cout<<"n "<<n->id<<" n1 "<<n1->id<<" n2 "<<n2->id<<endl;
-    cout<<"n "<<n->FB<<" n1 "<<n1->FB<<" n2 "<<n2->FB<<endl;
+    //cout<<"n "<<n->id<<" n1 "<<n1->id<<" n2 "<<n2->id<<endl;
+    //cout<<"n "<<n->FB<<" n1 "<<n1->FB<<" n2 "<<n2->FB<<endl;
     n=n2;
     
-    cout<<"fin"<<endl;
-    cout<<"n "<<n->id<<" n1 "<<n1->id<<" n2 "<<n2->id<<endl;
-    cout<<"n "<<n->FB<<" n1 "<<n1->FB<<" n2 "<<n2->FB<<endl;
+    //cout<<"fin"<<endl;
+    //cout<<"n "<<n->id<<" n1 "<<n1->id<<" n2 "<<n2->id<<endl;
+    //cout<<"n "<<n->FB<<" n1 "<<n1->FB<<" n2 "<<n2->FB<<endl;
 }
 
 void ArbolCiudad::RotacionSimpleDerecha(NodoCiudad* &n, NodoCiudad* &n1){
@@ -182,25 +182,75 @@ void ArbolCiudad::RotacionSimpleIzquierda(NodoCiudad* &n, NodoCiudad* &n1){
 }
 
 
-NodoCiudad* ArbolCiudad::existeAux(NodoCiudad* r, int id) {
-    if (r == NULL || r->id == id) {
+NodoCiudad* ArbolCiudad::existeAuxCiudad(NodoCiudad* r, int id, int idPais) {
+    
+    if (r == NULL || (r->id == id && r->idPais == idPais)) {
+        return r;
+    }
+    if (id < r->id) {
+        return existeAuxCiudad(r->izq, id, idPais); 
+    } else {
+        return existeAuxCiudad(r->der, id, idPais);  
+    }
+}
+
+
+bool ArbolCiudad::existeCiudad(int id, int idPais, ArbolPais& aPaises) {
+    cout<<"entro"<<endl;
+    NodoCiudad* buscado = existeAuxCiudad(raiz, id, idPais);
+    if (buscado == NULL) {
+        if(aPaises.existePais(idPais)){
+            cout<<"si existe"<<endl;
+            return false;
+        }  else {
+            return true;
+        } 
+    } else {
+            return true;
+        } 
+        
+    }
+
+
+
+void ArbolCiudad::buscarCiudad(int id, int idPais, ArbolPais& aPaises) {
+    NodoCiudad* buscado = existeAuxCiudad(raiz, id, idPais);
+    if (buscado == NULL) {
+        cout << "No existe esta ciudad" << endl;
+    } else {
+        if(aPaises.existePais(idPais)){
+            NodoPais* pais = aPaises.punteroPais(idPais);
+            cout << "ID: " << buscado->id  << "\nNombre: " << buscado->nombre << "\nPais: " << pais->nombre << endl;
+        }
+    }
+}
+
+
+
+NodoCiudad* ArbolCiudad::modificarAux(NodoCiudad* r, int id, int idPais, string nombre) {
+
+    if (r->id == id && r->idPais == idPais) {
+    	r->nombre = nombre;
         return r;
     }
 
     if (id < r->id) {
-        return existeAux(r->izq, id);
+        return modificarAux(r->izq, id, idPais,nombre);
     } else {
-        return existeAux(r->der, id);
+        return modificarAux(r->der, id, idPais,nombre);
     }
 }
 
-bool ArbolCiudad::existe(int id) {
-    NodoCiudad* buscado = existeAux(raiz, id);
-    if (buscado == NULL) {
-        return false;
+void ArbolCiudad::modificar(int id, string nombre, int idPais, ArbolPais& aPaises) {
+    
+    if (!existeCiudad(id, idPais, aPaises)) {
+        cout << "No existe esta ciudad" << endl;
     } else {
-        cout<<"si existe"<<endl;
-        return true;
+        if(aPaises.existePais(idPais)){
+            NodoCiudad* buscado = modificarAux(raiz, id, idPais, nombre);
+    	    cout << "Nombre modificado" << endl;
+            cout << "ID: " << buscado->id << "\nNombre: " << buscado->nombre << endl;  
+        }
     }
 }
 
@@ -251,6 +301,33 @@ void ArbolCiudad::postorden() {
 	cout << endl;
 }
 
+void ArbolCiudad::cargarCiudades(ArbolPais& aPaises) {
+    string str;
+    ifstream archivo;
+    archivo.open("Archivos/Ciudades.txt");
+    while (archivo >> str) {
+        int cont = 0;
+        int idP,idC;
+        string name = "", temp;
+        for (char& c : str) {
+            if (c == ';') {
+                if (cont == 0) {
+                    idP = stoi(temp);
+                } else if (cont == 1) {
+                    idC = stoi(temp);
+                }
+                temp = "";
+                cont++;
+            } else {
+                temp += c;
+            }
+        }
+        name = temp;
+        insertar(idC, idP, name, aPaises);
+    }
+    archivo.close();
+    str="";
+}
 
 
 /*void ArbolCiudad::insertarAux(NodoPais* r, int id, string nombre) {

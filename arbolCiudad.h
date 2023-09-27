@@ -4,6 +4,8 @@
 #include <iostream>
 using namespace std;
 
+#include "nodoPais.h"
+#include "arbolPais.h"
 #include "NodoCiudad.h"
 #include <fstream>
 #include <string>
@@ -19,24 +21,24 @@ class ArbolCiudad {
 		void postorden(NodoCiudad* r);
 		void inorden(NodoCiudad* r);
 		void preorden(NodoCiudad* r);
-		NodoCiudad* existeAux(NodoCiudad* r, int id);
+		NodoCiudad* existeAuxCiudad(NodoCiudad* r, int id, int idPais);
 		//NodoPais* existeAux(NodoPais* r, int id);
-		//NodoPais* modificarAux(NodoPais* r, int id, string nombreNuevo);
+		NodoCiudad* modificarAux(NodoCiudad* r, int id, int idPais, string nombre);
 	public:
 		ArbolCiudad();
-        void insertarBalanceado(NodoCiudad* &r, int id, string nombre, bool& Hh);
-        void insertar(int id, int idPais, string nombre);
+        void insertarBalanceado(NodoCiudad* &r, int id, int idPais, string nombre, bool& Hh);
+        void insertar(int id, int idPais, string nombre, ArbolPais& aPaises);
 		void RotacionDobleIzquierda(NodoCiudad* &n, NodoCiudad* &n1);
         void RotacionDobleDerecha(NodoCiudad* &n, NodoCiudad* &n1);
         void RotacionSimpleDerecha(NodoCiudad* &n, NodoCiudad* &n1);
         void RotacionSimpleIzquierda(NodoCiudad* &n, NodoCiudad* &n1);
-		bool existe(int id);
+		bool existeCiudad(int id, int idPais, ArbolPais& aPaises);
 
 		//void insertar(int id, string nombre);
-		//void cargarPais();
-		//void buscar(int id);
+		void cargarCiudades(ArbolPais& aPaises);
+		void buscarCiudad(int id, int idPais, ArbolPais& aPaises);
 		//bool existe(int id);
-		//void modificar(int id, string nombreNuevo);
+		void modificar(int id, string nombre, int idPais, ArbolPais& aPaises);
 		
 		void preorden();
 		void inorden();

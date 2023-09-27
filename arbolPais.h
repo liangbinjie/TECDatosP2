@@ -18,7 +18,7 @@ class ArbolPais {
 		void postorden(NodoPais* r);
 		void inorden(NodoPais* r);
 		void preorden(NodoPais* r);
-		NodoPais* existeAux(NodoPais* r, int id);
+		
 		NodoPais* modificarAux(NodoPais* r, int id, string nombreNuevo);
 	public:
 		ArbolPais();
@@ -26,9 +26,10 @@ class ArbolPais {
 		void insertar(int id, string nombre);
 		void cargarPais();
 		void buscar(int id);
-		bool existe(int id);
+		bool existePais(int id);
 		void modificar(int id, string nombreNuevo);
-		
+		NodoPais* existeAux(NodoPais* r, int id);
+		NodoPais* punteroPais(int id);
 		void preorden();
 		void inorden();
 		void postorden();
