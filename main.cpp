@@ -3,49 +3,537 @@ using namespace std;
 
 
 // importando clases
-#include "nodoPais.h"
 #include "arbolPais.h"
-#include "nodoCiudad.h"
-#include "arbolCiudad.h"
+#include "arbolRestaurante.h"
+#include "nodoRestaurante.h"
+
+void menu(ArbolPais paises, ArbolRestaurante restaurantes) {
+	cout << endl;
+	cout << "Bienvenido, que desea realizar?" << endl;
+	cout << endl;
+    cout << "1. Insertar" << endl;
+    cout << "2. Mostrar" << endl;
+    cout << "3. Modificar" << endl;
+    cout << "4. Buscar" << endl;
+    cout << "5. Comprar" << endl;
+    cout << "6. Reportes" << endl;
+    cout << "7. Salir" << endl;
+    int numPais;
+    int opcion;
+    cout << "> ";
+    cin >> opcion;
+    string nombre;
+    int codPais, codCiudad, codRest, codMenu, codProducto, codCliente, calorias, precio;
+    switch(opcion) {
+        case 1:
+        	cout << endl;
+            cout << "Que deseas insertar?" << endl;
+            cout << endl;
+            cout << "1. Pais" << endl;
+            cout << "2. Ciudad" << endl;
+            cout << "3. Restaurante" << endl;
+            cout << "4. Menu" << endl;
+            cout << "5. Producto" << endl;
+            cout << "6. Clientes" << endl;
+			cout << "7. Salir" << endl;
+            cout << "> ";
+            cin >> opcion;
+            switch(opcion) {
+                case 1:
+                	cout << endl;
+                    cout << "Ingrese el codigo del pais: " << endl;
+                    cin >> codPais;
+                    cout << "Ingrese el nombre del pais: " << endl;
+                    cin.ignore();
+                    getline(cin,nombre);
+                    paises.insertar(codPais, nombre);
+                    break;
+
+                case 2:
+                	cout << endl;
+                    cout << "Ingrese el codigo del pais: " << endl;
+                    cin >> codPais;
+                    cout << "Ingrese el codigo de la ciudad: " << endl;
+                    cin >> codCiudad;
+                    cout << "Ingrese el nombre de la ciudad: " << endl;
+                    cin.ignore();
+                    getline(cin,nombre);
+                    // lCiudad.insertar(codPais, codCiudad, nombre, lPais);
+                    break;
+
+                case 3:
+                	cout << endl;
+                    cout << "Ingrese el codigo del pais: " << endl;
+                    cin >> codPais;
+                    cout << "Ingrese el codigo de la ciudad: " << endl;
+                    cin >> codCiudad;
+                    cout << "Ingrese el codigo del rest: " << endl;
+                    cin >> codRest;
+                    cout << "Ingrese el nombre del restaurante: " << endl;
+                    cin.ignore();
+                    getline(cin,nombre);
+                    restaurantes.insertar(codPais, codCiudad, codRest, nombre);
+                    break;
+				
+				case 7:
+					cout << endl;
+                    break;
+                
+				/*
+                // case 4:
+                // 	cout << endl;
+                //     cout << "Ingrese el codigo del pais: " << endl;
+                //     cin >> codPais;
+                //     cout << "Ingrese el codigo de la ciudad: " << endl;
+                //     cin >> codCiudad;
+                //     cout << "Ingrese el codigo del rest: " << endl;
+                //     cin >> codRest;
+                //     cout << "Ingrese el codigo del menu: " << endl;
+                //     cin >> codMenu;
+                //     cout << "Ingrese el nombre del menu " << endl;
+                //     cin.ignore();
+                //     getline(cin,nombre);
+                //     lMenu.insertarMenuRest(codPais, codCiudad, codRest,codMenu,nombre,lPais,lCiudad,lRest);
+                //     break;
+                
+                // case 5:
+                // 	cout << endl;
+                //     cout << "Ingrese el codigo del pais: " << endl;
+                //     cin >> codPais;
+                //     cout << "Ingrese el codigo de la ciudad: " << endl;
+                //     cin >> codCiudad;
+                //     cout << "Ingrese el codigo del rest: " << endl;
+                //     cin >> codRest;
+                //     cout << "Ingrese el codigo del menu: " << endl;
+                //     cin >> codMenu;
+                //     cout << "Ingrese el codigo del producto: " << endl;
+                //     cin >> codProducto;
+                //     cout << "Ingrese el nombre del producto: " << endl;
+                //     cin.ignore();
+                //     getline(cin,nombre);
+                //     cout << "Ingrese la cantidad de caloria del producto: " << endl;
+                //     cin >> calorias;
+                //     cout << "Ingrese el precio del producto: " << endl;
+                //     cin >> precio;
+                //     lProducto.insertarProducto(codPais, codCiudad, codRest, codMenu, codProducto, nombre, calorias, precio, lPais, lCiudad, lRest, lMenu);
+                //     break;
+
+                // case 6:
+                // 	cout << endl;
+                //     cout << "Ingrese la identificacion del cliente: " << endl;
+                //     cin >> codCliente;
+                //     cout << "Ingrese el nombre del cliente: " << endl;
+                //     cin.ignore();
+                //     getline(cin,nombre);
+                //     lCliente.insertar(codCliente, nombre);
+                //     break;
+				*/
+            }
+            break;
+        
+        case 2:
+        	cout << endl;
+            cout << "Que deseas mostrar?" << endl;
+            cout << endl;
+            cout << "1. Pais" << endl;
+            cout << "2. Ciudad" << endl;
+            cout << "3. Restaurante" << endl;
+            cout << "4. Menu" << endl;
+            cout << "5. Producto" << endl;
+            cout << "6. Clientes" << endl;
+			cout << "7. Salir" << endl;
+            cout << "> ";
+            cin >> opcion;
+            switch(opcion) {
+                case 1:
+                	cout << endl;
+					cout << "Preorden: " << endl;
+                    paises.preorden();
+					cout << "Inorden: " << endl;
+                    paises.inorden();
+					cout << "Postorden: " << endl;
+                    paises.postorden();
+					cout << endl;
+                    break;
+                case 2:
+                	cout << endl;
+                    // lCiudad.mostrar();
+                    break;
+                case 3:
+                	cout << endl;
+                    restaurantes.MostrarRN();
+                    break;
+
+				/*
+                case 4:
+                	cout << endl;
+                    lMenu.mostrar();
+                    break;
+                
+                case 5:
+                	cout << endl;
+                    lProducto.mostrar();
+                    break;
+
+                case 6:
+                	cout << endl;
+                    lCliente.mostrar();
+                    break; 
+				*/
+
+				case 7:
+					cout << endl;
+					break;
+            }
+            break;
+
+        case 3:
+        	cout << endl;
+            cout << "Que deseas MODIFICAR?" << endl;
+            cout << endl;
+            cout << "1. Pais" << endl;
+            cout << "2. Ciudad" << endl;
+            cout << "3. Restaurante" << endl;
+            cout << "4. Menu" << endl;
+            cout << "5. Producto" << endl;
+            cout << "6. Clientes" << endl;
+			cout << "7. Salir" << endl;
+            cout << "> ";
+            cin >> opcion;
+            switch(opcion) {
+                case 1:
+                	cout << endl;
+                    cout << "Ingrese el numero del pais que quiere MODIFICAR: ";
+                    cin >> numPais;
+                    cout << "Ingrese el nuevo nombre que quiere MODIFICAR: ";
+                    cin.ignore();
+                    getline(cin,nombre);
+                    paises.modificar(numPais, nombre);
+                    break;
+                case 2:
+                	cout << endl;
+                    cout << "Ingrese el codigo del pais al que pertenece la ciudad: ";
+                    cin >> codPais;
+                    cout << "Ingrese el codigo de la ciudad: ";
+                    cin >> codCiudad;
+                    cout << "Ingrese el nuevo nombre que quiere MODIFICAR: ";
+                    cin.ignore();
+                    getline(cin,nombre);
+                	// lCiudad.modificarCiudad(codPais, codCiudad, nombre, lPais);
+                    break;
+                case 3:
+                	cout << endl;
+                    cout << "Ingres el codigo del pais: ";
+                    cin >> codPais;
+                    cout << "Ingrese el codigo de la ciudad: ";
+                    cin >> codCiudad;
+                    cout << "Ingrese el codigo del rest: ";
+                    cin >> codRest;
+                    cout << "Ingrese el nuevo nombre del restaurante: ";
+                    cin.ignore();
+                    getline(cin,nombre);
+                    restaurantes.modificar(codRest, codPais, codCiudad, nombre);
+                    break;
+
+				/*
+                case 4:
+                	cout << endl;
+                    cout << "Ingres el codigo del pais: ";
+                    cin >> codPais;
+                    cout << "Ingrese el codigo de la ciudad: ";
+                    cin >> codCiudad;
+                    cout << "Ingrese el codigo del rest: ";
+                    cin >> codRest;
+                    cout << "Ingrese el codigo del menu: ";
+                    cin >> codMenu;
+                    cout << "Ingrese el nuevo nombre del menu: ";
+                    cin.ignore();
+                    getline(cin,nombre);
+                    lMenu.modificarMenu(codPais,codCiudad, codRest, nombre, codMenu);
+                    break;
+                
+                case 5:
+                	cout << endl;
+                    cout << "Ingres el codigo del pais: ";
+                    cin >> codPais;
+                    cout << "Ingrese el codigo de la ciudad: ";
+                    cin >> codCiudad;
+                    cout << "Ingrese el codigo del rest: ";
+                    cin >> codRest;
+                    cout << "Ingrese el codigo del menu: ";
+                    cin >> codMenu;
+                    cout << "Ingrese el codigo del producto: ";
+                    cin >> codProducto;
+                    cout << "Ingrese el nuevo nombre del producto: ";
+                    cin.ignore();
+                    getline(cin,nombre);
+                    cout << "Ingrese el monto de calorias a modificar: ";
+                    cin >> calorias;
+                    cout << "Ingrese el precio a modificar: ";
+                    cin >> precio;
+                    lProducto.modificarProducto(codPais, codCiudad, codRest, codMenu, codProducto, nombre, calorias, precio, lPais, lCiudad, lRest, lMenu);
+                    break;
+
+                case 6:
+                	cout << endl;
+                    cout << "Ingrese la identificacion del cliente que desea modificar: ";
+                    cin >> codCliente;
+                    cout << "Ingrese el nuevo nombre: ";
+                    cin >> nombre;
+                    lCliente.modificarNombre(codCliente, nombre);
+                    break; 
+				*/
+
+				case 7:
+					cout << endl;
+					break;
+            }
+            break;
+        
+        case 4:
+        	cout << endl;
+            cout << "Que deseas BUSCAR?" << endl;
+            cout << endl;
+            cout << "1. Pais" << endl;
+            cout << "2. Ciudad" << endl;
+            cout << "3. Restaurante" << endl;
+            cout << "4. Menu" << endl;
+            cout << "5. Producto" << endl;
+            cout << "6. Clientes" << endl;
+            cout << "7. Salir" << endl;
+            cout << "> ";
+            cin >> opcion;
+            switch(opcion) {
+                case 1:
+                	cout << endl;
+                    cout << "Ingrese el numero del pais que quiere mostrar: " << endl;
+                    cin >> numPais;
+                    paises.buscar(numPais);
+                    break;
+                case 2:
+                	cout << endl;
+                    cout << "Ingrese el codigo de pais de la ciudad que quieres buscar: " << endl;
+                    cin >> numPais;
+                    cout << "Ingrese el codigo de ciudad que deseas buscar: " << endl;
+                    cin >> codCiudad;
+                    // lCiudad.buscarCiudad(numPais, codCiudad);
+                    break;
+                case 3:
+                	cout << endl;
+                    cout << "Ingrese el numero del pais del que quiere ver el restaurante" << endl;
+                    cin >> codPais;
+                    cout << "Ingrese el numero de la ciudad del que quiere ver el restaurante" << endl;
+                    cin >> codCiudad;
+                    cout << "Ingrese el numero del restaurante" << endl;
+                    cin >> codRest;
+                    restaurantes.BusquedaM(codRest, codPais, codCiudad);
+					
+                    break;
+				
+				/*
+                case 4:
+                	cout << endl;
+                    cout << "Ingrese el numero del pais del que quiere ver el menu" << endl;
+                    cin >> codPais;
+                    cout << "Ingrese el numero de la ciudad del que quiere ver el menu" << endl;
+                    cin >> codCiudad;
+                    cout << "Ingrese el numero del restaurante del que quiere ver el menu" << endl;
+                    cin >> codRest;
+                    cout << "Ingrese el numero del menu" << endl;
+                    cin >> codMenu;
+                    lMenu.buscarMenuRest(codPais, codCiudad, codRest, codMenu, lPais, lCiudad, lRest);
+                    break;
+                case 5:
+                	cout << endl;
+                    cout << "Ingrese el numero del pais del que quiere ver el producto" << endl;
+                    cin >> codPais;
+                    cout << "Ingrese el numero de la ciudad del que quiere ver el producto" << endl;
+                    cin >> codCiudad;
+                    cout << "Ingrese el numero del restaurante del que quiere ver el producto" << endl;
+                    cin >> codRest;
+                    cout << "Ingrese el numero del menu del que quiere ver el producto" << endl;
+                    cin >> codMenu;
+                    cout << "Ingrese el numero del producto" << endl;
+                    cin >> codProducto;
+                    lProducto.buscarProducto(codPais, codCiudad, codRest, codMenu, codProducto, lPais, lCiudad, lRest, lMenu);
+                    break;
+                case 6:
+                	cout << endl;
+                    cout << "Ingrese la identificacion del cliente: ";
+                    cin >> codCliente;
+                    lCliente.buscarCliente(codCliente);
+                    break; 
+				*/
+				case 7:
+					cout << endl;
+					break;
+            }
+            break;
+
+
+		/*
+        case 5:
+        	cout << endl;
+        	cout << "Que deseas hacer?" << endl;
+        	cout << endl;
+        	cout << "1. Hacer fila para comprar" << endl;
+        	cout << "2. Atender a cliente" << endl;
+        	cin >> opcion;
+        	switch(opcion) {
+        		case 1:
+        			cout << endl;
+        			if (Fila.largoFila() == 5) {
+        				cout << "No se puede hacer mas fila, porque ya esta lleno" << endl;
+					} else {
+						cout << "Ingrese su identificacion: ";
+						cin >> codCliente;
+						if (lCliente.existeCliente(codCliente)) {
+							Fila.encolar(codCliente);
+							Fila.imprimir();
+						} else {
+							cout << "Esta identificacion no existe en la base de datos" << endl;
+						}
+ 					}
+ 					break;
+
+				case 2:
+					cout << endl;
+					if (Fila.filaVacia()) {
+						cout << "No hay clientes que atender" << endl;
+					} else {
+						codCliente = Fila.atender();
+                        cout << "Ingrese el pais donde se encuentra el restaurante: ";
+                        cin >> codPais;
+                        cout << "Ingrese la ciudad donde se encuentra el restaurante: ";
+                        cin >> codCiudad;
+                        cout << "Ingrese el codigo del restaurante: ";
+                        cin >> codRest;
+                        cout << "Ingrese el id menu que quieres comprar: ";
+                        cin >> codMenu;
+                        if (lMenu.existeMenuRest(codPais, codCiudad, codRest, codMenu, lPais, lCiudad, lRest)) {
+                            // while (true)
+                            while (true) {
+                                lProducto.mostrarProductosMenu(codPais, codCiudad, codRest, codMenu);
+                                int codProd;
+                                string compra = "";
+                                cout << "Que desea comprar?: ";
+                                cin >> codProd;
+                                if (lProducto.existeProducto(codPais, codCiudad, codRest, codMenu, codProd, lPais, lCiudad, lRest, lMenu)) {
+                                    compra += codProd + ";";
+                                    lProducto.aumentarCompra(codPais, codCiudad, codRest, codMenu, codProd, lPais, lCiudad, lRest, lMenu);
+                                    cout << "Producto agregado a la compra" << endl;
+                                } else {
+                                    cout << "Ingrese un producto valido" << endl;
+                                }
+                                cout << "Desea seguir comprando? y/n" << endl;
+                                char seguir;
+                                cin >> seguir;
+                                if (seguir == 'n') {
+                                    //cout << compra << endl;
+                                    lCompra.agregar(codCliente, codPais, codCiudad, codRest, codMenu, compra);
+                                    cout << "Por favor espere en la fila de pagar" << endl;
+                                    //lCompra.mostrar();
+                                    break;
+                                }
+                            }
+
+                        } else {
+                            cout << "No existe este menu" << endl;
+                        }
+					}
+					break;			
+			}
+			
+			break;
+            
+
+        case 6:
+            cout << endl;
+            cout << "Reportes" << endl;
+            cout << endl;
+            cout << "1. Paises" << endl;
+            cout << "2. Ciudades" << endl;
+            cout << "3. Restaurantes" << endl;
+            cout << "4. Clientes" << endl;
+            cout << "5. Restaurante mas buscado" << endl;
+            cout << "6. Menu mas buscado" << endl;
+            cout << "7. Producto mas comprado" << endl;
+            cout << "8. Consultar el precio de un producto" << endl;
+            cout << "> ";
+            cin >> opcion;
+            switch(opcion) {
+                case 1:
+                	cout << endl;
+                    cout << "Reporte del pais: " << endl;
+                    lPais.reportePaises();
+                    cout << "Proceso finalizado" << endl;
+                    break;
+                case 2:
+                    cout << endl;
+                    cout << "Ingrese el codigo del pais del que quiere ver las ciudades" << endl;
+                    cin >> codPais;
+                    lCiudad.reporteCiudades(codPais);
+                    cout << "Proceso finalizado" << endl;
+                    break;
+                case 3:
+                	cout << endl;
+                    cout << "Ingrese el numero del pais del que quiere ver el restaurante" << endl;
+                    cin >> codPais;
+                    cout << "Ingrese el numero de la ciudad del que quiere ver el restaurante" << endl;
+                    cin >> codCiudad;
+                    lRest.restPaisCiudad(codPais, codCiudad, lPais, lCiudad);
+                    cout << "Proceso finalizado" << endl;
+                    break;
+                case 4:
+                	lCliente.reporteClientes();
+                    cout << "Proceso finalizado" << endl;
+                    break;
+                case 5:
+                	cout << endl;
+                    lRest.reporteRestBuscado();
+                    cout << "Proceso finalizado" << endl;
+                    break;
+                case 6:
+                	cout << endl;
+                    lMenu.menuMasBuscado();
+                    cout << "Proceso finalizado" << endl;
+                    break; 
+                case 7:
+                    cout << endl;
+                    // lProducto.productoMasComprado();
+                    cout << "Proceso finalizado" << endl;
+                    break;
+
+                case 8:
+                    cout << endl;
+                    cout << "Ingrese el numero del pais del que quiere ver el producto" << endl;
+                    cin >> codPais;
+                    cout << "Ingrese el numero de la ciudad del que quiere ver el producto" << endl;
+                    cin >> codCiudad;
+                    cout << "Ingrese el numero del restaurante del que quiere ver el producto" << endl;
+                    cin >> codRest;
+                    cout << "Ingrese el numero del menu del que quiere ver el producto" << endl;
+                    cin >> codMenu;
+                    cout << "Ingrese el numero del producto" << endl;
+                    cin >> codProducto;
+                    // lProducto.precio(codPais, codCiudad, codRest, codMenu, codProducto, lPais, lCiudad, lRest, lMenu);
+                    cout << "Proceso finalizado" << endl;
+                    break;
+            }
+            break;
+			*/
+            
+    	case 7:
+            return;
+    }
+    menu(paises, restaurantes);
+}
 
 int main() {
-
-
-ArbolPais paises;
+	ArbolPais paises;
 	paises.cargarPais();
-	paises.insertar(9, "USA");
-	paises.insertar(46, "ES");
-	paises.insertar(100, "ASW");
-	paises.insertar(4, "CVB");
-	paises.insertar(4, "CVB");
-	paises.insertar(5, "QWE");
-	paises.insertar(76, "WER");
-//	paises.insertar(23, "SDF");
-//	paises.insertar(63, "CHN");
-//	paises.insertar(23, "SQW");
-	//paises.modificar(345, "KOREA");
-	//paises.modificar(234, "no se");
-	paises.preorden();
-
-
-	ArbolCiudad ciudades;
-	
-	ciudades.insertar(12, 9, "San Jose", paises);
-	ciudades.insertar(132, 9,"Alajuela", paises);
-	ciudades.insertar(28, 9, "Cartago", paises);
-	ciudades.cargarCiudades(paises);
-	
-	cout<<"hola"<<endl;
-	ciudades.preorden();
-	ciudades.inorden();
-	ciudades.buscarCiudad(132,9,paises);
-	ciudades.buscarCiudad(345,123,paises);
-	ciudades.modificar(28,"Berlin",9,paises);
-	ciudades.buscarCiudad(71,46,paises);
-	
-	//paises.postorden();
-	//paises.inorden();
-	//paises.buscar(4567);
-	//paises.buscar(200);
+	ArbolRestaurante restaurantes;
+    restaurantes.cargarRests();
+	menu(paises, restaurantes);
 	return 0;
 }
