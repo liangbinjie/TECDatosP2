@@ -15,7 +15,7 @@ void ArbolCiudad::insertar(int id, int idPais, string nombre, ArbolPais& aPaises
 			cout << "Esta ciudad ya existe" << id << endl;
 		} else {
             bool Hh= false;
-            cout << " Insertar   Nueva ciudad insertada" << id<< endl;
+            cout << " Nueva ciudad a insertar" << id<< endl;
 			insertarBalanceado(raiz, id, idPais, nombre, Hh);
 		}
 	}
@@ -49,10 +49,8 @@ void ArbolCiudad::insertarBalanceado(NodoCiudad* &r, int id, int idPais, string 
                 case -1: 
                 NodoCiudad* n1 = r->izq;
                 if(n1->FB ==-1){
-                    cout<<"rotacion simple izquierda"<< endl;
                     RotacionSimpleIzquierda(r, n1);
                 }else{
-                    cout<<"rotacion doble izquierda"<< endl;
                     RotacionDobleIzquierda(r,n1);
                 }
                 Hh = false;
@@ -75,7 +73,6 @@ void ArbolCiudad::insertarBalanceado(NodoCiudad* &r, int id, int idPais, string 
                         r->FB=1;
                         break;
                         case 1:
-                        cout<<"caso 1 der"<<endl;
                         NodoCiudad* n1 = r->der;
                         cout<<n1->id<<endl;
                         if(n1->FB==1){
@@ -196,7 +193,6 @@ NodoCiudad* ArbolCiudad::existeAuxCiudad(NodoCiudad* r, int id, int idPais) {
 
 
 bool ArbolCiudad::existeCiudad(int id, int idPais, ArbolPais& aPaises) {
-    cout<<"entro"<<endl;
     NodoCiudad* buscado = existeAuxCiudad(raiz, id, idPais);
     if (buscado == NULL) {
         if(aPaises.existePais(idPais)){
