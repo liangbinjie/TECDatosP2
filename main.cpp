@@ -323,7 +323,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes)
                     cin >> numPais;
                     cout << "Ingrese el codigo de ciudad que deseas buscar: " << endl;
                     cin >> codCiudad;
-                    ciudades.buscarCiudad(codCiudad, codPais, paises);
+                    ciudades.buscarCiudad(codCiudad, numPais, paises);
                     break;
                 case 3:
                 	cout << endl;
