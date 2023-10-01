@@ -1,17 +1,20 @@
 #include "arbolCiudad.h"
+#include "nodoCiudad.h"
 #include "nodoPais.h"
 #include "arbolPais.h"
+#include "arbolProducto.h"
 
-ArbolCiudad::ArbolCiudad() {
+
+ArbolProducto::ArbolProducto() {
 	raiz = NULL;
 }
 
-void ArbolCiudad::insertar(int id, int idPais, string nombre, ArbolPais& aPaises) {
+void ArbolProducto::insertarProducto(int id, int idPais, int idCiudad, string nombre, ArbolPais& aPaises, ArbolCiudad& aCiudades) {
 	if (raiz == NULL) {
-		raiz = new NodoCiudad(id, idPais, nombre);
+		raiz = new NodoProducto(id, idPais, idCiudad, nombre);
 		cout << "Nueva ciudad insertada" << nombre<< endl;
 	} else {
-		if (existeCiudad(id, idPais, aPaises)) {
+		if (existeProducto(id, idPais, idCiudad, aPaises, aCiudades)) {
 			cout << "Esta ciudad ya existe" << id << endl;
 		} else {
             bool Hh= false;
@@ -21,7 +24,7 @@ void ArbolCiudad::insertar(int id, int idPais, string nombre, ArbolPais& aPaises
 	}
 }
 
-
+ggggg
 
 void ArbolCiudad::insertarBalanceado(NodoCiudad* &r, int id, int idPais, string nombre, bool& Hh){
     
