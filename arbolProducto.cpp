@@ -9,35 +9,35 @@ ArbolProducto::ArbolProducto() {
 	raiz = NULL;
 }
 
-void ArbolProducto::insertarProducto(int id, int idPais, int idCiudad, string nombre, ArbolPais& aPaises, ArbolCiudad& aCiudades) {
+void ArbolProducto::insertarProducto(int id, int idPais, int idCiudad, int idMenu, string nombre, ArbolPais& aPaises, ArbolCiudad& aCiudades) {
 	if (raiz == NULL) {
-		raiz = new NodoProducto(id, idPais, idCiudad, nombre);
+		raiz = new NodoProducto(id, idPais, idCiudad, idMenu, nombre);
 		cout << "Nueva ciudad insertada" << nombre<< endl;
 	} else {
-		if (existeProducto(id, idPais, idCiudad, aPaises, aCiudades)) {
+		if (existeProducto(id, idPais, idCiudad, idMenu, aPaises, aCiudades)) {
 			cout << "Esta ciudad ya existe" << id << endl;
 		} else {
             bool Hh= false;
             cout << " Nueva ciudad a insertar" << id<< endl;
-			insertarBalanceado(raiz, id, idPais, nombre, Hh);
+			insertarBalanceado(raiz, id, idPais, idCiudad, idMenu, nombre, Hh);
 		}
 	}
 }
 
-ggggg
 
-void ArbolCiudad::insertarBalanceado(NodoCiudad* &r, int id, int idPais, string nombre, bool& Hh){
+
+void ArbolProducto::insertarBalanceado(NodoProducto* &r, int id, int idPais, int idCiudad, int idMenu, string nombre, bool& Hh){
     
     
     if(r==NULL){
-        r=new NodoCiudad(id, idPais, nombre);
+        r=new NodoProducto(id, idPais, idCiudad, idMenu, nombre);
         //cout<<r->id<<" igual a Null"<<endl;
         Hh = true;
     }else{
         //cout<<"no Null "<<r->id<<endl;
         if(id<=r->id){
             //cout<< id <<" es menor a "<<r->id<<endl;
-            insertarBalanceado(r->izq, id, idPais, nombre, Hh);
+            insertarBalanceado(r->izq, id, idPais, idCiudad, idMenu, nombre, Hh);
 
         if(Hh){
             //cout <<"hh izquierdo true"<<endl;
@@ -50,7 +50,7 @@ void ArbolCiudad::insertarBalanceado(NodoCiudad* &r, int id, int idPais, string 
                 r->FB  = -1;
                 break;
                 case -1: 
-                NodoCiudad* n1 = r->izq;
+                NodoProducto* n1 = r->izq;
                 if(n1->FB ==-1){
                     RotacionSimpleIzquierda(r, n1);
                 }else{
@@ -63,7 +63,7 @@ void ArbolCiudad::insertarBalanceado(NodoCiudad* &r, int id, int idPais, string 
         }else{
             if(id>=r->id){
                 //cout<< id <<" es mayor a "<<r->id<<endl;
-                insertarBalanceado(r->der, id, idPais, nombre, Hh);
+                insertarBalanceado(r->der, id, idPais, idCiudad, idMenu, nombre, Hh);
 
                 if(Hh){
                     //cout <<"hh derecho true"<< r->id <<" "<< r->FB<< endl;
@@ -76,7 +76,7 @@ void ArbolCiudad::insertarBalanceado(NodoCiudad* &r, int id, int idPais, string 
                         r->FB=1;
                         break;
                         case 1:
-                        NodoCiudad* n1 = r->der;
+                        NodoProducto* n1 = r->der;
                         cout<<n1->id<<endl;
                         if(n1->FB==1){
                             cout<<"rotacion simple derecha"<< endl;
@@ -96,8 +96,8 @@ void ArbolCiudad::insertarBalanceado(NodoCiudad* &r, int id, int idPais, string 
 }
 
 
-void ArbolCiudad::RotacionDobleIzquierda(NodoCiudad* &n, NodoCiudad* &n1){
-    NodoCiudad *n2;
+void ArbolProducto::RotacionDobleIzquierda(NodoProducto* &n, NodoProducto* &n1){
+    NodoProducto *n2;
     n2=n1->der;
     n->izq = n2->der;
     n2->der=n;
@@ -118,8 +118,8 @@ void ArbolCiudad::RotacionDobleIzquierda(NodoCiudad* &n, NodoCiudad* &n1){
     n=n2;
 }
 
-void ArbolCiudad::RotacionDobleDerecha(NodoCiudad* &n, NodoCiudad* &n1){
-    NodoCiudad *n2;
+void ArbolProducto::RotacionDobleDerecha(NodoProducto* &n, NodoProducto* &n1){
+    NodoProducto *n2;
     //cout<<"entro"<<endl;
     n2=n1->izq;
     //cout<<"n "<<n->id<<" n1 "<<n1->id<<" n2 "<<n2->id<<endl;
@@ -153,7 +153,7 @@ void ArbolCiudad::RotacionDobleDerecha(NodoCiudad* &n, NodoCiudad* &n1){
     //cout<<"n "<<n->FB<<" n1 "<<n1->FB<<" n2 "<<n2->FB<<endl;
 }
 
-void ArbolCiudad::RotacionSimpleDerecha(NodoCiudad* &n, NodoCiudad* &n1){
+void ArbolProducto::RotacionSimpleDerecha(NodoProducto* &n, NodoProducto* &n1){
     n->der=n1->izq;
     n1->izq=n;
 
@@ -167,7 +167,7 @@ void ArbolCiudad::RotacionSimpleDerecha(NodoCiudad* &n, NodoCiudad* &n1){
     n=n1;
 }
 
-void ArbolCiudad::RotacionSimpleIzquierda(NodoCiudad* &n, NodoCiudad* &n1){
+void ArbolProducto::RotacionSimpleIzquierda(NodoProducto* &n, NodoProducto* &n1){
     n->izq=n1->der;
     n1->der=n;
 
@@ -182,15 +182,15 @@ void ArbolCiudad::RotacionSimpleIzquierda(NodoCiudad* &n, NodoCiudad* &n1){
 }
 
 
-NodoCiudad* ArbolCiudad::existeAuxCiudad(NodoCiudad* r, int id, int idPais) {
+NodoProducto* ArbolProducto::existeAuxProducto(NodoProducto* r, int id, int idPais, int idCiudad, int idMenu) {
     
     if (r == NULL || (r->id == id && r->idPais == idPais)) {
         return r;
     }
     if (id < r->id) {
-        return existeAuxCiudad(r->izq, id, idPais); 
+        return existeAuxProducto(r->izq, id, idPais, idCiudad, idMenu); 
     } else {
-        return existeAuxCiudad(r->der, id, idPais);  
+        return existeAuxProducto(r->der, id, idPais, idCiudad, idMenu);  
     }
 }
 
@@ -255,7 +255,7 @@ void ArbolCiudad::modificar(int id, string nombre, int idPais, ArbolPais& aPaise
 
 
 
-void ArbolCiudad::preorden(NodoCiudad* r) {
+void ArbolProducto::preorden(NodoProducto* r) {
 	if (r == NULL) {
 		return;
 	} else {
@@ -265,12 +265,12 @@ void ArbolCiudad::preorden(NodoCiudad* r) {
 	}
 }
 
-void ArbolCiudad::preorden() {
+void ArbolProducto::preorden() {
 	preorden(raiz);
 	cout << endl;
 }
 
-void ArbolCiudad::inorden(NodoCiudad* r) {
+void ArbolProducto::inorden(NodoProducto* r) {
 	if (r == NULL) {
 		return;
 	} else {
@@ -280,12 +280,12 @@ void ArbolCiudad::inorden(NodoCiudad* r) {
 	}
 }
 
-void ArbolCiudad::inorden() {
+void ArbolProducto::inorden() {
 	inorden(raiz);
 	cout << endl;
 }
 
-void ArbolCiudad::postorden(NodoCiudad* r) {
+void ArbolProducto::postorden(NodoProducto* r) {
 	if (r == NULL) {
 		return;
 	} else {
@@ -295,7 +295,7 @@ void ArbolCiudad::postorden(NodoCiudad* r) {
 	}
 }
 
-void ArbolCiudad::postorden() {
+void ArbolProducto::postorden() {
 	postorden(raiz);
 	cout << endl;
 }

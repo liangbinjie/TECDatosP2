@@ -12,28 +12,28 @@ using namespace std;
 #include <string>
 #include <sstream>
 
-class ArbolCiudad {
+class ArbolProducto {
 	private:
-		NodoCiudad* raiz;
+		NodoProducto* raiz;
 		
 		//void insertarBalanceado(NodoCiudad* r, int id, string nombre, bool Hh, int x);
         //void insertar(int id, string nombre);
 		//NodoPais* buscarAux(NodoPais* r, int id);
-		void postorden(NodoCiudad* r);
-		void inorden(NodoCiudad* r);
-		void preorden(NodoCiudad* r);
-		NodoCiudad* existeAuxCiudad(NodoCiudad* r, int id, int idPais);
+		void postorden(NodoProducto* r);
+		void inorden(NodoProducto* r);
+		void preorden(NodoProducto* r);
+		NodoProducto* existeAuxProducto(NodoProducto* r, int id, int idPais, int idCiudad, int idMenu);
 		//NodoPais* existeAux(NodoPais* r, int id);
 		NodoCiudad* modificarAux(NodoCiudad* r, int id, int idPais, string nombre);
 	public:
-		ArbolCiudad();
-        void insertarBalanceado(NodoCiudad* &r, int id, int idPais, string nombre, bool& Hh);
-        void insertar(int id, int idPais, string nombre, ArbolPais& aPaises);
-		void RotacionDobleIzquierda(NodoCiudad* &n, NodoCiudad* &n1);
-        void RotacionDobleDerecha(NodoCiudad* &n, NodoCiudad* &n1);
-        void RotacionSimpleDerecha(NodoCiudad* &n, NodoCiudad* &n1);
-        void RotacionSimpleIzquierda(NodoCiudad* &n, NodoCiudad* &n1);
-		bool existeCiudad(int id, int idPais, ArbolPais& aPaises);
+		ArbolProducto();
+        void insertarBalanceado(NodoProducto* &r, int id, int idPais, int idCiudad, int idMenu, string nombre, bool& Hh);
+        void insertarProducto(int id, int idPais, int idCiudad, int idMenu, string nombre, ArbolPais& aPaises, ArbolCiudad& aCiudades);
+		void RotacionDobleIzquierda(NodoProducto* &n, NodoProducto* &n1);
+        void RotacionDobleDerecha(NodoProducto* &n, NodoProducto* &n1);
+        void RotacionSimpleDerecha(NodoProducto* &n, NodoProducto* &n1);
+        void RotacionSimpleIzquierda(NodoProducto* &n, NodoProducto* &n1);
+		bool existeProducto(int id, int idPais, int idCiudad, int idMenu, ArbolPais& aPaises, ArbolCiudad& aCiudades);
 
 		//void insertar(int id, string nombre);
 		void cargarCiudades(ArbolPais& aPaises);
