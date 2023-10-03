@@ -6,12 +6,12 @@ ArbolMenu::ArbolMenu() {
     raiz = nullptr;
 };
 
-void ArbolMenu::insertar(int clave, int idPais, int idCiudad, int idRest, string nombre, ArbolRestaurante restaurantes) {
+void ArbolMenu::insertar(int clave, int idPais, int idCiudad, int idRest, string nombre, ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes) {
     if (existe(clave, idPais, idCiudad, idRest)) {
         cout << "Este menu ya existe" << endl;
         return;
     }
-    if (restaurantes.existe(idRest, idPais, idCiudad)) {
+    if (paises.existePais(idPais) && ciudades.existeCiudad(idCiudad, idPais, paises) && restaurantes.existe(idRest, idPais, idCiudad)) {
         raiz = insertarRec(raiz, clave, idPais, idCiudad, idRest, nombre);
         cout << "Nuevo menu insertado" << endl;
     } else {
@@ -145,7 +145,7 @@ void ArbolMenu::modificar(NodoMenu* nodo, int clave, int idPais, int idCiudad, i
     }
 }
 
-void ArbolMenu::cargarMenus(ArbolRestaurante rests) {
+void ArbolMenu::cargarMenus(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante rests) {
     ifstream archivo("Archivos/Menu.txt");
     string line;
     
@@ -169,7 +169,7 @@ void ArbolMenu::cargarMenus(ArbolRestaurante rests) {
 
         getline(ss, name, ';');
 
-        insertar(idM, idP, idC, idR, name, rests);
+        insertar(idM, idP, idC, idR, name, paises, ciudades, rests);
     }
 
     archivo.close();

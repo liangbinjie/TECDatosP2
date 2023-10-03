@@ -6,16 +6,18 @@ using namespace std;
 #include <fstream>
 #include <sstream>
 #include "arbolRestaurante.h"
+#include "arbolCiudad.h"
+#include "arbolPais.h"
 
 class ArbolMenu {
 	public:
 		ArbolMenu();
-		void insertar(int clave, int idPais, int idCiudad, int idRest, string nombre, ArbolRestaurante restaurantes);
+		void insertar(int clave, int idPais, int idCiudad, int idRest, string nombre, ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes);
 		void mostrar();
 		bool existe(int clave, int idPais, int idCiudad, int idRest);
 		void buscar(int clave, int idPais, int idCiudad, int idRest);
 		void modificar(int clave, int idPais, int idCiudad, int idRest, string nuevoNombre);
-		void cargarMenus(ArbolRestaurante rests);
+		void cargarMenus(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante rests);
 	
 	private:
 		NodoMenu* raiz;
