@@ -7,8 +7,9 @@ using namespace std;
 #include "arbolRestaurante.h"
 #include "nodoRestaurante.h"
 #include "arbolCiudad.h"
+#include "arbolMenu.h"
 
-void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes) {
+void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes, ArbolMenu menus) {
 	cout << endl;
 	cout << "Bienvenido, que desea realizar?" << endl;
 	cout << endl;
@@ -79,23 +80,26 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes)
 				case 7:
 					cout << endl;
                     break;
+                    
+                case 4:
+                 	cout << endl;
+	                cout << "Ingrese el codigo del pais: " << endl;
+	                cin >> codPais;
+	                cout << "Ingrese el codigo de la ciudad: " << endl;
+	                cin >> codCiudad;
+	                cout << "Ingrese el codigo del rest: " << endl;
+	                cin >> codRest;
+	                cout << "Ingrese el codigo del menu: " << endl;
+	                cin >> codMenu;
+	                cout << "Ingrese el nombre del menu " << endl;
+	                cin.ignore();
+	                getline(cin,nombre);
+	                menus.insertar(codMenu, codPais, codCiudad, codRest, nombre, restaurantes);
+//	                menus.insertar(codMenu, codPais, codCiudad, codRest,nombre,paises,ciudades,restaurantes);
+	                break;
                 
 				/*
-                // case 4:
-                // 	cout << endl;
-                //     cout << "Ingrese el codigo del pais: " << endl;
-                //     cin >> codPais;
-                //     cout << "Ingrese el codigo de la ciudad: " << endl;
-                //     cin >> codCiudad;
-                //     cout << "Ingrese el codigo del rest: " << endl;
-                //     cin >> codRest;
-                //     cout << "Ingrese el codigo del menu: " << endl;
-                //     cin >> codMenu;
-                //     cout << "Ingrese el nombre del menu " << endl;
-                //     cin.ignore();
-                //     getline(cin,nombre);
-                //     lMenu.insertarMenuRest(codPais, codCiudad, codRest,codMenu,nombre,lPais,lCiudad,lRest);
-                //     break;
+
                 
                 // case 5:
                 // 	cout << endl;
@@ -170,12 +174,14 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes)
                 	cout << endl;
                     restaurantes.MostrarRN();
                     break;
-
-				/*
+                
                 case 4:
                 	cout << endl;
-                    lMenu.mostrar();
+                    menus.mostrar();
                     break;
+
+				/*
+                
                 
                 case 5:
                 	cout << endl;
@@ -242,7 +248,6 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes)
                     restaurantes.modificar(codRest, codPais, codCiudad, nombre);
                     break;
 
-				/*
                 case 4:
                 	cout << endl;
                     cout << "Ingres el codigo del pais: ";
@@ -256,8 +261,9 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes)
                     cout << "Ingrese el nuevo nombre del menu: ";
                     cin.ignore();
                     getline(cin,nombre);
-                    lMenu.modificarMenu(codPais,codCiudad, codRest, nombre, codMenu);
+                    menus.modificar(codMenu, codPais, codCiudad, codRest, nombre);
                     break;
+				/*
                 
                 case 5:
                 	cout << endl;
@@ -337,7 +343,6 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes)
 					
                     break;
 				
-				/*
                 case 4:
                 	cout << endl;
                     cout << "Ingrese el numero del pais del que quiere ver el menu" << endl;
@@ -348,8 +353,9 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes)
                     cin >> codRest;
                     cout << "Ingrese el numero del menu" << endl;
                     cin >> codMenu;
-                    lMenu.buscarMenuRest(codPais, codCiudad, codRest, codMenu, lPais, lCiudad, lRest);
+                    menus.buscar(codMenu, codPais, codCiudad, codRest);
                     break;
+				/*
                 case 5:
                 	cout << endl;
                     cout << "Ingrese el numero del pais del que quiere ver el producto" << endl;
@@ -533,7 +539,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes)
     	case 7:
             return;
     }
-    menu(paises, ciudades, restaurantes);
+    menu(paises, ciudades, restaurantes, menus);
 }
 
 int main() {
@@ -543,6 +549,8 @@ int main() {
     ciudades.cargarCiudades(paises);
 	ArbolRestaurante restaurantes;
     restaurantes.cargarRests(paises, ciudades);
-	menu(paises, ciudades, restaurantes);
+    ArbolMenu menus;
+    menus.cargarMenus(restaurantes);
+	menu(paises, ciudades, restaurantes, menus);
 	return 0;
 }
