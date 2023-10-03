@@ -159,7 +159,7 @@ void ArbolRestaurante::BusquedaM(int id, int idPais, int idCiudad) {
 
 bool ArbolRestaurante::existe(int id, int idPais, int idCiudad) {
   NodoRestaurante* buscado = Busqueda(this->raiz, id, idPais, idCiudad);
-  if (buscado->valor == -1) {
+  if (buscado->valor == -1 || buscado == NULL) {
     return false;
   } else {
     return true;
