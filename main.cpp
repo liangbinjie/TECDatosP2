@@ -224,7 +224,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes,
                     paises.modificar(numPais, nombre);
                     break;
                 case 2:
-                	cout << endl;
+			cout << endl;
                     cout << "Ingrese el codigo del pais al que pertenece la ciudad: ";
                     cin >> codPais;
                     cout << "Ingrese el codigo de la ciudad: ";
@@ -235,7 +235,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes,
                 	ciudades.modificar(codCiudad, nombre, codPais, paises);
                     break;
                 case 3:
-                	cout << endl;
+			cout << endl;
                     cout << "Ingres el codigo del pais: ";
                     cin >> codPais;
                     cout << "Ingrese el codigo de la ciudad: ";
@@ -545,8 +545,8 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes,
 int main() {
 	ArbolPais paises;
 	paises.cargarPais();
-    ArbolCiudad ciudades;
-    ciudades.cargarCiudades(paises);
+	ArbolCiudad ciudades;
+	ciudades.cargarCiudades(paises);
 	ArbolRestaurante restaurantes;
     restaurantes.cargarRests(paises, ciudades);
     ArbolMenu menus;
