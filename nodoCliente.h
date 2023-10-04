@@ -4,7 +4,16 @@
 #include <iostream>
 using namespace std;
 
+#define MAX 4
+#define MIN 2
+
 class NodoCliente {
+	private:
+    struct NodoClienteInternal {
+        int val[MAX + 1], count;
+        NodoCliente* link[MAX + 1];
+    };
+
 	public:
 		int cedula;
 		string nombre;

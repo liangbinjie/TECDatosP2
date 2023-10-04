@@ -1,3 +1,7 @@
+#ifndef ARBOLCLIENTE_H
+#define ARBOLCLIENTE_H
+
+
 #include <string>
 #include <sstream>
 
@@ -12,7 +16,8 @@
 
 class ArbolCliente {
 	private:
-		NodoCliente* root;
+
+		//NodoCliente* root;
 		
         NodoCliente* crearnodo(int val, NodoCliente* hijo);
 		//void insertarBalanceado(NodoCiudad* r, int id, string nombre, bool Hh, int x);

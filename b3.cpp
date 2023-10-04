@@ -1,27 +1,32 @@
 #include <iostream>
 #include <conio.h>
 
-#include "arbolCiudad.h"
-#include "nodoCiudad.h"
-#include "nodoPais.h"
-#include "arbolPais.h"
-#include "arbolProducto.h"
-#include "arbolCliente.h"
+using namespace std;
 
+#define MAX 4
+#define MIN 2
 
+struct NodoBtree {
+	int val[MAX + 1], count;
+	NodoBtree* link[MAX + 1];
+    std::string nombre;
+};
+
+NodoBtree* root;
 
 //Crear nodo 
-NodoCliente* crearnodo(int val, NodoCliente* hijo) {
-	NodoCliente* NuevoNodo = new NodoCliente;
+NodoBtree* crearnodo(int val, string nombre, NodoBtree* hijo) {
+	NodoBtree* NuevoNodo = new NodoBtree;
 	NuevoNodo->val[1] = val;
 	NuevoNodo->count = 1;
 	NuevoNodo->link[0] = root;
 	NuevoNodo->link[1] = hijo;
+    NuevoNodo->nombre = nombre;
 	return NuevoNodo;
 }
 
 //coloca el nodo en la posicion adecuada, de acuerdo a su valor
-void ArbolCliente::Colocarnodo(int val, int pos, NodoCliente* node, NodoCliente* hijo) {
+void Colocarnodo(int val, int pos, NodoBtree* node, NodoBtree* hijo) {
 	int j = node->count;
 	while (j > pos) {
 		node->val[j + 1] = node->val[j];
@@ -34,7 +39,7 @@ void ArbolCliente::Colocarnodo(int val, int pos, NodoCliente* node, NodoCliente*
 }
 
 
-void ArbolCliente::PartirNodo(int val, int* pval, int pos, NodoCliente* node, NodoCliente* hijo, NodoCliente** NuevoNodo) {
+void PartirNodo(int val, int* pval, int pos, NodoBtree* node, NodoBtree* hijo, NodoBtree** NuevoNodo) {
 	int median, j;
 
 	if (pos > MIN)
@@ -42,7 +47,7 @@ void ArbolCliente::PartirNodo(int val, int* pval, int pos, NodoCliente* node, No
 	else
 		median = MIN;
 
-	*NuevoNodo = new NodoCliente;
+	*NuevoNodo = new NodoBtree;
 	j = median + 1;
 	while (j <= MAX) {
 		(*NuevoNodo)->val[j - median] = node->val[j];
@@ -64,7 +69,7 @@ void ArbolCliente::PartirNodo(int val, int* pval, int pos, NodoCliente* node, No
 }
 
 //colocar valor
-int ArbolCliente::SetValorNodo(int val, int* pval, NodoCliente* node, NodoCliente** hijo) {
+int SetValorNodo(int val, int* pval, NodoBtree* node, NodoBtree** hijo) {
 
 	int pos;
 	if (!node) {
@@ -97,18 +102,18 @@ int ArbolCliente::SetValorNodo(int val, int* pval, NodoCliente* node, NodoClient
 }
 
 //inserta valores en el btree
-void ArbolCliente::insertar(int val) {
+void insertar(int val, string nombre) {
 	int flag, i;
-	NodoCliente* hijo;
+	NodoBtree* hijo;
 
 	flag = SetValorNodo(val, &i, root, &hijo);
 	if (flag)
-		root = crearnodo(i, hijo);
+		root = crearnodo(i, nombre, hijo);
 }
 
 //copia el sucesor del nodo que será borrado
-void ArbolCliente::copySuccessor(NodoCliente* minodo, int pos) {
-	NodoCliente* dummy;
+void copySuccessor(NodoBtree* minodo, int pos) {
+	NodoBtree* dummy;
 	dummy = minodo->link[pos];
 
 	for (; dummy->link[0] != NULL;)
@@ -118,7 +123,7 @@ void ArbolCliente::copySuccessor(NodoCliente* minodo, int pos) {
 }
 
 //remueve un valor de un nodo y reacomoda el arbol
-void ArbolCliente::removeVal(NodoCliente* minodo, int pos) {
+void removeVal(NodoBtree* minodo, int pos) {
 	int i = pos + 1;
 	while (i <= minodo->count) {
 		minodo->val[i - 1] = minodo->val[i];
@@ -129,8 +134,8 @@ void ArbolCliente::removeVal(NodoCliente* minodo, int pos) {
 }
 
 //shift a la derecha
-void ArbolCliente::doRightShift(NodoCliente* minodo, int pos) {
-	NodoCliente* x = minodo->link[pos];
+void doRightShift(NodoBtree* minodo, int pos) {
+	NodoBtree* x = minodo->link[pos];
 	int j = x->count;
 
 	while (j > 0) {
@@ -149,9 +154,9 @@ void ArbolCliente::doRightShift(NodoCliente* minodo, int pos) {
 }
 
 //shift a la izquierda
-void ArbolCliente::doLeftShift(NodoCliente* minodo, int pos) {
+void doLeftShift(NodoBtree* minodo, int pos) {
 	int j = 1;
-	NodoCliente* x = minodo->link[pos - 1];
+	NodoBtree* x = minodo->link[pos - 1];
 
 	x->count++;
 	x->val[x->count] = minodo->val[pos];
@@ -171,9 +176,9 @@ void ArbolCliente::doLeftShift(NodoCliente* minodo, int pos) {
 }
 
 //Fusionar nodos
-void ArbolCliente::UnirNodos(NodoCliente* minodo, int pos) {
+void UnirNodos(NodoBtree* minodo, int pos) {
 	int j = 1;
-	NodoCliente* x1 = minodo->link[pos], * x2 = minodo->link[pos - 1];
+	NodoBtree* x1 = minodo->link[pos], * x2 = minodo->link[pos - 1];
 
 	x2->count++;
 	x2->val[x2->count] = minodo->val[pos];
@@ -196,10 +201,8 @@ void ArbolCliente::UnirNodos(NodoCliente* minodo, int pos) {
 	free(x1);
 }
 
-
-
 //Ajusta el nodo dado
-void ArbolCliente::AjustarNodo(NodoCliente* minodo, int pos) {
+void AjustarNodo(NodoBtree* minodo, int pos) {
 	if (!pos) {
 		if (minodo->link[1]->count > MIN) {
 			doLeftShift(minodo, 1);
@@ -232,7 +235,7 @@ void ArbolCliente::AjustarNodo(NodoCliente* minodo, int pos) {
 }
 
 //borrar un valor del nodo
-int ArbolCliente::BorrarDeNodo(int val, NodoCliente* minodo) {
+int BorrarDeNodo(int val, NodoBtree* minodo) {
 	int pos, flag = 0;
 	if (minodo) {
 		if (val < minodo->val[1]) {
@@ -273,8 +276,8 @@ int ArbolCliente::BorrarDeNodo(int val, NodoCliente* minodo) {
 }
 
 /* delete val from B-tree */
-void ArbolCliente::borrado(int val, NodoCliente* minodo) {
-	NodoCliente* tmp;
+void borrado(int val, NodoBtree* minodo) {
+	NodoBtree* tmp;
 	if (!BorrarDeNodo(val, minodo)) {
 		cout << "No existe ese valor en el B-Tree\n";
 		system("pause");
@@ -294,7 +297,7 @@ void ArbolCliente::borrado(int val, NodoCliente* minodo) {
 }
 
 /* search val in B-Tree */
-void ArbolCliente::busqueda(int val, int* pos, NodoCliente* minodo) {
+void busqueda(int val, int* pos, NodoBtree* minodo) {
 	if (!minodo) {
 		return;
 	}
@@ -318,73 +321,70 @@ void ArbolCliente::busqueda(int val, int* pos, NodoCliente* minodo) {
 }
 
 // B-Tree desplegar
-void ArbolCliente::desplegar(NodoCliente* minodo) {
-	int i;
-	if (minodo) {
-		for (i = 0; i < minodo->count; i++) {
-			desplegar(minodo->link[i]);
-			cout << minodo->val[i + 1] << ' ';
-		}
-		desplegar(minodo->link[i]);
-	}
+void desplegar(NodoBtree* minodo) {
+    if (minodo) {
+        for (int i = 0; i < minodo->count; i++) {
+            desplegar(minodo->link[i]);
+            cout << minodo->val[i + 1] << ' ' << minodo->nombre << ' ';  // Imprimir valor y nombre
+        }
+        desplegar(minodo->link[minodo->count]);
+    }
 }
 
-int main() {
-    
-insertar(1);
-insertar(32);
-insertar(8);
-insertar(90);
-insertar(12);
-insertar(25);
-insertar(52);
-insertar(19);
-desplegar(root);
-
-
-    int val, opt;
-    /*while (true) {
-        system("CLS");
-        cout << "1. Insertar\n";
-        cout << "2. Borrar\n";
-        cout << "3. Buscar\n";
-        cout << "4. Desplegar (InOrder)\n";
-        cout << "5. Salir\nOpcion? ";
-
-        // Manejo de error de entrada
-        if (!(cin >> opt)) {
-            cout << "Entrada no válida. Saliendo.\n";
-            break;
+void preOrden(NodoBtree* minodo) {
+    if (minodo) {
+        for (int i = 0; i < minodo->count; i++) {
+            cout << minodo->val[i + 1] << ' ' << minodo->nombre << ' ';  // Imprimir valor y nombre
+            preOrden(minodo->link[i]);
         }
-
-        cout << endl;
-
-        switch (opt) {
-        case 1:
-            cout << "Ingrese valor del nodo:";
-            cin >> val;
-            insertar(val);
-            break;
-        case 2:
-            cout << "Cual elemento desea borrar:";
-            cin >> val;
-            borrado(val, root);
-            break;
-        case 3:
-            cout << "Cual elemento desea buscar?";
-            cin >> val;
-            busqueda(val, &opt, root);
-            break;
-        case 4:
-            desplegar(root);
-            break;
-        case 5:
-            return 0;
-        }
-
-        cout << endl;
+        preOrden(minodo->link[minodo->count]);
     }
-    */
+}
 
-    return 0;
+
+int main() {
+    insertar(12,"usa");
+    insertar(24,"uty");
+    insertar(26,"rr");
+    insertar(30,"ss");
+    insertar(45,"pp");
+    desplegar(root);
+    preOrden(root);
+	int val, opt;
+	/*while (true) {
+		system("CLS");
+		cout << "1. insertar\n";
+		cout << "2. Borrar\n";
+		cout << "3. Buscar\n";
+		cout << "4. Desplegar (InOrder)\n";
+		cout << "5. Salir \n Opcion? ";
+		cin >> opt;
+		cout << endl;
+		switch (opt) {
+		case 1:
+			cout << "Ingrese valor del nodo:";
+			cin >> val;
+			insertar(val);
+			break;
+		case 2:
+			cout << "Cual elemento desea borrar:";
+			cin >> val;
+			borrado(val, root);
+			break;
+		case 3:
+			cout << "Cual elemento desea buscar?";
+			cin >> val;
+			busqueda(val, &opt, root);
+			break;
+		case 4:
+			desplegar(root);
+			break;
+		case 5:
+			exit(0);
+		}
+		cout << endl;
+	}
+
+	system("pause");
+    */
 }
