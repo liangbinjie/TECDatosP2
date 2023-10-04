@@ -24,12 +24,12 @@ HostApplication=
 UseCustomMakefile=0
 CustomMakefile=
 CommandLine=
-Folders=Archivos,Ciudad,Menu,Pais,Restaurante
+Folders=Archivos,Ciudad,Cliente,Menu,Pais,Restaurante
 IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=3
 CompilerSettings=00000001c0000000000000000
-UnitCount=22
+UnitCount=26
 
 [VersionInfo]
 Major=1
@@ -265,9 +265,9 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit24]
-FileName=arbolProducto.h
+FileName=nodoCliente.h
 CompileCpp=1
-Folder=Producto
+Folder=Cliente
 Compile=1
 Link=1
 Priority=1000
@@ -275,9 +275,9 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit25]
-FileName=nodoProducto.cpp
+FileName=arbolCliente.cpp
 CompileCpp=1
-Folder=Producto
+Folder=Cliente
 Compile=1
 Link=1
 Priority=1000
@@ -285,9 +285,19 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit26]
-FileName=nodoProducto.h
+FileName=arbolCliente.h
 CompileCpp=1
-Folder=Producto
+Folder=Cliente
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit23]
+FileName=nodoCliente.cpp
+CompileCpp=1
+Folder=Cliente
 Compile=1
 Link=1
 Priority=1000
