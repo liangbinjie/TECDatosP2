@@ -28,11 +28,13 @@ public:
     void cargarCliente();
     void buscar(int id);
     void modificar(int id, string nombreNuevo);
+    void reporte();
 
 private:
     Pagina* Raiz;
     const static int Max = 4;
 
+    void reporte(Pagina* nodo);
     void BuscarNodo(int Clave, Pagina* P, bool& Encontrado, int& K);
     void MeterHoja(int X, Pagina* Xder, Pagina* P, int K, string nombre, string nAux);
     void DividirNodo(int X, Pagina* Xder, Pagina* P, int K, int& Mda, Pagina*& Mder, string nombre, string nAux);

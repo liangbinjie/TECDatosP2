@@ -167,6 +167,7 @@ void ArbolCliente::modificar(Pagina* nodo, int id, string nombre) {
             RecorridoPreorden(nodo->Ramas[i]);
         }
     }
+    cout << "No se encontro el cliente" << endl;
 }
 
 void ArbolCliente::cargarCliente() {
@@ -186,5 +187,27 @@ void ArbolCliente::cargarCliente() {
 
         Insertar(idP, name);
     }
+    archivo.close();
+}
+
+
+void ArbolCliente::reporte() {
+    reporte(Raiz);
+}
+
+
+void ArbolCliente::reporte(Pagina* nodo) {
+    ofstream archivo;
+    archivo.open ("reportes/clientes.txt");
+    if (nodo != nullptr) {
+        for (int i = 0; i < nodo->Cuenta; i++) {
+            archivo << "ID: " << nodo->Claves[i] << " | Cliente: " << nodo->nombre[i] << endl;
+        }
+        for (int i = 0; i <= nodo->Cuenta; i++) {
+            RecorridoPreorden(nodo->Ramas[i]);
+        }
+    }
+    
+    
     archivo.close();
 }
