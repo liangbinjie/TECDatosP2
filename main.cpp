@@ -516,6 +516,14 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes,
                     menus.reporte();
                     cout << "Proceso finalizado" << endl;
                     break;
+                
+                case 8:
+                break;
+
+                case 9:
+                    menus.masBuscado();
+                    cout << "Proceso finalizado" << endl;
+                    break;
 
                 // case 8:
                 //     cout << endl;

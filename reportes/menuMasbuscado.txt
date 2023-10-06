@@ -1,0 +1,7 @@
+MENU MAS BUSCADO
+ID: 3
+Nombre: PolloyNuggets
+Busquedas: 2
+Restaurante: 876
+Ciudad: 234
+Pais: 4567

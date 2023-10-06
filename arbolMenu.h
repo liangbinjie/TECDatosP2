@@ -19,6 +19,7 @@ class ArbolMenu {
 		void modificar(int clave, int idPais, int idCiudad, int idRest, string nuevoNombre);
 		void cargarMenus(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante rests);
 		void reporte();
+		void masBuscado();
 	
 	private:
 		NodoMenu* raiz;
@@ -30,6 +31,7 @@ class ArbolMenu {
 		void buscarRec(NodoMenu* nodo, int clave, int idPais, int idCiudad, int idRest);
 		void modificar(NodoMenu* nodo, int clave, int idPais, int idCiudad, int idRest, string nuevoNombre);
 		void reporte(NodoMenu* nodo, int profundidad, ofstream& archivo);
+		void* masBuscado(NodoMenu* nodo, int profundidad, NodoMenu* menu);
 		
 		
 };

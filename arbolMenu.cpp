@@ -114,6 +114,7 @@ void ArbolMenu::buscarRec(NodoMenu* nodo, int clave, int idPais, int idCiudad, i
         cout << "ID MENU: " << nodo->clave << endl;
         cout << "Nombre menu: " << nodo->nombre << endl;
         nodo->cont++;
+        cout << "Busquedas: " << nodo->cont << endl;
         return;
     } else if (clave < nodo->clave) {
         return buscarRec(nodo->izquierda, clave, idPais, idCiudad, idRest);
@@ -185,12 +186,37 @@ void ArbolMenu::reporte() {
 
 void ArbolMenu::reporte(NodoMenu* nodo, int profundidad, ofstream& archivo) {
     if (nodo != nullptr) {
+        archivo << "ID: " << nodo->clave << " Nombre: " << nodo->nombre << endl;
+        reporte(nodo->izquierda, profundidad + 1, archivo);
         reporte(nodo->derecha, profundidad + 1, archivo);
         for (int i = 0; i < profundidad; i++) {
             std::cout << "  ";
         }
-        archivo << "ID: " << nodo->clave << " Nombre: " << nodo->nombre << endl;
-        // std::cout << "(" << nodo->clave << "," << nodo->nivel << ")" << std::endl;
-        reporte(nodo->izquierda, profundidad + 1, archivo);
+    }
+}
+
+void ArbolMenu::masBuscado() {
+    
+    masBuscado(raiz, 0, raiz);
+    
+    
+}
+
+void* ArbolMenu::masBuscado(NodoMenu* nodo, int profundidad, NodoMenu* menu) {
+    if (nodo != nullptr) {
+        masBuscado(nodo->izquierda, profundidad + 1, menu);
+        masBuscado(nodo->derecha, profundidad + 1, menu);
+        if (nodo->cont > menu->cont) {
+            ofstream archivo;
+            archivo.open("reportes/menuMasbuscado.txt");
+            archivo << "MENU MAS BUSCADO" << endl;
+            archivo << "ID: " << nodo->clave << endl;
+            archivo << "Nombre: " << nodo->nombre << endl;
+            archivo << "Busquedas: " << nodo->cont << endl;
+            archivo << "Restaurante: " << nodo->idRest << endl;
+            archivo << "Ciudad: " << nodo->idCiudad << endl;
+            archivo << "Pais: " << nodo->idPais << endl;
+            archivo.close();
+        }
     }
 }
