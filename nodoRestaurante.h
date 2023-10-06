@@ -10,6 +10,7 @@ class NodoRestaurante {
         int idCiudad;
         int valor;
         string nombre;
+        int cont; // contador para busquedas
         NodoRestaurante *padre;
         NodoRestaurante *Hizq;
         NodoRestaurante *Hder;

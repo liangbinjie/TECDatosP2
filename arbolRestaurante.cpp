@@ -35,6 +35,7 @@ void ArbolRestaurante::postOrden(pnodoRest nodo) {
 
 pnodoRest ArbolRestaurante::Busqueda(pnodoRest nodo, int id, int idPais, int idCiudad) {
     if (nodo == TNULL || (id == nodo->valor && idPais == nodo->idPais && idCiudad == nodo->idCiudad)) {
+      nodo->cont++;
       return nodo;
     }
 
@@ -356,4 +357,25 @@ void ArbolRestaurante::modificarAux(pnodoRest nodo, int id, int idP, int idC, st
       return modificarAux(nodo->Hizq, id, idP, idC, nuevo);
     }
     return modificarAux(nodo->Hder, id, idP, idC, nuevo);
+}
+
+void ArbolRestaurante::masBuscado() {
+  masBuscado(raiz);
+}
+
+void ArbolRestaurante::masBuscado(pnodoRest r) {
+  if (r != TNULL) {
+    if (r->cont > raiz->cont) {
+      ofstream archivo;
+      archivo.open("reportes/restMasbuscado.txt");
+      archivo << "Restaurante mas buscado" << endl;
+      archivo << "ID: " << r->valor << endl;
+      archivo << "Nombre: " << r->nombre << endl;
+      archivo << "Ciudad: " << r->idCiudad << endl;
+      archivo << "Pais: " << r->idPais << endl;
+      archivo << "Busquedas: " << r->cont << endl;
+    }
+    masBuscado(r->Hizq);
+    masBuscado(r->Hder);
+  }
 }

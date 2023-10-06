@@ -26,6 +26,7 @@ class ArbolRestaurante {
         void MostrarRN(pnodoRest raiz, string indent, bool ultimo);
         pnodoRest existeAux(pnodoRest nodo, int id, int idPais, int idCiudad);
         void modificarAux(pnodoRest nodo, int id, int idPais, int idCiudad, string nuevoNombre);
+        void masBuscado(pnodoRest nodo);
 
     public:
         ArbolRestaurante();
@@ -45,6 +46,7 @@ class ArbolRestaurante {
         void MostrarRN();
         void cargarRests(ArbolPais &paises, ArbolCiudad &ciudades);
         void modificar(int id, int idPais, int idCiudad, string nuevoNombre);
+        void masBuscado();
 };
 
 #endif 
