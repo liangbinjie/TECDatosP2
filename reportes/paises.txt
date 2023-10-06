@@ -1,0 +1,3 @@
+ID: 123 | Nombre: Panama
+ID: 345 | Nombre: Estados Unidos
+ID: 4567 | Nombre: Mexico
