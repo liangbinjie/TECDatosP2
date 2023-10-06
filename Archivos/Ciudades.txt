@@ -1,5 +1,6 @@
-123;345;David
-345;987;Orlando
-4567;234;Guadalajara
-12;34;Bocas del Toro
-123;345;X
+1;1;David
+2;2;Orlando
+3;3;Guadalajara 
+4;4;Bocas del toro 
+5;5;San Jose
+1;1;XXXX
