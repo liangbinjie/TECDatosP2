@@ -119,7 +119,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes,
                     cin >> calorias;
                     cout << "Ingrese el precio del producto: " << endl;
                     cin >> precio;
-                    // productos.insertarProducto(codPais, codCiudad, codRest, codMenu, codProducto, nombre, calorias, precio, lPais, lCiudad, lRest, lMenu);
+                    productos.insertarProducto(codProducto, codPais, codCiudad, codRest, codMenu, nombre, paises, ciudades, restaurantes, menus);
                     break;
 
                 case 6:
@@ -129,7 +129,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes,
                     cout << "Ingrese el nombre del cliente: " << endl;
                     cin.ignore();
                     getline(cin,nombre);
-                    clientes.Insertar(codCliente, nombre);
+                    clientes.insertar(codCliente, nombre);
                     break;
 
 				case 7:
@@ -185,12 +185,18 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes,
                 
                 case 5:
                 	cout << endl;
-                    // lProducto.mostrar();
+					cout << "Preorden: " << endl;
+                    productos.preorden();
+					cout << "Inorden: " << endl;
+                    productos.inorden();
+					cout << "Postorden: " << endl;
+                    productos.postorden();
+					cout << endl;
                     break;
 
                 case 6:
                 	cout << endl;
-                    clientes.RecorridoPreorden();
+                    // clientes.mostrar();
                     break; 
 
 				case 7:
@@ -291,7 +297,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes,
                     cin >> codCliente;
                     cout << "Ingrese el nuevo nombre: ";
                     cin >> nombre;
-                    clientes.modificar(codCliente, nombre);
+                    clientes.modificarNombre(codCliente, nombre);
                     break; 
 
 				case 7:
@@ -364,13 +370,13 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes,
                     cin >> codMenu;
                     cout << "Ingrese el numero del producto" << endl;
                     cin >> codProducto;
-                    // productos.buscarProducto(codPais, codCiudad, codRest, codMenu, codProducto, lPais, lCiudad, lRest, lMenu);
+                    productos.buscarProducto(codProducto, codPais, codCiudad, codRest, codMenu, paises, ciudades, restaurantes, menus);
                     break;
                 case 6:
                 	cout << endl;
                     cout << "Ingrese la identificacion del cliente: ";
                     cin >> codCliente;
-                    clientes.buscar(codCliente);
+                    clientes.buscarCliente(codCliente);
                     break; 
 				case 7:
 					cout << endl;
@@ -453,39 +459,35 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes,
 			
 			break;
             */
-		
+		/*
+            
+
         case 6:
             cout << endl;
             cout << "Reportes" << endl;
             cout << endl;
-            cout << "1. Preorden Paises" << endl;
-            cout << "2. Preorden Ciudades" << endl;
-            cout << "3. Preorden Restaurantes" << endl;
-            cout << "4. Preorden Clientes" << endl;
-            cout << "5. Compras de un cliente?" << endl;
-            cout << "6. Restaurante mas buscado" << endl;
-            cout << "7. Preorden Menu" << endl;
-            cout << "8. Preorden productos" << endl;
-            cout << "9. Menu mas buscado" << endl;
-            cout << "10. Producto mas comprado" << endl;
-            cout << "11. Factura con mayor monto" << endl;
-            cout << "12. Factura con menor monto" << endl;
-            cout << "13. Precio de un producto" << endl;
-            cout << "14. GENERAR TODO DE UN SOLO" << endl;
+            cout << "1. Paises" << endl;
+            cout << "2. Ciudades" << endl;
+            cout << "3. Restaurantes" << endl;
+            cout << "4. Clientes" << endl;
+            cout << "5. Restaurante mas buscado" << endl;
+            cout << "6. Menu mas buscado" << endl;
+            cout << "7. Producto mas comprado" << endl;
+            cout << "8. Consultar el precio de un producto" << endl;
             cout << "> ";
             cin >> opcion;
             switch(opcion) {
                 case 1:
                 	cout << endl;
                     cout << "Reporte del pais: " << endl;
-                    paises.reporte();
+                    lPais.reportePaises();
                     cout << "Proceso finalizado" << endl;
                     break;
                 case 2:
                     cout << endl;
                     cout << "Ingrese el codigo del pais del que quiere ver las ciudades" << endl;
                     cin >> codPais;
-                    // lCiudad.reporteCiudades(codPais);
+                    lCiudad.reporteCiudades(codPais);
                     cout << "Proceso finalizado" << endl;
                     break;
                 case 3:
@@ -494,46 +496,47 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes,
                     cin >> codPais;
                     cout << "Ingrese el numero de la ciudad del que quiere ver el restaurante" << endl;
                     cin >> codCiudad;
-                    // lRest.restPaisCiudad(codPais, codCiudad, lPais, lCiudad);
+                    lRest.restPaisCiudad(codPais, codCiudad, lPais, lCiudad);
                     cout << "Proceso finalizado" << endl;
                     break;
                 case 4:
-                	clientes.reporte();
+                	lCliente.reporteClientes();
                     cout << "Proceso finalizado" << endl;
                     break;
                 case 5:
                 	cout << endl;
-                    // lRest.reporteRestBuscado();
+                    lRest.reporteRestBuscado();
                     cout << "Proceso finalizado" << endl;
                     break;
                 case 6:
                 	cout << endl;
-                    // lMenu.menuMasBuscado();
+                    lMenu.menuMasBuscado();
                     cout << "Proceso finalizado" << endl;
                     break; 
                 case 7:
                     cout << endl;
-                    menus.reporte();
+                    // lProducto.productoMasComprado();
                     cout << "Proceso finalizado" << endl;
                     break;
 
-                // case 8:
-                //     cout << endl;
-                //     cout << "Ingrese el numero del pais del que quiere ver el producto" << endl;
-                //     cin >> codPais;
-                //     cout << "Ingrese el numero de la ciudad del que quiere ver el producto" << endl;
-                //     cin >> codCiudad;
-                //     cout << "Ingrese el numero del restaurante del que quiere ver el producto" << endl;
-                //     cin >> codRest;
-                //     cout << "Ingrese el numero del menu del que quiere ver el producto" << endl;
-                //     cin >> codMenu;
-                //     cout << "Ingrese el numero del producto" << endl;
-                //     cin >> codProducto;
-                //     // lProducto.precio(codPais, codCiudad, codRest, codMenu, codProducto, lPais, lCiudad, lRest, lMenu);
-                //     cout << "Proceso finalizado" << endl;
-                //     break;
+                case 8:
+                    cout << endl;
+                    cout << "Ingrese el numero del pais del que quiere ver el producto" << endl;
+                    cin >> codPais;
+                    cout << "Ingrese el numero de la ciudad del que quiere ver el producto" << endl;
+                    cin >> codCiudad;
+                    cout << "Ingrese el numero del restaurante del que quiere ver el producto" << endl;
+                    cin >> codRest;
+                    cout << "Ingrese el numero del menu del que quiere ver el producto" << endl;
+                    cin >> codMenu;
+                    cout << "Ingrese el numero del producto" << endl;
+                    cin >> codProducto;
+                    // lProducto.precio(codPais, codCiudad, codRest, codMenu, codProducto, lPais, lCiudad, lRest, lMenu);
+                    cout << "Proceso finalizado" << endl;
+                    break;
             }
             break;
+			*/
             
     	case 7:
             return;
@@ -551,7 +554,7 @@ int main() {
     ArbolMenu menus;
     menus.cargarMenus(paises, ciudades, restaurantes);
 	ArbolProducto productos;
-//	productos.cargarProductos();
+	productos.cargarProductos(paises, ciudades, restaurantes, menus);
     ArbolCliente clientes;
     clientes.cargarCliente();
     system("cls");

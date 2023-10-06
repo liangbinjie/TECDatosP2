@@ -56,7 +56,7 @@ NodoMenu* ArbolMenu::dividir(NodoMenu* nodo) {
 
 NodoMenu* ArbolMenu::insertarRec(NodoMenu* nodo, int clave, int idPais, int idCiudad, int idRest, string nombre) {
     if (nodo == nullptr) {
-        nodo = new NodoMenu{clave, 1, idPais, idCiudad, idRest, 0, nombre, nullptr, nullptr};
+        nodo = new NodoMenu{clave, 1, idPais, idCiudad, idRest, nombre, nullptr, nullptr};
     } else if (clave <= nodo->clave) {
         nodo->izquierda = insertarRec(nodo->izquierda, clave, idPais, idCiudad, idRest, nombre);
     } else if (clave > nodo->clave) {
@@ -113,7 +113,6 @@ void ArbolMenu::buscarRec(NodoMenu* nodo, int clave, int idPais, int idCiudad, i
         cout << "ID REST: " << nodo->idRest << endl;
         cout << "ID MENU: " << nodo->clave << endl;
         cout << "Nombre menu: " << nodo->nombre << endl;
-        nodo->cont++;
         return;
     } else if (clave < nodo->clave) {
         return buscarRec(nodo->izquierda, clave, idPais, idCiudad, idRest);
@@ -174,23 +173,4 @@ void ArbolMenu::cargarMenus(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaur
     }
 
     archivo.close();
-}
-
-void ArbolMenu::reporte() {
-    ofstream archivo;
-    archivo.open("reportes/menu.txt");
-    reporte(raiz, 0, archivo);
-    archivo.close();
-}
-
-void ArbolMenu::reporte(NodoMenu* nodo, int profundidad, ofstream& archivo) {
-    if (nodo != nullptr) {
-        reporte(nodo->derecha, profundidad + 1, archivo);
-        for (int i = 0; i < profundidad; i++) {
-            std::cout << "  ";
-        }
-        archivo << "ID: " << nodo->clave << " Nombre: " << nodo->nombre << endl;
-        // std::cout << "(" << nodo->clave << "," << nodo->nivel << ")" << std::endl;
-        reporte(nodo->izquierda, profundidad + 1, archivo);
-    }
 }

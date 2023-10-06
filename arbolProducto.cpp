@@ -241,8 +241,7 @@ void ArbolProducto::buscarProducto(int id, int idPais, int idCiudad, int idRest,
         if(existeProducto(id, idPais, idCiudad, idRest, idMenu, aPaises, aCiudades, aRest, aMenu)){
             NodoProducto* buscado = existeAuxProducto(raiz, id, idPais, idCiudad, idRest, idMenu);
             NodoPais* pais = aPaises.punteroPais(idPais);
-//            NodoCiudad* ciudad = aCiudades.punteroCiudad(idCiudad);
-//            cout << "ID: " << buscado->id  << "\nNombre: " << buscado->nombre << "\nPais: " << pais->nombre <<"\nCiudad: " << ciudad->nombre << "\nRestaurante: " << buscado->idRest << "\nMenu: " << buscado->idMenu << endl;
+            cout << "ID: " << buscado->id  << "\nNombre: " << buscado->nombre << "\nPais: " << pais->nombre <<"\nCiudad: " << buscado->idCiudad << "\nRestaurante: " << buscado->idRest << "\nMenu: " << buscado->idMenu << endl;
         } else{
             cout << "gggg"<<endl;
         }

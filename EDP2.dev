@@ -28,8 +28,8 @@ Folders=Archivos,Ciudad,Cliente,Menu,Pais,Producto,Restaurante
 IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=3
-CompilerSettings=00000001c0000000000000000
-UnitCount=28
+CompilerSettings=0;0;0;0;0;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+UnitCount=30
 
 [VersionInfo]
 Major=1
@@ -265,7 +265,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit24]
-FileName=arbolCliente.h
+FileName=nodoCliente.h
 CompileCpp=1
 Folder=Cliente
 Compile=1
@@ -275,9 +275,9 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit25]
-FileName=arbolProducto.cpp
+FileName=arbolCliente.cpp
 CompileCpp=1
-Folder=Producto
+Folder=Cliente
 Compile=1
 Link=1
 Priority=1000
@@ -285,9 +285,9 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit26]
-FileName=arbolProducto.h
+FileName=arbolCliente.h
 CompileCpp=1
-Folder=Producto
+Folder=Cliente
 Compile=1
 Link=1
 Priority=1000
@@ -295,7 +295,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit23]
-FileName=arbolCliente.cpp
+FileName=nodoCliente.cpp
 CompileCpp=1
 Folder=Cliente
 Compile=1
@@ -316,6 +316,26 @@ BuildCmd=
 
 [Unit28]
 FileName=nodoProducto.h
+CompileCpp=1
+Folder=Producto
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit29]
+FileName=arbolProducto.cpp
+CompileCpp=1
+Folder=Producto
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit30]
+FileName=arbolProducto.h
 CompileCpp=1
 Folder=Producto
 Compile=1

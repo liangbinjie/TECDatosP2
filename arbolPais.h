@@ -18,12 +18,11 @@ class ArbolPais {
 		void postorden(NodoPais* r);
 		void inorden(NodoPais* r);
 		void preorden(NodoPais* r);
-		void reporte(NodoPais *r, ofstream& archivo);
 		
 		NodoPais* modificarAux(NodoPais* r, int id, string nombreNuevo);
 	public:
 		ArbolPais();
-		void reporte();
+		
 		void insertar(int id, string nombre);
 		void cargarPais();
 		void buscar(int id);

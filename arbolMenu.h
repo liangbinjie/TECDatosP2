@@ -18,7 +18,6 @@ class ArbolMenu {
 		void buscar(int clave, int idPais, int idCiudad, int idRest);
 		void modificar(int clave, int idPais, int idCiudad, int idRest, string nuevoNombre);
 		void cargarMenus(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante rests);
-		void reporte();
 	
 	private:
 		NodoMenu* raiz;
@@ -29,7 +28,6 @@ class ArbolMenu {
 		bool existeRec(NodoMenu* nodo, int clave, int idPais, int idCiudad, int idRest);
 		void buscarRec(NodoMenu* nodo, int clave, int idPais, int idCiudad, int idRest);
 		void modificar(NodoMenu* nodo, int clave, int idPais, int idCiudad, int idRest, string nuevoNombre);
-		void reporte(NodoMenu* nodo, int profundidad, ofstream& archivo);
 		
 		
 };

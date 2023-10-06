@@ -1,4 +1,0 @@
-ID: 12 Nombre: HP
-ID: 3 Nombre: PolloyNuggets
-ID: 2 Nombre: Acompañamientos
-ID: 1 Nombre: HC

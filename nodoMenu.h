@@ -10,7 +10,6 @@ struct NodoMenu {
     int idPais;
     int idCiudad;
     int idRest;
-    int cont;
     string nombre;
     NodoMenu* izquierda;
     NodoMenu* derecha;

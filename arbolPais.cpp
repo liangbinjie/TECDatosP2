@@ -183,19 +183,3 @@ void ArbolPais::cargarPais() {
     archivo.close();
 }
 
-void ArbolPais::reporte() {
-    ofstream archivo;
-    archivo.open ("reportes/paises.txt");
-    reporte(raiz, archivo);
-	archivo.close();
-}
-
-void ArbolPais::reporte(NodoPais* r, ofstream& archivo) {
-	if (r == NULL) {
-		return;
-	} else {
-		archivo << "ID: " << r->id << " | Nombre: " << r->nombre << endl;
-		reporte(r->izq, archivo);
-		reporte(r->der, archivo);
-	}
-}

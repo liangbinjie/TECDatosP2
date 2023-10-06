@@ -208,7 +208,6 @@ bool ArbolCiudad::existeCiudad(int id, int idPais, ArbolPais& aPaises) {
     }
 
 
-
 void ArbolCiudad::buscarCiudad(int id, int idPais, ArbolPais& aPaises) {
     NodoCiudad* buscado = existeAuxCiudad(raiz, id, idPais);
     if (buscado == NULL) {

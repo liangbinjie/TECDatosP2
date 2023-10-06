@@ -1,25 +1,25 @@
 # Project: EDP2
-# Makefile created by Dev-C++ 5.11
+# Makefile created by Embarcadero Dev-C++ 6.3
 
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = main.o nodoPais.o arbolPais.o arbolRestaurante.o nodoRestaurante.o arbolCiudad.o nodoCiudad.o arbolMenu.o arbolCliente.o arbolProducto.o nodoProducto.o
-LINKOBJ  = main.o nodoPais.o arbolPais.o arbolRestaurante.o nodoRestaurante.o arbolCiudad.o nodoCiudad.o arbolMenu.o arbolCliente.o arbolProducto.o nodoProducto.o
-LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib32" -static-libgcc -m32
-INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
-CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+OBJ      = main.o nodoPais.o arbolPais.o arbolRestaurante.o nodoRestaurante.o arbolCiudad.o nodoCiudad.o arbolMenu.o nodoCliente.o arbolCliente.o nodoProducto.o arbolProducto.o
+LINKOBJ  = main.o nodoPais.o arbolPais.o arbolRestaurante.o nodoRestaurante.o arbolCiudad.o nodoCiudad.o arbolMenu.o nodoCliente.o arbolCliente.o nodoProducto.o arbolProducto.o
+LIBS     = -L"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/lib32" -static-libgcc -m32
+INCS     = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include"
+CXXINCS  = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++"
 BIN      = EDP2.exe
-CXXFLAGS = $(CXXINCS) -m32 -std=c++11
-CFLAGS   = $(INCS) -m32 -std=c++11
-RM       = rm.exe -f
+CXXFLAGS = $(CXXINCS) -m32
+CFLAGS   = $(INCS) -m32
+DEL      = C:\Program Files (x86)\Embarcadero\Dev-Cpp\DevCpp.exe INTERNAL_DEL
 
 .PHONY: all all-before all-after clean clean-custom
 
 all: all-before $(BIN) all-after
 
 clean: clean-custom
-	${RM} $(OBJ) $(BIN)
+	${DEL} $(OBJ) $(BIN)
 
 $(BIN): $(OBJ)
 	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
@@ -48,11 +48,14 @@ nodoCiudad.o: nodoCiudad.cpp
 arbolMenu.o: arbolMenu.cpp
 	$(CPP) -c arbolMenu.cpp -o arbolMenu.o $(CXXFLAGS)
 
+nodoCliente.o: nodoCliente.cpp
+	$(CPP) -c nodoCliente.cpp -o nodoCliente.o $(CXXFLAGS)
+
 arbolCliente.o: arbolCliente.cpp
 	$(CPP) -c arbolCliente.cpp -o arbolCliente.o $(CXXFLAGS)
 
-arbolProducto.o: arbolProducto.cpp
-	$(CPP) -c arbolProducto.cpp -o arbolProducto.o $(CXXFLAGS)
-
 nodoProducto.o: nodoProducto.cpp
 	$(CPP) -c nodoProducto.cpp -o nodoProducto.o $(CXXFLAGS)
+
+arbolProducto.o: arbolProducto.cpp
+	$(CPP) -c arbolProducto.cpp -o arbolProducto.o $(CXXFLAGS)
