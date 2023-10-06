@@ -129,7 +129,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes,
                     cout << "Ingrese el nombre del cliente: " << endl;
                     cin.ignore();
                     getline(cin,nombre);
-                    clientes.insertar(codCliente, nombre);
+                    clientes.Insertar(codCliente, nombre);
                     break;
 
 				case 7:
@@ -190,7 +190,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes,
 
                 case 6:
                 	cout << endl;
-                    // clientes.mostrar();
+                    clientes.RecorridoPreorden();
                     break; 
 
 				case 7:
@@ -291,7 +291,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes,
                     cin >> codCliente;
                     cout << "Ingrese el nuevo nombre: ";
                     cin >> nombre;
-                    clientes.modificarNombre(codCliente, nombre);
+                    clientes.modificar(codCliente, nombre);
                     break; 
 
 				case 7:
@@ -370,7 +370,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes,
                 	cout << endl;
                     cout << "Ingrese la identificacion del cliente: ";
                     cin >> codCliente;
-                    clientes.buscarCliente(codCliente);
+                    clientes.buscar(codCliente);
                     break; 
 				case 7:
 					cout << endl;
