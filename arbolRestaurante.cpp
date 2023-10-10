@@ -36,6 +36,7 @@ void ArbolRestaurante::postOrden(pnodoRest nodo) {
 pnodoRest ArbolRestaurante::Busqueda(pnodoRest nodo, int id, int idPais, int idCiudad) {
     if (nodo == TNULL || (id == nodo->valor && idPais == nodo->idPais && idCiudad == nodo->idCiudad)) {
       nodo->cont++;
+      // cout <<  "asdasd" << nodo->valor << endl;
       return nodo;
     }
 
@@ -160,7 +161,7 @@ void ArbolRestaurante::BusquedaM(int id, int idPais, int idCiudad) {
 
 bool ArbolRestaurante::existe(int id, int idPais, int idCiudad) {
   NodoRestaurante* buscado = Busqueda(this->raiz, id, idPais, idCiudad);
-  if (buscado->valor == -1 || buscado == NULL) {
+  if (buscado == NULL || buscado->valor == -1) {
     return false;
   } else {
     return true;
@@ -244,16 +245,7 @@ void ArbolRestaurante::RotacionDerecha(pnodoRest nodo) {
   nodo->padre = y;
 }
 
-void ArbolRestaurante::insertar(int idPais, int idCiudad, int valornuevo, string nombre, ArbolPais &paises, ArbolCiudad &ciudades) {
-  // revisa si existe este restaurante
-  if (existe(valornuevo, idPais, idCiudad)) {
-    cout << "Este restaurante ya existe" << endl;
-    return;
-  }
-  if (!ciudades.existeCiudad(idCiudad, idPais, paises)) {
-    cout << "Ubicacion no existe" << endl;
-    return;
-  }
+void ArbolRestaurante::insertar(int idPais, int idCiudad, int valornuevo, string nombre) {
   pnodoRest nodo = new NodoRestaurante;
   nodo->padre = nullptr;
   nodo->valor = valornuevo;
@@ -307,32 +299,32 @@ void ArbolRestaurante::MostrarRN() {
   }
 }
 
-void ArbolRestaurante::cargarRests(ArbolPais &paises, ArbolCiudad &ciudades) {
-    ifstream archivo("Archivos/Restaurantes.txt");
-    string line;
+// void ArbolRestaurante::cargarRests(ArbolPais &paises, ArbolCiudad &ciudades) {
+//     ifstream archivo("Archivos/Restaurantes.txt");
+//     string line;
     
-    while (getline(archivo, line)) {
-        stringstream ss(line);
-        string temp;
-        int idP, idC, idR;
-        string name;
+//     while (getline(archivo, line)) {
+//         stringstream ss(line);
+//         string temp;
+//         int idP, idC, idR;
+//         string name;
 
-        getline(ss, temp, ';');
-        idP = stoi(temp);
+//         getline(ss, temp, ';');
+//         idP = stoi(temp);
 
-        getline(ss, temp, ';');
-        idC = stoi(temp);
+//         getline(ss, temp, ';');
+//         idC = stoi(temp);
 
-        getline(ss, temp, ';');
-        idR = stoi(temp);
+//         getline(ss, temp, ';');
+//         idR = stoi(temp);
 
-        getline(ss, name, ';');
+//         getline(ss, name, ';');
 
-       insertar(idP, idC, idR, name, paises, ciudades);
-    }
+//        insertar(idP, idC, idR, name, paises, ciudades);
+//     }
 
-    archivo.close();
-}
+//     archivo.close();
+// }
 
 
 void ArbolRestaurante::modificar(int id, int idPais, int idCiudad, string nuevoNombre) {
@@ -373,9 +365,28 @@ void ArbolRestaurante::masBuscado(pnodoRest r) {
       archivo << "Nombre: " << r->nombre << endl;
       archivo << "Ciudad: " << r->idCiudad << endl;
       archivo << "Pais: " << r->idPais << endl;
-      archivo << "Busquedas: " << r->cont << endl;
+      // archivo << "Busquedas: " << r->cont << endl;
     }
     masBuscado(r->Hizq);
     masBuscado(r->Hder);
+  }
+}
+
+void ArbolRestaurante::reporte(int idPais, int idCiudad) {
+  ofstream archivo;
+  archivo.open("reportes/restaurantes.txt");
+  archivo << "Preorden restaurantes de pais: " << idPais << "| Ciudad: " << idCiudad << endl;
+  reporte(raiz, idPais, idCiudad, archivo);
+  archivo.close();
+}
+
+void ArbolRestaurante::reporte(pnodoRest r, int idP, int idC, ofstream& archivo) {
+  if (r != TNULL) {
+    if (r->idPais == idP && r->idCiudad == idC) {
+      archivo << "ID: " << r->valor << " Nombre: " << r->nombre << endl;
+    }
+    cout << r->valor << endl;
+    reporte(r->Hizq, idP, idC, archivo);
+    reporte(r->Hder, idP, idC, archivo);
   }
 }

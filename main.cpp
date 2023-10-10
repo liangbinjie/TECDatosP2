@@ -12,8 +12,9 @@ using namespace std;
 #include "arbolCliente.h"
 #include "compra/fila.h"
 #include "compra/listaCompra.h"
+#include "listaRest.h"
 
-void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes, ArbolMenu menus, ArbolProducto productos, ArbolCliente clientes) {
+void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolMenu menus, ArbolProducto productos, ArbolCliente clientes, ArbolRestaurante rests) {
 	cout << endl;
 	cout << "Bienvenido, que desea realizar?" << endl;
 	cout << endl;
@@ -78,7 +79,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes,
                     cout << "Ingrese el nombre del restaurante: " << endl;
                     cin.ignore();
                     getline(cin,nombre);
-                    restaurantes.insertar(codPais, codCiudad, codRest, nombre, paises, ciudades);
+                    restaurantes.insertar(codPais, codCiudad, codRest, nombre, paises, ciudades, rests);
                     break;
 				
                     
@@ -95,7 +96,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes,
 	                cout << "Ingrese el nombre del menu " << endl;
 	                cin.ignore();
 	                getline(cin,nombre);
-	                menus.insertar(codMenu, codPais, codCiudad, codRest, nombre, paises, ciudades, restaurantes);
+	                menus.insertar(codMenu, codPais, codCiudad, codRest, nombre, paises, ciudades, rests);
 //	                menus.insertar(codMenu, codPais, codCiudad, codRest,nombre,paises,ciudades,restaurantes);
 	                break;
                 
@@ -174,7 +175,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes,
                     break;
                 case 3:
                 	cout << endl;
-                    restaurantes.MostrarRN();
+                    rests.MostrarRN();
                     break;
                 
                 case 4:
@@ -185,7 +186,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes,
                 
                 case 5:
                 	cout << endl;
-                    // lProducto.mostrar();
+                    productos.preorden();
                     break;
 
                 case 6:
@@ -244,7 +245,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes,
                     cout << "Ingrese el nuevo nombre del restaurante: ";
                     cin.ignore();
                     getline(cin,nombre);
-                    restaurantes.modificar(codRest, codPais, codCiudad, nombre);
+                    rests.modificar(codRest, codPais, codCiudad, nombre);
                     break;
 
                 case 4:
@@ -282,7 +283,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes,
                     cin >> calorias;
                     cout << "Ingrese el precio a modificar: ";
                     cin >> precio;
-                    // productos.modificarProducto(codPais, codCiudad, codRest, codMenu, codProducto, nombre, calorias, precio, lPais, lCiudad, lRest, lMenu);
+                    // productos.modificar(codPais, codCiudad, codRest, codMenu, codProducto, nombre, calorias, precio, lPais, lCiudad, lRest, lMenu);
                     break;
 
                 case 6:
@@ -336,7 +337,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes,
                     cin >> codCiudad;
                     cout << "Ingrese el numero del restaurante" << endl;
                     cin >> codRest;
-                    restaurantes.BusquedaM(codRest, codPais, codCiudad);
+                    rests.BusquedaM(codRest, codPais, codCiudad);
 					
                     break;
 				
@@ -364,7 +365,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes,
                     cin >> codMenu;
                     cout << "Ingrese el numero del producto" << endl;
                     cin >> codProducto;
-                    // productos.buscarProducto(codPais, codCiudad, codRest, codMenu, codProducto, lPais, lCiudad, lRest, lMenu);
+                    productos.buscarProducto(codProducto, codPais, codCiudad, codRest, codMenu, paises, ciudades, rests, menus);
                     break;
                 case 6:
                 	cout << endl;
@@ -495,6 +496,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes,
                     cout << "Ingrese el numero de la ciudad del que quiere ver el restaurante" << endl;
                     cin >> codCiudad;
                     // preorden de restaurantes de una ciudad y pais
+                    rests.reporte(codPais, codCiudad);
                     cout << "Proceso finalizado" << endl;
                     break;
                 case 4:
@@ -508,7 +510,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes,
                     break;
                 case 6:
                 	cout << endl;
-                    restaurantes.masBuscado();
+                    rests.masBuscado();
                     cout << "Proceso finalizado" << endl;
                     break; 
                 case 7:
@@ -531,7 +533,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes,
     	case 7:
             return;
     }
-    menu(paises, ciudades, restaurantes, menus, productos, clientes);
+    menu(paises, ciudades, restaurantes, menus, productos, clientes, rests);
 }
 
 int main() {
@@ -539,15 +541,16 @@ int main() {
 	paises.cargarPais();
     ArbolCiudad ciudades;
     ciudades.cargarCiudades(paises);
-	ArbolRestaurante restaurantes;
-    restaurantes.cargarRests(paises, ciudades);
+	listaRest restaurantes;
+	ArbolRestaurante rests;
+    restaurantes.cargarRest(paises, ciudades, rests);
     ArbolMenu menus;
-    menus.cargarMenus(paises, ciudades, restaurantes);
+    menus.cargarMenus(paises, ciudades, rests);
 	ArbolProducto productos;
-//	productos.cargarProductos();
+	productos.cargarProductos(paises, ciudades, rests, menus);
     ArbolCliente clientes;
     clientes.cargarCliente();
-    system("cls");
-	menu(paises, ciudades, restaurantes, menus, productos, clientes);
+    // system("cls");
+	menu(paises, ciudades, restaurantes, menus, productos, clientes, rests);
 	return 0;
 }

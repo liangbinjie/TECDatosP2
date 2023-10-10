@@ -27,6 +27,7 @@ class ArbolRestaurante {
         pnodoRest existeAux(pnodoRest nodo, int id, int idPais, int idCiudad);
         void modificarAux(pnodoRest nodo, int id, int idPais, int idCiudad, string nuevoNombre);
         void masBuscado(pnodoRest nodo);
+        void reporte(pnodoRest nodo, int idPais, int idCiudad, ofstream &archivo);
 
     public:
         ArbolRestaurante();
@@ -41,12 +42,13 @@ class ArbolRestaurante {
         pnodoRest predecessor(pnodoRest nodo);
         void RotacionIzquierda(pnodoRest nodo);
         void RotacionDerecha(pnodoRest nodo);
-        void insertar(int idPais, int idCiudad, int valornuevo, string nombre, ArbolPais &paises, ArbolCiudad &ciudades);
+        void insertar(int idPais, int idCiudad, int valornuevo, string nombre);
         pnodoRest getRaiz();
         void MostrarRN();
         void cargarRests(ArbolPais &paises, ArbolCiudad &ciudades);
         void modificar(int id, int idPais, int idCiudad, string nuevoNombre);
         void masBuscado();
+        void reporte(int idPais, int idCiudad);
 };
 
 #endif 

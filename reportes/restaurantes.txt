@@ -1,0 +1,4 @@
+Preorden restaurantes de pais: 123| Ciudad: 345
+ID: 34 Nombre: MacPanama
+ID: 1 Nombre: KFC
+ID: 2341 Nombre: X

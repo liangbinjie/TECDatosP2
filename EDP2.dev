@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=3
 CompilerSettings=00000001c0000000000000000
-UnitCount=28
+UnitCount=30
 
 [VersionInfo]
 Major=1
@@ -318,6 +318,26 @@ BuildCmd=
 FileName=nodoProducto.h
 CompileCpp=1
 Folder=Producto
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit29]
+FileName=listaRest.cpp
+CompileCpp=1
+Folder=Restaurante
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit30]
+FileName=listaRest.h
+CompileCpp=1
+Folder=Restaurante
 Compile=1
 Link=1
 Priority=1000
