@@ -177,24 +177,6 @@ void ArbolMenu::cargarMenus(ArbolPais paises, ArbolCiudad ciudades, ArbolRestaur
     archivo.close();
 }
 
-void ArbolMenu::reporte() {
-    ofstream archivo;
-    archivo.open("reportes/menu.txt");
-    reporte(raiz, 0, archivo);
-    archivo.close();
-}
-
-void ArbolMenu::reporte(NodoMenu* nodo, int profundidad, ofstream& archivo) {
-    if (nodo != nullptr) {
-        archivo << "ID: " << nodo->clave << " Nombre: " << nodo->nombre << endl;
-        reporte(nodo->izquierda, profundidad + 1, archivo);
-        reporte(nodo->derecha, profundidad + 1, archivo);
-        for (int i = 0; i < profundidad; i++) {
-            std::cout << "  ";
-        }
-    }
-}
-
 void ArbolMenu::masBuscado() {
     
     masBuscado(raiz, 0, raiz);
@@ -202,7 +184,7 @@ void ArbolMenu::masBuscado() {
     
 }
 
-void* ArbolMenu::masBuscado(NodoMenu* nodo, int profundidad, NodoMenu* menu) {
+void ArbolMenu::masBuscado(NodoMenu* nodo, int profundidad, NodoMenu* menu) {
     if (nodo != nullptr) {
         masBuscado(nodo->izquierda, profundidad + 1, menu);
         masBuscado(nodo->derecha, profundidad + 1, menu);
@@ -217,6 +199,26 @@ void* ArbolMenu::masBuscado(NodoMenu* nodo, int profundidad, NodoMenu* menu) {
             archivo << "Ciudad: " << nodo->idCiudad << endl;
             archivo << "Pais: " << nodo->idPais << endl;
             archivo.close();
+        }
+    }
+}
+
+void ArbolMenu::reporte(int idP, int idC, int idR) {
+    ofstream archivo;
+    archivo.open("reportes/menu.txt");
+    reporte(raiz, 0, archivo, idP, idC, idR);
+    archivo.close();
+}
+
+void ArbolMenu::reporte(NodoMenu* nodo, int profundidad, ofstream& archivo, int idP, int idC, int idR) {
+    if (nodo != nullptr) {
+        if (nodo->idPais == idP && nodo->idCiudad == idC && nodo->idRest == idR) {
+            archivo << "ID: " << nodo->clave << " Nombre: " << nodo->nombre << endl;
+        }
+        reporte(nodo->izquierda, profundidad + 1, archivo, idP, idC, idR);
+        reporte(nodo->derecha, profundidad + 1, archivo, idP, idC, idR);
+        for (int i = 0; i < profundidad; i++) {
+            std::cout << "  ";
         }
     }
 }

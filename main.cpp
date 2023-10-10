@@ -515,7 +515,13 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                     break; 
                 case 7:
                     cout << endl;
-                    menus.reporte();
+                    cout << "Ingrese el numero del pais" << endl;
+                    cin >> codPais;
+                    cout << "Ingrese el numero de la ciudad" << endl;
+                    cin >> codCiudad;
+                    cout << "Ingrese el codigo del restaurante" << endl;
+                    cin >> codRest;
+                    menus.reporte(codPais, codCiudad, codRest);
                     cout << "Proceso finalizado" << endl;
                     break;
                 
