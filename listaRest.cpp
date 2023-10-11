@@ -30,7 +30,7 @@ void listaRest::insertar(int id, int idP, int idC, string nombre, ArbolPais &pai
         cout << "Este restaurante ya existe" << endl;
         return;
     } else {
-        // if (ciudades.existeCiudad(idC, idP, paises)) {
+        if (ciudades.existeCiudad(idC, idP)) {
         if (paises.existePais(idP)) {
             if (head == NULL) {
                 head = nuevo;
@@ -46,6 +46,7 @@ void listaRest::insertar(int id, int idP, int idC, string nombre, ArbolPais &pai
         } else {
             cout << "No existe el pais o ciudad" << endl;
             return;
+        }
         }
     }
 }
