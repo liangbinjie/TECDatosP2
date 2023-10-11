@@ -150,6 +150,26 @@ void ArbolCliente::buscar(Pagina* nodo, int id) {
     }
 }
 
+bool ArbolCliente::existe(int id) {
+    existeAux(Raiz, id);
+}
+
+bool ArbolCliente::existeAux(Pagina* nodo, int id) {
+    if (nodo != nullptr) {
+        for (int i = 0; i < nodo->Cuenta; i++) {
+            if (nodo->Claves[i] == id) {
+                // cout << "Nombre: " << nodo->nombre[i] << endl;
+                // cout << "ID: " << nodo->Claves[i] << endl;
+                return true;
+            }
+        }
+        for (int i = 0; i <= nodo->Cuenta; i++) {
+            RecorridoPreorden(nodo->Ramas[i]);
+        }
+    }
+    return false;
+}
+
 void ArbolCliente::modificar(int id, string nombre) {
     modificar(Raiz, id, nombre);
 }

@@ -14,7 +14,7 @@ using namespace std;
 #include "compra/listaCompra.h"
 #include "listaRest.h"
 
-void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolMenu menus, ArbolProducto productos, ArbolCliente clientes, ArbolRestaurante rests) {
+void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolMenu menus, ArbolProducto productos, ArbolCliente clientes, ArbolRestaurante rests, fila& Fila, ListaCompra& lCompra) {
 	cout << endl;
 	cout << "Bienvenido, que desea realizar?" << endl;
 	cout << endl;
@@ -379,7 +379,6 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
             }
             break;
 
-/*
         case 5:
         	cout << endl;
         	cout << "Que deseas hacer?" << endl;
@@ -395,7 +394,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
 					} else {
 						cout << "Ingrese su identificacion: ";
 						cin >> codCliente;
-						if (clientes.existeCliente(codCliente)) {
+						if (clientes.existe(codCliente)) {
 							Fila.encolar(codCliente);
 							Fila.imprimir();
 						} else {
@@ -419,7 +418,8 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                         cout << "Ingrese el id menu que quieres comprar: ";
                         cin >> codMenu;
                         if (menus.existe(codMenu, codPais, codCiudad, codRest)) {
-                            // while (true)
+                            
+                            /*
                             while (true) {
                                 productos.mostrarProductosMenu(codPais, codCiudad, codRest, codMenu);
                                 int codProd;
@@ -444,6 +444,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                                     break;
                                 }
                             }
+                            */
 
                         } else {
                             cout << "No existe este menu" << endl;
@@ -453,7 +454,6 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
 			}
 			
 			break;
-            */
 		
         case 6:
             cout << endl;
@@ -539,7 +539,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
     	case 7:
             return;
     }
-    menu(paises, ciudades, restaurantes, menus, productos, clientes, rests);
+    menu(paises, ciudades, restaurantes, menus, productos, clientes, rests, Fila, lCompra);
 }
 
 int main() {
@@ -556,7 +556,9 @@ int main() {
 	productos.cargarProductos(paises, ciudades, rests, menus);
     ArbolCliente clientes;
     clientes.cargarCliente();
+    fila Fila;
+    ListaCompra lCompra;
     // system("cls");
-	menu(paises, ciudades, restaurantes, menus, productos, clientes, rests);
+	menu(paises, ciudades, restaurantes, menus, productos, clientes, rests, Fila, lCompra);
 	return 0;
 }

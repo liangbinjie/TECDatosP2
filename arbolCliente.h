@@ -29,6 +29,7 @@ public:
     void buscar(int id);
     void modificar(int id, string nombreNuevo);
     void reporte();
+    bool existe(int id);
 
 private:
     Pagina* Raiz;
@@ -42,6 +43,7 @@ private:
     void RecorridoPreorden(Pagina* nodo);
     void buscar(Pagina* nodo, int id);
     void modificar(Pagina* nodo, int id, string nuevoNombre);
+    bool existeAux(Pagina* nodo, int id);
 };
 
 #endif

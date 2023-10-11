@@ -4,8 +4,8 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = main.o nodoPais.o arbolPais.o arbolRestaurante.o nodoRestaurante.o arbolCiudad.o nodoCiudad.o arbolMenu.o arbolCliente.o arbolProducto.o nodoProducto.o listaRest.o
-LINKOBJ  = main.o nodoPais.o arbolPais.o arbolRestaurante.o nodoRestaurante.o arbolCiudad.o nodoCiudad.o arbolMenu.o arbolCliente.o arbolProducto.o nodoProducto.o listaRest.o
+OBJ      = main.o nodoPais.o arbolPais.o arbolRestaurante.o nodoRestaurante.o arbolCiudad.o nodoCiudad.o arbolMenu.o arbolCliente.o arbolProducto.o nodoProducto.o listaRest.o compra/fila.o compra/listaCompra.o compra/nodoCompra.o compra/nodoFila.o
+LINKOBJ  = main.o nodoPais.o arbolPais.o arbolRestaurante.o nodoRestaurante.o arbolCiudad.o nodoCiudad.o arbolMenu.o arbolCliente.o arbolProducto.o nodoProducto.o listaRest.o compra/fila.o compra/listaCompra.o compra/nodoCompra.o compra/nodoFila.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib32" -static-libgcc -m32
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
@@ -59,3 +59,15 @@ nodoProducto.o: nodoProducto.cpp
 
 listaRest.o: listaRest.cpp
 	$(CPP) -c listaRest.cpp -o listaRest.o $(CXXFLAGS)
+
+compra/fila.o: compra/fila.cpp
+	$(CPP) -c compra/fila.cpp -o compra/fila.o $(CXXFLAGS)
+
+compra/listaCompra.o: compra/listaCompra.cpp
+	$(CPP) -c compra/listaCompra.cpp -o compra/listaCompra.o $(CXXFLAGS)
+
+compra/nodoCompra.o: compra/nodoCompra.cpp
+	$(CPP) -c compra/nodoCompra.cpp -o compra/nodoCompra.o $(CXXFLAGS)
+
+compra/nodoFila.o: compra/nodoFila.cpp
+	$(CPP) -c compra/nodoFila.cpp -o compra/nodoFila.o $(CXXFLAGS)
