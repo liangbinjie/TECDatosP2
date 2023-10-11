@@ -39,6 +39,8 @@ class ArbolCiudad {
 		void insertarReporte(int id, int idPais, string nombre, ArbolPais& aPaises);
 		void resetearReportes1();
 		void resetearReportes2(NodoCiudad* r);
+		void escArchivo2(NodoCiudad* r);
+		void escArchivo1();
 
 		//void insertar(int id, string nombre);
 		void cargarCiudades(ArbolPais& aPaises);

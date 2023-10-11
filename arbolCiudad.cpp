@@ -303,6 +303,7 @@ void ArbolCiudad::resetearReportes1() {
 void ArbolCiudad::reporteCiudad(int idPais, ArbolPais& aPaises, ArbolCiudad& reporteCiudad){
     if(aPaises.existePais(idPais)){
         preordenReporte1(idPais, aPaises, reporteCiudad);;
+        reporteCiudad.escArchivo1();
     }else{
         cout<<"El pais no existe"<<endl;
     }
@@ -339,6 +340,29 @@ void ArbolCiudad::preorden(NodoCiudad* r) {
 		preorden(r->der);
 	}
 }
+
+void ArbolCiudad::escArchivo2(NodoCiudad* r) {
+	if (r == NULL) {
+		return;
+	} else {
+
+        ofstream archivo;
+            archivo.open("reportes/Ciudades.txt");
+            archivo << "Ciudades del pais " << r->idPais << endl;
+            archivo << endl;
+            archivo << r->nombre << " - "<< endl;
+            archivo.close();
+		cout << r->id << " - ";
+		preorden(r->izq);
+		preorden(r->der);
+	}
+}
+
+void ArbolCiudad::escArchivo1() {
+	escArchivo2(raiz);
+	cout << endl;
+}
+
 
 void ArbolCiudad::preorden() {
 	preorden(raiz);
