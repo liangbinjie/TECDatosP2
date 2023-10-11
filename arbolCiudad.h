@@ -22,6 +22,7 @@ class ArbolCiudad {
 		void inorden(NodoCiudad* r);
 		void preorden(NodoCiudad* r);
 		NodoCiudad* existeAuxCiudad(NodoCiudad* r, int id, int idPais);
+
 		//NodoPais* existeAux(NodoPais* r, int id);
 		NodoCiudad* modificarAux(NodoCiudad* r, int id, int idPais, string nombre);
 	public:
@@ -41,6 +42,7 @@ class ArbolCiudad {
 		void resetearReportes2(NodoCiudad* r);
 		void escArchivo2(NodoCiudad* r);
 		void escArchivo1();
+	
 
 		//void insertar(int id, string nombre);
 		void cargarCiudades(ArbolPais& aPaises);

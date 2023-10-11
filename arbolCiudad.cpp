@@ -185,15 +185,23 @@ void ArbolCiudad::RotacionSimpleIzquierda(NodoCiudad* &n, NodoCiudad* &n1){
 }
 
 
+
 NodoCiudad* ArbolCiudad::existeAuxCiudad(NodoCiudad* r, int id, int idPais) {
-    
     if (r == NULL || (r->id == id && r->idPais == idPais)) {
         return r;
     }
+
     if (id < r->id) {
-        return existeAuxCiudad(r->izq, id, idPais); 
+        return existeAuxCiudad(r->izq, id, idPais);
+    } else if (id > r->id) {
+        return existeAuxCiudad(r->der, id, idPais);
     } else {
-        return existeAuxCiudad(r->der, id, idPais);  
+        // If id is equal, check the idPais to determine the next step
+        if (idPais < r->idPais) {
+            return existeAuxCiudad(r->izq, id, idPais);
+        } else {
+            return existeAuxCiudad(r->der, id, idPais);
+        }
     }
 }
 
@@ -218,6 +226,7 @@ bool ArbolCiudad::existeCiudad(int id, int idPais) {
 
 
 void ArbolCiudad::buscarCiudad(int id, int idPais, ArbolPais& aPaises) {
+    cout << "entro" << endl;
     NodoCiudad* buscado = existeAuxCiudad(raiz, id, idPais);
     if (buscado == NULL) {
         cout << "No existe esta ciudad" << endl;
