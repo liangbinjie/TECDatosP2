@@ -4,15 +4,15 @@ ListaCompra::ListaCompra() {
     primero = NULL;
 }
 
-void ListaCompra::agregar(int idCliente, int cp, int cc, int cr, int cm, string productos) {
+void ListaCompra::agregar(int idCliente, int cp, int cc, int cr, int cm, string productos, bool dt) {
     if (primero == NULL) {
-		primero = new NodoCompra(idCliente, cp, cc, cr, cm, productos);
+		primero = new NodoCompra(idCliente, cp, cc, cr, cm, productos, dt);
 	} else {
 		pNodoCompra aux = primero;
 		while (aux->siguiente != NULL) {
 			aux = aux->siguiente;
 		}
-		aux->siguiente = new NodoCompra(idCliente, cp, cc, cr, cm, productos);
+		aux->siguiente = new NodoCompra(idCliente, cp, cc, cr, cm, productos, dt);
 	}
 	cout << "Compra en lista" << endl;
 }

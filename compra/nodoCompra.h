@@ -12,13 +12,14 @@ class NodoCompra {
 		int idCiudad;
 		int idRest;
 		int idMenu;
+		bool driveThru;
 		string productos;
 		NodoCompra *siguiente;
 		
 		friend class ListaCompra;
 		
 	public:
-		NodoCompra(int idCliente, int cp, int cc, int cr, int cm, string pp);
+		NodoCompra(int idCliente, int cp, int cc, int cr, int cm, string pp, bool dt);
 	
 };
 

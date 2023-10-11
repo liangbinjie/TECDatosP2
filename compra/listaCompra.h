@@ -13,7 +13,7 @@ class ListaCompra {
 	   
 	public:
 	    ListaCompra();
-		void agregar(int idCliente, int cp, int cc, int cr, int cm, string compra);
+		void agregar(int idCliente, int cp, int cc, int cr, int cm, string compra, bool dt);
 		void mostrar();
 	    
 };

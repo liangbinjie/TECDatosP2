@@ -385,6 +385,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
         	cout << endl;
         	cout << "1. Hacer fila para comprar" << endl;
         	cout << "2. Atender a cliente" << endl;
+            cout << "3. Pagar" << endl;
         	cin >> opcion;
         	switch(opcion) {
         		case 1:
@@ -444,13 +445,24 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                                     break;
                                 }
                             }
+
+
+                            // notas: preguntar si es drive thru o para comer aqui
+                            // pasar la solicitud a compras
+
                             */
 
                         } else {
                             cout << "No existe este menu" << endl;
                         }
 					}
-					break;			
+					break;	
+
+                case 3:
+                    cout << endl;
+                    // de lista compra, sacar los calculos
+                    // reportes
+                    // facturas		
 			}
 			
 			break;
