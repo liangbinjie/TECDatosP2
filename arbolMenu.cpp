@@ -11,7 +11,7 @@ void ArbolMenu::insertar(int clave, int idPais, int idCiudad, int idRest, string
         cout << "Este menu ya existe" << endl;
         return;
     }
-    if (paises.existePais(idPais) && ciudades.existeCiudad(idCiudad, idPais, paises) && restaurantes.existe(idRest, idPais, idCiudad)) {
+    if (paises.existePais(idPais) && ciudades.existeCiudad(idCiudad, idPais) && restaurantes.existe(idRest, idPais, idCiudad)) {
         raiz = insertarRec(raiz, clave, idPais, idCiudad, idRest, nombre);
         cout << "Nuevo menu insertado" << endl;
     } else {

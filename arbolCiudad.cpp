@@ -7,7 +7,7 @@ ArbolCiudad::ArbolCiudad() {
 }
 
 void ArbolCiudad::insertar(int id, int idPais, string nombre, ArbolPais& aPaises) {
-    if(aPaises.existePais(idPais) && existeCiudad(id, idPais)){
+    if(aPaises.existePais(idPais)){
         if (raiz == NULL) {
 		raiz = new NodoCiudad(id, idPais, nombre);
 		cout << "Nueva ciudad insertada" << nombre<< endl;
@@ -23,7 +23,7 @@ void ArbolCiudad::insertar(int id, int idPais, string nombre, ArbolPais& aPaises
 
 
     }else {
-			cout << "Incongruencias con la ubicacion" << id << endl;
+			cout << "Incongruencias con la ubicacion ttt" << id << endl;
 		
 }
 }
@@ -260,6 +260,74 @@ void ArbolCiudad::modificar(int id, string nombre, int idPais, ArbolPais& aPaise
     }
 }
 
+void ArbolCiudad::insertarReporte(int id, int idPais, string nombre, ArbolPais& aPaises) {
+    //cout << "www" << nombre<< endl;
+    if(aPaises.existePais(idPais)){
+        //cout << "uuu " << nombre<< endl;
+        if (raiz == NULL) {
+		raiz = new NodoCiudad(id, idPais, nombre);
+		//cout << "Nueva ciudad insertada" << nombre<< endl;
+	    } else {
+            //cout << "ppp" << nombre<< endl;
+		    if (existeCiudad(id, idPais)) {
+			    //cout << "Esta ciudad ya existe" << id << endl;
+		    } else {
+                bool Hh= false;
+                //cout << " Nueva ciudad a insertar" << id<< endl;
+			    insertarBalanceado(raiz, id, idPais, nombre, Hh);
+		    }
+	    }
+
+
+    }else {
+			cout << "Incongruencias con la ubicacion ttt" << id << endl;
+		
+}
+}
+
+ void ArbolCiudad::resetearReportes2(NodoCiudad* r) {
+        if (r == NULL)
+            return;
+
+        resetearReportes2(r->izq);
+        resetearReportes2(r->izq);
+        delete r;
+    }
+
+void ArbolCiudad::resetearReportes1() {
+        resetearReportes2(raiz);
+        raiz = NULL;
+    }
+
+
+void ArbolCiudad::reporteCiudad(int idPais, ArbolPais& aPaises, ArbolCiudad& reporteCiudad){
+    if(aPaises.existePais(idPais)){
+        preordenReporte1(idPais, aPaises, reporteCiudad);;
+    }else{
+        cout<<"El pais no existe"<<endl;
+    }
+
+}
+
+void ArbolCiudad::preordenReporte2(NodoCiudad* r, int idPais, ArbolPais& aPaises, ArbolCiudad& reporteCiudad) {
+	if (r == NULL) {
+		return;
+	} else {
+        if (r->idPais == idPais){
+            //cout <<"paos"<<endl;
+            reporteCiudad.insertarReporte(r->id, r->idPais, r->nombre, aPaises);
+        }
+		//cout << r->id << "  " << r->idPais << "  " << idPais<<endl;
+		preordenReporte2(r->izq, idPais,aPaises, reporteCiudad);
+		preordenReporte2(r->der, idPais, aPaises, reporteCiudad);
+	}
+}
+
+
+void ArbolCiudad::preordenReporte1(int idPais, ArbolPais& aPaises, ArbolCiudad& reporteCiudad) {
+	preordenReporte2(raiz, idPais, aPaises, reporteCiudad);
+	cout << endl;
+}
 
 
 void ArbolCiudad::preorden(NodoCiudad* r) {

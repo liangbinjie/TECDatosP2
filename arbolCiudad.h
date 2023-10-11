@@ -33,6 +33,12 @@ class ArbolCiudad {
         void RotacionSimpleDerecha(NodoCiudad* &n, NodoCiudad* &n1);
         void RotacionSimpleIzquierda(NodoCiudad* &n, NodoCiudad* &n1);
 		bool existeCiudad(int id, int idPais);
+		void reporteCiudad(int idPais, ArbolPais& aPaises, ArbolCiudad& aCiudades);
+		void preordenReporte1(int idPais, ArbolPais& aPaises, ArbolCiudad& aCiudades);
+		void preordenReporte2(NodoCiudad* r, int idPais, ArbolPais& aPaises, ArbolCiudad& aCiudades);
+		void insertarReporte(int id, int idPais, string nombre, ArbolPais& aPaises);
+		void resetearReportes1();
+		void resetearReportes2(NodoCiudad* r);
 
 		//void insertar(int id, string nombre);
 		void cargarCiudades(ArbolPais& aPaises);

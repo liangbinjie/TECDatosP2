@@ -14,7 +14,7 @@ using namespace std;
 #include "compra/listaCompra.h"
 #include "listaRest.h"
 
-void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolMenu menus, ArbolProducto productos, ArbolCliente clientes, ArbolRestaurante rests, fila& Fila, ListaCompra& lCompra) {
+void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolMenu menus, ArbolProducto productos, ArbolCliente clientes, ArbolRestaurante rests, fila& Fila, ListaCompra& lCompra, ArbolCiudad reporteCiudades) {
 	cout << endl;
 	cout << "Bienvenido, que desea realizar?" << endl;
 	cout << endl;
@@ -120,8 +120,8 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                     cin >> calorias;
                     cout << "Ingrese el precio del producto: " << endl;
                     cin >> precio;
-                    // productos.insertarProducto(codPais, codCiudad, codRest, codMenu, codProducto, nombre, calorias, precio, lPais, lCiudad, lRest, lMenu);
-                    break;
+                    //roductos.insertarProducto(codProducto,codPais, codCiudad, codRest, codMenu, nombre,paises, ciudades,restaurantes,menus);
+                    break;                                                                         //calorias, precio,
 
                 case 6:
                 	cout << endl;
@@ -324,7 +324,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                 case 2:
                 	cout << endl;
                     cout << "Ingrese el codigo de pais de la ciudad que quieres buscar: " << endl;
-                    cin >> numPais;
+                    cin >> codPais;
                     cout << "Ingrese el codigo de ciudad que deseas buscar: " << endl;
                     cin >> codCiudad;
                     ciudades.buscarCiudad(codCiudad, codPais, paises);
@@ -496,9 +496,12 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                     break;
                 case 2:
                     cout << endl;
-                    // cout << "Ingrese el codigo del pais del que quiere ver las ciudades" << endl;
-                    // cin >> codPais;
-                    // preorden de ciudades
+                    cout << "Ingrese el codigo del pais del que quiere ver las ciudades" << endl;
+                    cin >> codPais;
+                   
+                    ciudades.reporteCiudad(codPais, paises, reporteCiudades);
+                    reporteCiudades.preorden();
+                    reporteCiudades.resetearReportes1();
                     cout << "Proceso finalizado" << endl;
                     break;
                 case 3:
@@ -507,7 +510,6 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                     cin >> codPais;
                     cout << "Ingrese el numero de la ciudad del que quiere ver el restaurante" << endl;
                     cin >> codCiudad;
-                    // preorden de restaurantes de una ciudad y pais
                     rests.reporte(codPais, codCiudad);
                     cout << "Proceso finalizado" << endl;
                     break;
@@ -551,13 +553,14 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
     	case 7:
             return;
     }
-    menu(paises, ciudades, restaurantes, menus, productos, clientes, rests, Fila, lCompra);
+    menu(paises, ciudades, restaurantes, menus, productos, clientes, rests, Fila, lCompra, reporteCiudades);
 }
 
 int main() {
 	ArbolPais paises;
 	paises.cargarPais();
     ArbolCiudad ciudades;
+    ArbolCiudad reporteCiudad;
     ciudades.cargarCiudades(paises);
 	listaRest restaurantes;
 	ArbolRestaurante rests;
@@ -571,6 +574,6 @@ int main() {
     fila Fila;
     ListaCompra lCompra;
     // system("cls");
-	menu(paises, ciudades, restaurantes, menus, productos, clientes, rests, Fila, lCompra);
+	menu(paises, ciudades, restaurantes, menus, productos, clientes, rests, Fila, lCompra, reporteCiudad);
 	return 0;
 }
