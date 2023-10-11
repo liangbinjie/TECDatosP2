@@ -7,20 +7,26 @@ ArbolCiudad::ArbolCiudad() {
 }
 
 void ArbolCiudad::insertar(int id, int idPais, string nombre, ArbolPais& aPaises) {
-	if (raiz == NULL) {
+    if(aPaises.existePais(idPais) && existeCiudad(id, idPais)){
+        if (raiz == NULL) {
 		raiz = new NodoCiudad(id, idPais, nombre);
 		cout << "Nueva ciudad insertada" << nombre<< endl;
-	} else {
-		if (existeCiudad(id, idPais, aPaises)) {
-			cout << "Esta ciudad ya existe" << id << endl;
-		} else {
-            bool Hh= false;
-            cout << " Nueva ciudad a insertar" << id<< endl;
-			insertarBalanceado(raiz, id, idPais, nombre, Hh);
-		}
-	}
-}
+	    } else {
+		    if (existeCiudad(id, idPais)) {
+			    cout << "Esta ciudad ya existe" << id << endl;
+		    } else {
+                bool Hh= false;
+                cout << " Nueva ciudad a insertar" << id<< endl;
+			    insertarBalanceado(raiz, id, idPais, nombre, Hh);
+		    }
+	    }
 
+
+    }else {
+			cout << "Incongruencias con la ubicacion" << id << endl;
+		
+}
+}
 
 
 void ArbolCiudad::insertarBalanceado(NodoCiudad* &r, int id, int idPais, string nombre, bool& Hh){
@@ -192,20 +198,22 @@ NodoCiudad* ArbolCiudad::existeAuxCiudad(NodoCiudad* r, int id, int idPais) {
 }
 
 
-bool ArbolCiudad::existeCiudad(int id, int idPais, ArbolPais& aPaises) {
+
+
+
+
+bool ArbolCiudad::existeCiudad(int id, int idPais) {
     NodoCiudad* buscado = existeAuxCiudad(raiz, id, idPais);
-    if (buscado == NULL) {
-        if(aPaises.existePais(idPais)){
-            cout<<"si existe"<<endl;
+     if (buscado == NULL) {
+        cout << "jiji"<<endl;
             return false;
         }  else {
+            cout << "jiji"<<endl;
             return true;
-        } 
-    } else {
-            return true;
-        } 
+        }
         
     }
+    
 
 
 
@@ -239,13 +247,15 @@ NodoCiudad* ArbolCiudad::modificarAux(NodoCiudad* r, int id, int idPais, string 
 
 void ArbolCiudad::modificar(int id, string nombre, int idPais, ArbolPais& aPaises) {
     
-    if (!existeCiudad(id, idPais, aPaises)) {
+    if (!existeCiudad(id, idPais)) {
         cout << "No existe esta ciudad" << endl;
     } else {
-        if(aPaises.existePais(idPais)){
+        if(aPaises.existePais(idPais) && existeCiudad(id, idPais)){
             NodoCiudad* buscado = modificarAux(raiz, id, idPais, nombre);
     	    cout << "Nombre modificado" << endl;
             cout << "ID: " << buscado->id << "\nNombre: " << buscado->nombre << endl;  
+        } else{
+            cout << "Incongruencias con la ubicacion" << endl;
         }
     }
 }

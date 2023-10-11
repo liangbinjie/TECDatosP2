@@ -32,7 +32,7 @@ class ArbolCiudad {
         void RotacionDobleDerecha(NodoCiudad* &n, NodoCiudad* &n1);
         void RotacionSimpleDerecha(NodoCiudad* &n, NodoCiudad* &n1);
         void RotacionSimpleIzquierda(NodoCiudad* &n, NodoCiudad* &n1);
-		bool existeCiudad(int id, int idPais, ArbolPais& aPaises);
+		bool existeCiudad(int id, int idPais);
 
 		//void insertar(int id, string nombre);
 		void cargarCiudades(ArbolPais& aPaises);

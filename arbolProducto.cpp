@@ -13,7 +13,7 @@ ArbolProducto::ArbolProducto() {
 
 
 void ArbolProducto::insertarProducto(int id, int idPais, int idCiudad, int idRest, int idMenu, string nombre, ArbolPais& aPaises, ArbolCiudad& aCiudades, ArbolRestaurante& aRest, ArbolMenu& aMenu) {
-	if(aPaises.existePais(idPais) && aCiudades.existeCiudad(idCiudad, idPais, aPaises) && aRest.existe(idRest, idPais, idCiudad) && aMenu.existe(idMenu, idPais, idCiudad, idRest)){
+	if(aPaises.existePais(idPais) && aCiudades.existeCiudad(idCiudad, idPais) && aRest.existe(idRest, idPais, idCiudad) && aMenu.existe(idMenu, idPais, idCiudad, idRest)){
     if (raiz == NULL) {
 		raiz = new NodoProducto(id, idPais, idCiudad, idRest, idMenu, nombre);
 		cout << "Nueva ciudad insertada" << nombre<< endl;
@@ -236,7 +236,7 @@ bool ArbolProducto::existeProducto(int id, int idPais, int idCiudad, int idRest,
 void ArbolProducto::buscarProducto(int id, int idPais, int idCiudad, int idRest, int idMenu, ArbolPais& aPaises, ArbolCiudad& aCiudades, ArbolRestaurante& aRest, ArbolMenu& aMenu) {
     
     cout<<"ii"<<endl;
-    if(aPaises.existePais(idPais) && aCiudades.existeCiudad(idCiudad, idPais, aPaises) && aRest.existe(idRest, idPais, idCiudad) && aMenu.existe(idMenu, idPais, idCiudad, idRest)){
+    if(aPaises.existePais(idPais) && aCiudades.existeCiudad(idCiudad, idPais) && aRest.existe(idRest, idPais, idCiudad) && aMenu.existe(idMenu, idPais, idCiudad, idRest)){
         cout <<"holss"<<endl;
         if(existeProducto(id, idPais, idCiudad, idRest, idMenu, aPaises, aCiudades, aRest, aMenu)){
             NodoProducto* buscado = existeAuxProducto(raiz, id, idPais, idCiudad, idRest, idMenu);
