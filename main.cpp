@@ -15,7 +15,7 @@ using namespace std;
 #include "listaRest.h"
 #include "compra/compra.h"
 
-void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolMenu menus, ArbolProducto productos, ArbolCliente clientes, ArbolRestaurante rests, fila& Fila, ListaCompra& lCompra, ArbolCiudad reporteCiudades) {
+void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolMenu menus, ArbolProducto productos, ArbolCliente clientes, ArbolRestaurante rests, fila& Fila, ListaCompra& lCompra, ArbolCiudad reporteCiudades, ListaCompra& lCompra2) {
 	cout << endl;
 	cout << "Bienvenido, que desea realizar?" << endl;
 	cout << endl;
@@ -423,6 +423,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                         cin >> codMenu;
                         if (menus.existe(codMenu, codPais, codCiudad, codRest)) {
                             string compra = "";
+                            int costo = 0;
                             while (true) {
                                 productos.mostrarProductosMenu(codPais, codCiudad, codRest, codMenu);
                                 int codProd;
@@ -435,6 +436,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                                     cin >> cant;
                                     productos.aumentarCompra(codPais, codCiudad, codRest, codMenu, codProd, paises, ciudades, restaurantes, menus);
                                     compra += "Producto: " + to_string(codProd) + ": $" + to_string(precio * cant) + "\n";
+                                    costo += (precio * cant);
                                     cout << "Producto agregado a la compra" << endl;
                                 } else {
                                     cout << "Ingrese un producto valido" << endl;
@@ -445,26 +447,26 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                                 if (seguir == 'n') {
                                     cout << compra << endl;
                                     cout << "Para comer aqui o drive thru?\n1) Comer aqui\n2)Drive Thru" << endl;
-                                    char op;
+                                    int op;
+                                    cin >> op;  
                                     switch (op)
                                     {
                                     case 1:
-                                        lCompra.agregar(codCliente, codPais, codCiudad, codRest, codMenu, compra, false);
+                                        lCompra.agregar(codCliente, codPais, codCiudad, codRest, codMenu, compra, false, costo);
+                                        lCompra2.agregar(codCliente, codPais, codCiudad, codRest, codMenu, compra, false, costo);
                                         break;
                                     case 2:
-                                        lCompra.agregar(codCliente, codPais, codCiudad, codRest, codMenu, compra, true);
+                                        costo = costo - ((costo*3)/100);
+                                        cout << costo << endl;
+                                        lCompra.agregar(codCliente, codPais, codCiudad, codRest, codMenu, compra, true, costo);
+                                        lCompra2.agregar(codCliente, codPais, codCiudad, codRest, codMenu, compra, true, costo);
                                         break;
                                     }
                                     cout << "Por favor espere en la fila de pagar" << endl;
-                                    // lCompra.mostrar();
+                                    lCompra.mostrar();
                                     break;
                                 }
                             }
-
-
-                            // notas: preguntar si es drive thru o para comer aqui
-                            // pasar la solicitud a compras
-
 
                         } else {
                             cout << "No existe este menu" << endl;
@@ -474,9 +476,9 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
 
                 case 3:
                     cout << endl;
-                    // de lista compra, sacar los calculos
-                    // reportes
-                    // facturas		
+                    lCompra2.pagar();
+                    break;
+                    	
 			}
 			
 			break;
@@ -498,7 +500,6 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
             cout << "11. Factura con mayor monto" << endl;
             cout << "12. Factura con menor monto" << endl;
             cout << "13. Precio de un producto" << endl;
-            cout << "14. GENERAR TODO DE UN SOLO" << endl;
             cout << "> ";
             cin >> opcion;
             switch(opcion) {
@@ -533,7 +534,8 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                     break;
                 case 5:
                 	cout << endl;
-                    // compras de un cliente
+                    cout << "Ingrese el id de un cliente: "; cin >> codCliente;
+                    lCompra.comprasCliente(codCliente);
                     cout << "Proceso finalizado" << endl;
                     break;
                 case 6:
@@ -572,13 +574,38 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                     cout << "Proceso finalizado" << endl;
                     break;
 
+                case 10:
+                    productos.productoMasComprado();
+                    cout << "Proceso finalizado" << endl;
+                    break;
+                case 11:
+                    lCompra.facturaMontoMasAlto();
+                    break;
+                case 12:
+                    lCompra.facturaMontoMasBajo();
+                    break;
+                case 13:
+                    cout << endl;
+                    cout << "Ingrese el numero del pais del que quiere ver el producto" << endl;
+                    cin >> codPais;
+                    cout << "Ingrese el numero de la ciudad del que quiere ver el producto" << endl;
+                    cin >> codCiudad;
+                    cout << "Ingrese el numero del restaurante del que quiere ver el producto" << endl;
+                    cin >> codRest;
+                    cout << "Ingrese el numero del menu del que quiere ver el producto" << endl;
+                    cin >> codMenu;
+                    cout << "Ingrese el numero del producto" << endl;
+                    cin >> codProducto;
+                    productos.precio(codPais, codCiudad, codRest, codMenu, codProducto, paises, ciudades, restaurantes, menus);
+                    cout << "Proceso finalizado" << endl;
+                    break;
             }
             break;
             
     	case 7:
             return;
     }
-    menu(paises, ciudades, restaurantes, menus, productos, clientes, rests, Fila, lCompra, reporteCiudades);
+    menu(paises, ciudades, restaurantes, menus, productos, clientes, rests, Fila, lCompra, reporteCiudades, lCompra2);
 }
 
 int main() {
@@ -597,8 +624,8 @@ int main() {
     ArbolCliente clientes;
     clientes.cargarCliente();
     fila Fila;
-    ListaCompra lCompra;
+    ListaCompra lCompra, lCompra2;
     system("cls");
-	menu(paises, ciudades, restaurantes, menus, productos, clientes, rests, Fila, lCompra, reporteCiudad);
+	menu(paises, ciudades, restaurantes, menus, productos, clientes, rests, Fila, lCompra, reporteCiudad, lCompra2);
 	return 0;
 }
