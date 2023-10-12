@@ -13,6 +13,7 @@ using namespace std;
 #include "compra/fila.h"
 #include "compra/listaCompra.h"
 #include "listaRest.h"
+#include "compra/compra.h"
 
 void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolMenu menus, ArbolProducto productos, ArbolCliente clientes, ArbolRestaurante rests, fila& Fila, ListaCompra& lCompra, ArbolCiudad reporteCiudades) {
 	cout << endl;
@@ -367,7 +368,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                     cin >> codMenu;
                     cout << "Ingrese el numero del producto" << endl;
                     cin >> codProducto;
-                    productos.buscarProducto(codProducto, codPais, codCiudad, codRest, codMenu, paises, ciudades, restaurantes, menus);
+                    productos.buscarProducto(codPais, codCiudad, codRest, codMenu, codProducto, paises, ciudades, restaurantes, menus);
                     break;
                 case 6:
                 	cout << endl;
@@ -421,16 +422,19 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                         cout << "Ingrese el id menu que quieres comprar: ";
                         cin >> codMenu;
                         if (menus.existe(codMenu, codPais, codCiudad, codRest)) {
-                            
+                            string compra = "";
                             while (true) {
                                 productos.mostrarProductosMenu(codPais, codCiudad, codRest, codMenu);
                                 int codProd;
-                                string compra = "";
+                                int cant;
                                 cout << "Que desea comprar?: ";
                                 cin >> codProd;
                                 if (productos.existeProducto(codPais, codCiudad, codRest, codMenu, codProd, paises, ciudades, restaurantes, menus)) {
-                                    compra += codProd + ";";
+                                    int precio = productos.getProducto(codProd, codPais, codCiudad, codRest, codMenu);
+                                    cout << "Cuantos deseas comprar?" << endl;
+                                    cin >> cant;
                                     productos.aumentarCompra(codPais, codCiudad, codRest, codMenu, codProd, paises, ciudades, restaurantes, menus);
+                                    compra += "Producto: " + to_string(codProd) + ": $" + to_string(precio * cant) + "\n";
                                     cout << "Producto agregado a la compra" << endl;
                                 } else {
                                     cout << "Ingrese un producto valido" << endl;
@@ -439,10 +443,20 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                                 char seguir;
                                 cin >> seguir;
                                 if (seguir == 'n') {
-                                    //cout << compra << endl;
-                                    // lCompra.agregar(codCliente, codPais, codCiudad, codRest, codMenu, compra);
+                                    cout << compra << endl;
+                                    cout << "Para comer aqui o drive thru?\n1) Comer aqui\n2)Drive Thru" << endl;
+                                    char op;
+                                    switch (op)
+                                    {
+                                    case 1:
+                                        lCompra.agregar(codCliente, codPais, codCiudad, codRest, codMenu, compra, false);
+                                        break;
+                                    case 2:
+                                        lCompra.agregar(codCliente, codPais, codCiudad, codRest, codMenu, compra, true);
+                                        break;
+                                    }
                                     cout << "Por favor espere en la fila de pagar" << endl;
-                                    //lCompra.mostrar();
+                                    // lCompra.mostrar();
                                     break;
                                 }
                             }
@@ -540,7 +554,16 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                     break;
                 
                 case 8:
-                    productos.reporteProducto();
+                    cout << endl;
+                    cout << "Ingrese el numero del pais del que quiere ver los productos" << endl;
+                    cin >> codPais;
+                    cout << "Ingrese el numero de la ciudad del que quiere ver los productos" << endl;
+                    cin >> codCiudad;
+                    cout << "Ingrese el numero del restaurante del que quiere ver los productos" << endl;
+                    cin >> codRest;
+                    cout << "Ingrese el numero del menu del que quiere ver el producto" << endl;
+                    cin >> codMenu;
+                    productos.reporteProducto(codPais,codCiudad,codRest,codMenu,paises, ciudades, restaurantes, menus);
                     cout << "Proceso finalizado" << endl;
                 break;
 
@@ -575,7 +598,7 @@ int main() {
     clientes.cargarCliente();
     fila Fila;
     ListaCompra lCompra;
-    // system("cls");
+    system("cls");
 	menu(paises, ciudades, restaurantes, menus, productos, clientes, rests, Fila, lCompra, reporteCiudad);
 	return 0;
 }

@@ -11,7 +11,7 @@ NodoProducto::NodoProducto(int cp, int cc, int cr, int cm, int cpro, string pNom
     precio = p;
     siguiente = NULL;
     contador = 0;
-	cantidad = 0;
+	cantidad = cant;
 }
 
 NodoProducto::NodoProducto(int cp, int cc, int cr, int cm, int cpro, string pNombre, int kc, int p, int cant, NodoProducto* sigNodo) {

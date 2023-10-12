@@ -17,7 +17,7 @@ void ArbolProducto::buscarProducto(int pCodPais, int pCodCiudad, int pCodRest, i
     } else {
         aux = primero;
         while (aux) {
-            // cout << aux->codPais << "asd" << endl;
+            cout << aux->codMenu << "asd" << endl;
             if (aux->codMenu == pCodMenu && aux->codPais == pCodPais && aux->codCiudad == pCodCiudad && aux->codRest == pCodRest && aux->codProducto==pCodProducto) {
                 cout << "Datos del producto"<<endl;
                 cout << "Codigo del pais: "<< aux->codPais<< "  " <<endl;
@@ -28,6 +28,23 @@ void ArbolProducto::buscarProducto(int pCodPais, int pCodCiudad, int pCodRest, i
                 cout << "Precio del producto: "<< aux->precio<<endl;
                 cout << "Cantidad: " << aux->cantidad << endl;
                 return;
+            }
+            aux = aux->siguiente;
+        }
+        cout << "No se encontro el producto" << endl;
+    }
+}
+
+int ArbolProducto::getProducto(int pCodProducto, int pCodPais, int pCodCiudad, int pCodRest, int pCodMenu){
+    NodoProducto *aux;
+    if (primero==NULL) {
+        cout << "No hay elementos" << endl;
+    } else {
+        aux = primero;
+        while (aux) {
+            cout << aux->codMenu << "asd" << endl;
+            if (aux->codMenu == pCodMenu && aux->codPais == pCodPais && aux->codCiudad == pCodCiudad && aux->codRest == pCodRest && aux->codProducto==pCodProducto) {
+                return aux->precio;
             }
             aux = aux->siguiente;
         }
@@ -137,7 +154,7 @@ bool ArbolProducto::existeProducto(int pCodPais, int pCodCiudad, int pCodRest, i
     return false;
 }
 
-void ArbolProducto::reporteProducto(){
+void ArbolProducto::reporteProducto(int pCodPais, int pCodCiudad, int pCodRest, int pCodMenu, ArbolPais& lPaises, ArbolCiudad& lCiudades, listaRest& lRest, ArbolMenu& lMenu){
     NodoProducto *aux;
     ofstream archivo;
     archivo.open ("reportes/Productos.txt");
@@ -146,12 +163,16 @@ void ArbolProducto::reporteProducto(){
     } else {
         aux = primero;
         while (aux) {
-                archivo << aux->codProducto <<"  "<< aux->nombre<<endl;
-                archivo.close();
-                return;
+            if (aux->codMenu == pCodMenu && aux->codPais == pCodPais && aux->codCiudad == pCodCiudad && aux->codRest == pCodRest){
+                 archivo << aux->codProducto <<"  "<< aux->nombre<<endl;
+                
+            }
+            
             
             aux = aux->siguiente;
         }
+        archivo.close();
+        return;
     }
 }
 
@@ -185,7 +206,7 @@ void ArbolProducto::cargarProductos(ArbolPais& lPaises, ArbolCiudad& lCiudades, 
     while (getline(archivo, line)) {
         stringstream ss(line);
         string temp;
-        int idP, idC, idR, idM, id, kcal, precio;
+        int idP, idC, idR, idM, id, kcal, precio, cant;
         string name;
 
         getline(ss, temp, ';');
@@ -212,7 +233,7 @@ void ArbolProducto::cargarProductos(ArbolPais& lPaises, ArbolCiudad& lCiudades, 
         precio = stoi(temp);
 
         getline(ss, temp, ';');
-        int cant = stoi(temp);
+        cant = stoi(temp);
 
         ArbolProducto::insertarProducto(idP, idC, idR, idM, id, name, kcal, precio, cant, lPaises, lCiudades, lRest, lMenu);
     }
@@ -294,6 +315,9 @@ void ArbolProducto::productoMasComprado() {
 }
 
 void ArbolProducto::aumentarCompra(int pCodPais, int pCodCiudad, int pCodRest, int pCodMenu, int pCodProducto, ArbolPais& lPaises, ArbolCiudad& lCiudades, listaRest& lRest, ArbolMenu& lMenu){
+    /*
+    Esta funcion es para aumentar el contador de compras de este producto, para el producto mas buscado en la realizacion de compras
+    */
     NodoProducto* aux = primero;
     if (primero==NULL){
         cout << "No hay elementos" << endl;

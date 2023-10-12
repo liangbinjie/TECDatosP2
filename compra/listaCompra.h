@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "nodoCompra.h"
+#include "compra.h"
 using namespace std;
 
 typedef NodoCompra* pNodoCompra;
