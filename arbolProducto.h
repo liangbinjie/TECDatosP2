@@ -8,6 +8,7 @@ using namespace std;
 #include "arbolPais.h"
 #include "NodoCiudad.h"
 #include "NodoProducto.h"
+#include "listaRest.h"
 #include <fstream>
 #include <string>
 #include <sstream>
@@ -28,16 +29,16 @@ class ArbolProducto {
 	public:
 		ArbolProducto();
         void insertarBalanceado(NodoProducto* &r, int id, int idPais, int idCiudad, int idRest, int idMenu, string nombre, bool& Hh);
-        void insertarProducto(int id, int idPais, int idCiudad, int idRest, int idMenu, string nombre, ArbolPais& aPaises, ArbolCiudad& aCiudades, ArbolRestaurante& aRest, ArbolMenu& aMenu);
+        void insertarProducto(int id, int idPais, int idCiudad, int idRest, int idMenu, string nombre, ArbolPais& aPaises, ArbolCiudad& aCiudades, listaRest& aRest, ArbolMenu& aMenu);
 		void RotacionDobleIzquierda(NodoProducto* &n, NodoProducto* &n1);
         void RotacionDobleDerecha(NodoProducto* &n, NodoProducto* &n1);
         void RotacionSimpleDerecha(NodoProducto* &n, NodoProducto* &n1);
         void RotacionSimpleIzquierda(NodoProducto* &n, NodoProducto* &n1);
-		bool existeProducto(int id, int idPais, int idCiudad, int idRest, int idMenu, ArbolPais& aPaises, ArbolCiudad& aCiudad, ArbolRestaurante& aRest, ArbolMenu& aMenu);
+		bool existeProducto(int id, int idPais, int idCiudad, int idRest, int idMenu, ArbolPais& aPaises, ArbolCiudad& aCiudad, listaRest& aRest, ArbolMenu& aMenu);
 
 		//void insertar(int id, string nombre);
-		void cargarProductos(ArbolPais& aPaises, ArbolCiudad& aCiudades, ArbolRestaurante& aRests, ArbolMenu& aMenus);
-		void buscarProducto(int id, int idPais, int idCiudad, int idRest, int idMenu, ArbolPais& aPaises, ArbolCiudad& aCiudad, ArbolRestaurante& aRest, ArbolMenu& aMenu);
+		void cargarProductos(ArbolPais& aPaises, ArbolCiudad& aCiudades, listaRest& aRest, ArbolMenu& aMenus);
+		void buscarProducto(int id, int idPais, int idCiudad, int idRest, int idMenu, ArbolPais& aPaises, ArbolCiudad& aCiudad, listaRest& aRest, ArbolMenu& aMenu);
 		//bool existe(int id);
 		void modificar(int id, string nombre, int idPais, ArbolPais& aPaises);
 		

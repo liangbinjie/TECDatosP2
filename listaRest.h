@@ -33,6 +33,7 @@ class listaRest {
         listaRest();
         void insertar(int id, int idPais, int idCiudad, string nombre, ArbolPais &paises, ArbolCiudad &ciudades, ArbolRestaurante& restaurantes);
         bool existe(nodoRest* aux);
+        bool existePP(int id, int idPais, int idCiudad);
         void cargarRest(ArbolPais &paises, ArbolCiudad &ciudades, ArbolRestaurante& restaurantes);
 };
 

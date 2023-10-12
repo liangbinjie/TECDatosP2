@@ -13,6 +13,24 @@ listaRest::listaRest() {
     head = NULL;
 }
 
+bool listaRest::existePP(int id, int idPais, int idCiudad) {
+    cout << " entro a existe restaurante" <<endl;
+    nodoRest* aux = head;
+    while (aux != NULL) {
+        cout << "bbb" <<endl;
+        cout << aux->id <<endl;
+        cout<<aux->id<< " a " << id<< "  b  " << aux->idPais<<  "  c  " << idPais<< "  d  " << aux->idCiudad<< "  e   " <<idCiudad<< " i " << aux->nombre<< endl;
+        if (aux->id == id && aux->idPais == idPais && aux->idCiudad == idCiudad) {
+            cout << "si existe restaurante" << aux->id <<endl;
+            return true;
+        }
+        aux = aux->siguiente;
+    }
+    cout << " falsoo" <<endl;
+    return false;
+}
+
+
 bool listaRest::existe(nodoRest* nuevo) {
     nodoRest* aux = head;
     while (aux != NULL) {
@@ -30,7 +48,7 @@ void listaRest::insertar(int id, int idP, int idC, string nombre, ArbolPais &pai
         cout << "Este restaurante ya existe" << endl;
         return;
     } else {
-        if (ciudades.existeCiudad(idC, idP)) {
+       // if (ciudades.existeCiudad(idC, idP)) {
         if (paises.existePais(idP)) {
             if (head == NULL) {
                 head = nuevo;
@@ -47,7 +65,7 @@ void listaRest::insertar(int id, int idP, int idC, string nombre, ArbolPais &pai
             cout << "No existe el pais o ciudad" << endl;
             return;
         }
-        }
+        //}
     }
 }
 

@@ -5,6 +5,7 @@
 #include "arbolMenu.h"
 #include "nodoMenu.h"
 #include "arbolProducto.h"
+#include "listaRest.h"
 
 
 ArbolProducto::ArbolProducto() {
@@ -12,8 +13,10 @@ ArbolProducto::ArbolProducto() {
 }
 
 
-void ArbolProducto::insertarProducto(int id, int idPais, int idCiudad, int idRest, int idMenu, string nombre, ArbolPais& aPaises, ArbolCiudad& aCiudades, ArbolRestaurante& aRest, ArbolMenu& aMenu) {
-	if(aPaises.existePais(idPais) && aCiudades.existeCiudad(idCiudad, idPais) && aRest.existe(idRest, idPais, idCiudad) && aMenu.existe(idMenu, idPais, idCiudad, idRest)){
+void ArbolProducto::insertarProducto(int id, int idPais, int idCiudad, int idRest, int idMenu, string nombre, ArbolPais& aPaises, ArbolCiudad& aCiudades, listaRest& aRest, ArbolMenu& aMenu) {
+	cout << " entro a insertarProducto" <<endl;
+    if(aPaises.existePais(idPais) && aCiudades.existeCiudad(idCiudad, idPais) && aRest.existePP(idRest, idPais, idCiudad) && aMenu.existe(idMenu, idPais, idCiudad, idRest)){
+    cout << " entro a primera prueba" <<endl;
     if (raiz == NULL) {
 		raiz = new NodoProducto(id, idPais, idCiudad, idRest, idMenu, nombre);
 		cout << "Nueva ciudad insertada" << nombre<< endl;
@@ -191,16 +194,27 @@ void ArbolProducto::RotacionSimpleIzquierda(NodoProducto* &n, NodoProducto* &n1)
 
 NodoProducto* ArbolProducto::existeAuxProducto(NodoProducto* &r, int id, int idPais, int idCiudad, int idRest, int idMenu) {
     cout<<"oo"<<endl;
-    //cout<<r->id<< " " << id<< "    " << r->idPais<<  "    " << idPais<< "    " << r->idCiudad<< "    " << r->idCiudad<< " " << r->idRest<< " " << idRest<< " " << r->idMenu<< " " << idMenu<< endl;
+    cout<<r->id<< " a " << id<< "  b  " << r->idPais<<  "  c  " << idPais<< "  d  " << r->idCiudad<< "  e   " <<idCiudad<< " i " << r->idRest<< " o  " << idRest<< "  u " << r->idMenu<< " z " << idMenu<< endl;
     if ((r == NULL) || ((r->id == id) && (r->idPais == idPais) && (r->idCiudad == idCiudad) && (r->idRest == idRest) && (r->idMenu == idMenu))){
         return r;
     }
+    
     if (id < r->id) {
-        return existeAuxProducto(r->izq, id, idPais, idCiudad, idRest, idMenu); 
+        return existeAuxProducto(r->izq, id, idPais, idCiudad, idRest, idMenu);
+    } else if (id > r->id) {
+        return existeAuxProducto(r->der, id, idPais, idCiudad, idRest, idMenu);
     } else {
-        return existeAuxProducto(r->der, id, idPais, idCiudad, idRest, idMenu);  
+        if (idPais < r->idPais) {
+            return existeAuxProducto(r->izq, id, idPais, idCiudad, idRest, idMenu);
+        } else {
+            return existeAuxProducto(r->der, id, idPais, idCiudad, idRest, idMenu);
+        }
     }
 }
+
+
+
+
 
 
 /*void ArbolMenu::insertar(int clave, int idPais, int idCiudad, int idRest, string nombre, ArbolPais paises, ArbolCiudad ciudades, ArbolRestaurante restaurantes) {
@@ -219,7 +233,8 @@ NodoProducto* ArbolProducto::existeAuxProducto(NodoProducto* &r, int id, int idP
 
 
 
-bool ArbolProducto::existeProducto(int id, int idPais, int idCiudad, int idRest, int idMenu, ArbolPais& aPaises, ArbolCiudad& aCiudades, ArbolRestaurante& aRest, ArbolMenu& aMenu) {
+bool ArbolProducto::existeProducto(int id, int idPais, int idCiudad, int idRest, int idMenu, ArbolPais& aPaises, ArbolCiudad& aCiudades, listaRest& aRest, ArbolMenu& aMenu) {
+    cout << " entro a existe producto" <<endl;
     NodoProducto* buscado = existeAuxProducto(raiz, id, idPais, idCiudad, idRest, idMenu);
     if (buscado == NULL) {
         cout << "jiji"<<endl;
@@ -233,10 +248,10 @@ bool ArbolProducto::existeProducto(int id, int idPais, int idCiudad, int idRest,
 
 
 
-void ArbolProducto::buscarProducto(int id, int idPais, int idCiudad, int idRest, int idMenu, ArbolPais& aPaises, ArbolCiudad& aCiudades, ArbolRestaurante& aRest, ArbolMenu& aMenu) {
+void ArbolProducto::buscarProducto(int id, int idPais, int idCiudad, int idRest, int idMenu, ArbolPais& aPaises, ArbolCiudad& aCiudades, listaRest& aRest, ArbolMenu& aMenu) {
     
     cout<<"ii"<<endl;
-    if(aPaises.existePais(idPais) && aCiudades.existeCiudad(idCiudad, idPais) && aRest.existe(idRest, idPais, idCiudad) && aMenu.existe(idMenu, idPais, idCiudad, idRest)){
+    if(aPaises.existePais(idPais) && aCiudades.existeCiudad(idCiudad, idPais) && aRest.existePP(idRest, idPais, idCiudad) && aMenu.existe(idMenu, idPais, idCiudad, idRest)){
         cout <<"holss"<<endl;
         if(existeProducto(id, idPais, idCiudad, idRest, idMenu, aPaises, aCiudades, aRest, aMenu)){
             NodoProducto* buscado = existeAuxProducto(raiz, id, idPais, idCiudad, idRest, idMenu);
@@ -340,7 +355,7 @@ void ArbolProducto::postorden() {
 
 
 
-void ArbolProducto::cargarProductos(ArbolPais& aPaises, ArbolCiudad& aCiudades, ArbolRestaurante& aRests, ArbolMenu& aMenus) {
+void ArbolProducto::cargarProductos(ArbolPais& aPaises, ArbolCiudad& aCiudades, listaRest& aRest, ArbolMenu& aMenus) {
     string str;
     ifstream archivo;
     archivo.open("Archivos/Productos.txt");
@@ -372,7 +387,7 @@ void ArbolProducto::cargarProductos(ArbolPais& aPaises, ArbolCiudad& aCiudades, 
             }
         }
         precio = stoi(temp);
-        ArbolProducto::insertarProducto(id, idP, idC, idR, idM, name, aPaises, aCiudades, aRests, aMenus);
+        ArbolProducto::insertarProducto(id, idP, idC, idR, idM, name, aPaises, aCiudades, aRest, aMenus);
     }
     archivo.close();
     str = "";

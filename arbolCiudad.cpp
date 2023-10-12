@@ -210,6 +210,7 @@ NodoCiudad* ArbolCiudad::existeAuxCiudad(NodoCiudad* r, int id, int idPais) {
 
 
 bool ArbolCiudad::existeCiudad(int id, int idPais) {
+    cout << " entro a existe ciudad" <<endl;
     NodoCiudad* buscado = existeAuxCiudad(raiz, id, idPais);
      if (buscado == NULL) {
         cout << "jiji"<<endl;

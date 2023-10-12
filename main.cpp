@@ -79,7 +79,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                     cout << "Ingrese el nombre del restaurante: " << endl;
                     cin.ignore();
                     getline(cin,nombre);
-                    restaurantes.insertar(codPais, codCiudad, codRest, nombre, paises, ciudades, rests);
+                   // rests.insertar(codPais, codCiudad, codRest, nombre, paises, ciudades, rests);
                     break;
 				
                     
@@ -120,7 +120,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                     cin >> calorias;
                     cout << "Ingrese el precio del producto: " << endl;
                     cin >> precio;
-                    //roductos.insertarProducto(codProducto,codPais, codCiudad, codRest, codMenu, nombre,paises, ciudades,restaurantes,menus);
+                    productos.insertarProducto(codProducto,codPais, codCiudad, codRest, codMenu, nombre,paises, ciudades, restaurantes,menus);
                     break;                                                                         //calorias, precio,
 
                 case 6:
@@ -283,7 +283,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                     cin >> calorias;
                     cout << "Ingrese el precio a modificar: ";
                     cin >> precio;
-                    // productos.modificar(codPais, codCiudad, codRest, codMenu, codProducto, nombre, calorias, precio, lPais, lCiudad, lRest, lMenu);
+                    //productos.modificar(codProducto, nombre, codPais, codCiudad, codRest, codMenu, nombre,paises, ciudades, restaurantes,menus);
                     break;
 
                 case 6:
@@ -365,7 +365,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                     cin >> codMenu;
                     cout << "Ingrese el numero del producto" << endl;
                     cin >> codProducto;
-                    productos.buscarProducto(codProducto, codPais, codCiudad, codRest, codMenu, paises, ciudades, rests, menus);
+                    productos.buscarProducto(codProducto, codPais, codCiudad, codRest, codMenu, paises, ciudades, restaurantes, menus);
                     break;
                 case 6:
                 	cout << endl;
@@ -568,7 +568,7 @@ int main() {
     ArbolMenu menus;
     menus.cargarMenus(paises, ciudades, rests);
 	ArbolProducto productos;
-	productos.cargarProductos(paises, ciudades, rests, menus);
+	productos.cargarProductos(paises, ciudades, restaurantes, menus);
     ArbolCliente clientes;
     clientes.cargarCliente();
     fila Fila;
