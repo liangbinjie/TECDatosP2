@@ -68,7 +68,7 @@ void ListaCompra::facturaMontoMasAlto() {
         cout << "No hay compras" << endl;
     } else {
         pNodoCompra aux = primero;
-        pNodoCompra aux2;
+        pNodoCompra aux2 = primero;
         int mayor = primero->costo;
         while (aux) {
             if (aux->costo > mayor) {
@@ -90,7 +90,7 @@ void ListaCompra::facturaMontoMasBajo() {
         cout << "No hay compras" << endl;
     } else {
         pNodoCompra aux = primero;
-        pNodoCompra aux2;
+        pNodoCompra aux2 = primero;
         int menor = primero->costo;
         while (aux) {
             if (aux->costo < menor) {
