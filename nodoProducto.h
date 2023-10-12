@@ -5,24 +5,25 @@
 using namespace std;
 
 class NodoProducto {
-	public:
-		int id;
-		int idPais;
-        int idCiudad;
-		int idRest;
-        int idMenu;
-        int FB;
-		string nombre;
-		NodoProducto* izq;
-		NodoProducto* der;
-		friend class arbolProducto;
+    private:
+        NodoProducto* siguiente;
+        NodoProducto *anterior;
+        int codPais;
+        int codCiudad;
+        int codRest;
+        int codMenu;
+        int codProducto;
+        string nombre;
+        int kcal;
+        int precio;
+        int cantidad;
+        int contador;
 
-		NodoProducto();
-		NodoProducto(int id, int idPais, int idCiudad, int idRest, int idMenu, string nombre);
-		
+        friend class ArbolProducto;
+    
+    public:
+        NodoProducto(int cp, int cc, int cr, int cm, int cpro, string nombre, int kc, int p, int cant);
+        NodoProducto(int cp, int cc, int cr, int cm, int cpro, string nombre, int kc, int p, int cant, NodoProducto* sigNodo);
 };
-
-typedef NodoProducto* pnodoProducto;
-
 
 #endif

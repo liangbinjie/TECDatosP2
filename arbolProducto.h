@@ -2,51 +2,37 @@
 #define ARBOLPRODUCTO_H
 
 #include <iostream>
-using namespace std;
-
-#include "nodoPais.h"
+#include "nodoProducto.h"
 #include "arbolPais.h"
-#include "NodoCiudad.h"
-#include "NodoProducto.h"
+#include "arbolCiudad.h"
 #include "listaRest.h"
-#include <fstream>
-#include <string>
+#include "arbolMenu.h"
 #include <sstream>
+using namespace std;
+#include <fstream>
+
+typedef NodoProducto *pNodoProducto;
 
 class ArbolProducto {
-	private:
-		NodoProducto* raiz;
-		
-		//void insertarBalanceado(NodoCiudad* r, int id, string nombre, bool Hh, int x);
-        //void insertar(int id, string nombre);
-		//NodoPais* buscarAux(NodoPais* r, int id);
-		void postorden(NodoProducto* r);
-		void inorden(NodoProducto* r);
-		void preorden(NodoProducto* r);
-		NodoProducto* existeAuxProducto(NodoProducto* &r, int id, int idPais, int idCiudad, int idRest, int idMenu);
-		//NodoPais* existeAux(NodoPais* r, int id);
-		NodoCiudad* modificarAux(NodoCiudad* r, int id, int idPais, string nombre);
-	public:
-		ArbolProducto();
-        void insertarBalanceado(NodoProducto* &r, int id, int idPais, int idCiudad, int idRest, int idMenu, string nombre, bool& Hh);
-        void insertarProducto(int id, int idPais, int idCiudad, int idRest, int idMenu, string nombre, ArbolPais& aPaises, ArbolCiudad& aCiudades, listaRest& aRest, ArbolMenu& aMenu);
-		void RotacionDobleIzquierda(NodoProducto* &n, NodoProducto* &n1);
-        void RotacionDobleDerecha(NodoProducto* &n, NodoProducto* &n1);
-        void RotacionSimpleDerecha(NodoProducto* &n, NodoProducto* &n1);
-        void RotacionSimpleIzquierda(NodoProducto* &n, NodoProducto* &n1);
-		bool existeProducto(int id, int idPais, int idCiudad, int idRest, int idMenu, ArbolPais& aPaises, ArbolCiudad& aCiudad, listaRest& aRest, ArbolMenu& aMenu);
+    private:
+        pNodoProducto primero;
+    
+    public:
+        ArbolProducto();
+        // ListaProducto()
 
-		//void insertar(int id, string nombre);
-		void cargarProductos(ArbolPais& aPaises, ArbolCiudad& aCiudades, listaRest& aRest, ArbolMenu& aMenus);
-		void buscarProducto(int id, int idPais, int idCiudad, int idRest, int idMenu, ArbolPais& aPaises, ArbolCiudad& aCiudad, listaRest& aRest, ArbolMenu& aMenu);
-		//bool existe(int id);
-		void modificar(int id, string nombre, int idPais, ArbolPais& aPaises);
-		
-		void preorden();
-		void inorden();
-		void postorden();
-		
-		
+        bool ArbolVacio();
+        void insertarProducto(int codPais, int codCiudad, int codRest, int codMenu, int codProducto, string nombre, int kcal, int precio, int cant, ArbolPais& lPaises, ArbolCiudad& lCiudades, listaRest& lRests, ArbolMenu& lMenus);
+        bool existeProducto(int pCodPais, int pCodCiudad, int pCodRes, int pCodMenu, int pCodProducto, ArbolPais& lPais, ArbolCiudad& lCiudad, listaRest& lRest, ArbolMenu& lMenuRest);
+        void buscarProducto(int pCodPais, int pCodCiudad, int pCodRest, int pCodMenu, int pCodProducto, ArbolPais& lPaises, ArbolCiudad& lCiudades, listaRest& lRest, ArbolMenu& lMenuRest);
+        void mostrar();
+		void reporteProducto();
+        void cargarProductos(ArbolPais& lPaises, ArbolCiudad& lCiudades, listaRest& lRests, ArbolMenu& lMenus);
+        void modificarProducto(int codPais, int codCiudad, int codRest, int codMenu, int codProducto, string nombre, int kcal, int precio, ArbolPais& lPaises, ArbolCiudad& lCiudades, listaRest& lRest, ArbolMenu& lMenu);
+        void mostrarProductosMenu(int codPais, int codCiudad, int codRest, int codMenu);
+        void precio(int pCodPais, int pCodCiudad, int pCodRest, int pCodMenu, int pCodProducto, ArbolPais& lPaises, ArbolCiudad& lCiudades, listaRest& lRest, ArbolMenu& lMenuRest);
+        void productoMasComprado();
+        void aumentarCompra(int pCodPais, int pCodCiudad, int pCodRest, int pCodMenu, int pCodProducto, ArbolPais& lPais, ArbolCiudad& lCiudad, listaRest& lRest, ArbolMenu& lMenuRest );
 };
 
 #endif

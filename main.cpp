@@ -30,7 +30,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
     cout << "> ";
     cin >> opcion;
     string nombre;
-    int codPais, codCiudad, codRest, codMenu, codProducto, codCliente, calorias, precio, pos;
+    int codPais, codCiudad, codRest, codMenu, codProducto, codCliente, calorias, precio, pos, cant;
     switch(opcion) {
         case 1:
         	cout << endl;
@@ -79,7 +79,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                     cout << "Ingrese el nombre del restaurante: " << endl;
                     cin.ignore();
                     getline(cin,nombre);
-                   // rests.insertar(codPais, codCiudad, codRest, nombre, paises, ciudades, rests);
+                    restaurantes.insertar(codPais, codCiudad, codRest, nombre, paises, ciudades, rests);
                     break;
 				
                     
@@ -120,7 +120,9 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                     cin >> calorias;
                     cout << "Ingrese el precio del producto: " << endl;
                     cin >> precio;
-                    productos.insertarProducto(codProducto,codPais, codCiudad, codRest, codMenu, nombre,paises, ciudades, restaurantes,menus);
+                    cout << "Ingrese la cantidad del producto: " << endl;
+                    cin >> cant;
+                    productos.insertarProducto(codProducto,codPais, codCiudad, codRest, codMenu, nombre, calorias, precio, cant, paises, ciudades,restaurantes,menus);
                     break;                                                                         //calorias, precio,
 
                 case 6:
@@ -186,7 +188,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                 
                 case 5:
                 	cout << endl;
-                    productos.preorden();
+                    productos.mostrar();
                     break;
 
                 case 6:
@@ -236,7 +238,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                     break;
                 case 3:
                 	cout << endl;
-                    cout << "Ingres el codigo del pais: ";
+                    cout << "Ingrese el codigo del pais: ";
                     cin >> codPais;
                     cout << "Ingrese el codigo de la ciudad: ";
                     cin >> codCiudad;
@@ -283,7 +285,7 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                     cin >> calorias;
                     cout << "Ingrese el precio a modificar: ";
                     cin >> precio;
-                    //productos.modificar(codProducto, nombre, codPais, codCiudad, codRest, codMenu, nombre,paises, ciudades, restaurantes,menus);
+                    // productos.modificar(codPais, codCiudad, codRest, codMenu, codProducto, nombre, calorias, precio, lPais, lCiudad, lRest, lMenu);
                     break;
 
                 case 6:
@@ -420,16 +422,15 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                         cin >> codMenu;
                         if (menus.existe(codMenu, codPais, codCiudad, codRest)) {
                             
-                            /*
                             while (true) {
                                 productos.mostrarProductosMenu(codPais, codCiudad, codRest, codMenu);
                                 int codProd;
                                 string compra = "";
                                 cout << "Que desea comprar?: ";
                                 cin >> codProd;
-                                if (lProducto.existeProducto(codPais, codCiudad, codRest, codMenu, codProd, lPais, lCiudad, lRest, lMenu)) {
+                                if (productos.existeProducto(codPais, codCiudad, codRest, codMenu, codProd, paises, ciudades, restaurantes, menus)) {
                                     compra += codProd + ";";
-                                    lProducto.aumentarCompra(codPais, codCiudad, codRest, codMenu, codProd, lPais, lCiudad, lRest, lMenu);
+                                    productos.aumentarCompra(codPais, codCiudad, codRest, codMenu, codProd, paises, ciudades, restaurantes, menus);
                                     cout << "Producto agregado a la compra" << endl;
                                 } else {
                                     cout << "Ingrese un producto valido" << endl;
@@ -450,7 +451,6 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                             // notas: preguntar si es drive thru o para comer aqui
                             // pasar la solicitud a compras
 
-                            */
 
                         } else {
                             cout << "No existe este menu" << endl;
@@ -540,6 +540,8 @@ void menu(ArbolPais paises, ArbolCiudad ciudades, listaRest restaurantes, ArbolM
                     break;
                 
                 case 8:
+                    productos.reporteProducto();
+                    cout << "Proceso finalizado" << endl;
                 break;
 
                 case 9:
